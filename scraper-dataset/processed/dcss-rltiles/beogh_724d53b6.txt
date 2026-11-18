@@ -1,0 +1,8 @@
+pixel art icon of an orcish god symbol in green and grey, top-down fantasy roguelike style, limited palette
+beogh
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/dngn/altars/beogh.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 26 cores; dominantes: #000000, #7e5e05, #dea610, #684c02, #413102, #221901, #a17909, #c1900d

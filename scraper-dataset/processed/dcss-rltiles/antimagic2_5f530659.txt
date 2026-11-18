@@ -1,0 +1,8 @@
+pixel art effect sprite of a dark violet anti-magic burst with spiky edges, top-down fantasy roguelike style, limited palette
+antimagic2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/effect/antimagic2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 9 cores; dominantes: #15032f, #00213a, #29086a, #59398d, #4f1480, #8a40d0, #202020, #003060

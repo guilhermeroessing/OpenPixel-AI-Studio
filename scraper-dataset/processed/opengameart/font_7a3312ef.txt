@@ -1,0 +1,8 @@
+pixel art bitmap font sheet with uppercase and lowercase letters and digits on a parchment background
+font
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-sprites#gfx/font.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 240x144 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #e5e1e1, #443934, #786860, #ffffff, #c8b8b8, #a89080

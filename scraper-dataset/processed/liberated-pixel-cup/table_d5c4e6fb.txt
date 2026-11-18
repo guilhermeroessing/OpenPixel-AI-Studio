@@ -1,0 +1,8 @@
+pixel art tall wooden cabinet with vertical wood grain texture, front view, RPG furniture sprite
+table
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/derivative/vendors_table/PNG/table.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x128 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #736344, #57462c, #322418, #1f1a0e, #a18960, #3f3524

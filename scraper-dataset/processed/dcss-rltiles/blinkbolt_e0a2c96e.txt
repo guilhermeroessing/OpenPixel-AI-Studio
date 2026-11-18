@@ -1,0 +1,8 @@
+pixel art effect sprite of a purple and cyan blink bolt, top-down fantasy roguelike style, limited palette
+blinkbolt
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/blinkbolt.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #000000, #003c3c, #7f7f7f, #c4c4c4, #303030, #909090, #2d9090, #404040

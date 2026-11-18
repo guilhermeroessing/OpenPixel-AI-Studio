@@ -1,0 +1,8 @@
+pixel art icon of a small red armored barding piece, top-down fantasy roguelike style, limited palette
+barding2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/player/barding/barding2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #000000, #630208, #7a1b2d, #862135, #a83663, #be4c8a, #c57601, #8190b1

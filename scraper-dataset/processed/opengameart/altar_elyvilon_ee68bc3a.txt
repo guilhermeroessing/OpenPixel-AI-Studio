@@ -1,0 +1,8 @@
+pixel art icon of a pale white-grey altar with a dark figure, 32x32, dungeon crawl style, limited palette
+altar_elyvilon
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#Dungeon Crawl Stone Soup Full/dungeon/altars/altar_elyvilon.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #f0f0f0, #ffffff, #e0e0e0, #b0b0b0, #a0a0a0, #808080, #c0c0c0

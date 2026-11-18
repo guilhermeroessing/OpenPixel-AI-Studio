@@ -1,0 +1,8 @@
+pixel art sprite of a bulky green-tinted abomination monster, top-down fantasy roguelike style, limited palette
+abomination_large7
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large7.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #32322c, #46042b, #675e3d, #81122e, #998257, #c2ab92, #b41410

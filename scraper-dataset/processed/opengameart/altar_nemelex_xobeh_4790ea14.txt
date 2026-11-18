@@ -1,0 +1,8 @@
+pixel art icon of a grey altar with a purple and orange emblem, 32x32, dungeon crawl style
+altar_nemelex_xobeh
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#Dungeon Crawl Stone Soup Full/dungeon/altars/altar_nemelex_xobeh.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 26 cores; dominantes: #000000, #8000ff, #d0d0d0, #c03000, #c0c0c0, #7000e0, #ff4000, #6000c0

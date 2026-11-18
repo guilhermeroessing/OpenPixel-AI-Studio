@@ -1,0 +1,8 @@
+pixel art walk cycle sprite sheet of a dark navy humanoid character in four rows, limited palette
+walk
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Comet/walk.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 576x256 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #353b53, #272b39, #050606, #20222a, #16171b, #424763, #271920, #f2f7f8

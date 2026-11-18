@@ -1,0 +1,8 @@
+pixel art green grass patch tile with a circular hole in the center, top-down RPG terrain
+grassalt
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/grassalt.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #2f8136, #64a42c, #006b46, #499231, #004337, #c39753

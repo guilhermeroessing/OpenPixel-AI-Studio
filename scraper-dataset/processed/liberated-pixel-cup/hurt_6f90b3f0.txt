@@ -1,0 +1,8 @@
+pixel art hurt animation strip of a light orange humanoid character recoiling across six frames, limited palette
+hurt
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Gold/hurt.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 448x64 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #fdd082, #ea9f54, #281716, #d28144, #9e3c27, #fbe7a4, #293d4b, #50d4ec

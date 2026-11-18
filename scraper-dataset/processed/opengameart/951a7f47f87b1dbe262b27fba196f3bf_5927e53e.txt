@@ -1,0 +1,8 @@
+pixel art top-down zelda-like grassland scene with a dirt path, blue water, a speech bubble and a game HUD
+951a7f47f87b1dbe262b27fba196f3bf
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-sprites#951a7f47f87b1dbe262b27fba196f3bf.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 392x236 px; escala original detectada: 1x
+Paleta: 98 cores; dominantes: #5d5da3, #3abe41, #e0f878, #a0f868, #2eca35, #29973b, #ffffff, #328e41

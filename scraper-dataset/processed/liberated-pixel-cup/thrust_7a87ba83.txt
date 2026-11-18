@@ -1,0 +1,8 @@
+pixel art spear thrust animation sprite sheet of a dark navy humanoid character in four rows, limited palette
+thrust
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Comet/thrust.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 576x256 px; escala original detectada: 1x
+Paleta: 14 cores; dominantes: #353b53, #272b39, #050606, #20222a, #16171b, #424763, #f2f7f8, #f6f0d1

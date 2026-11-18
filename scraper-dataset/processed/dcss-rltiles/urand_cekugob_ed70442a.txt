@@ -1,0 +1,8 @@
+pixel art icon of a cyan-teal amulet on a chain, top-down fantasy roguelike style, limited palette
+urand_cekugob
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/item/amulet/artefact/urand_cekugob.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #000000, #0c4a5e, #2cafb1, #1d808a, #64e0d3, #5c5c5c, #767676, #47c7c1

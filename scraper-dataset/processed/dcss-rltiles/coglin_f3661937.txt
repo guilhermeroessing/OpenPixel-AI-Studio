@@ -1,0 +1,8 @@
+pixel art sprite of a grey armored humanoid with a red helmet, top-down fantasy roguelike style, limited palette
+coglin
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/player/base/coglin.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #000000, #7d7d7d, #9c9c9c, #4c120c, #4e4e4e, #f6e8e0, #a32819, #871f11

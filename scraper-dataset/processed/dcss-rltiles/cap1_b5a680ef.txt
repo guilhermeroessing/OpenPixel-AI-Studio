@@ -1,0 +1,8 @@
+pixel art icon of a brown leather cap, top-down fantasy roguelike style, limited palette
+cap1
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/cap1.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #804000, #a05000, #603000, #c06000, #402000, #a00000, #c00000

@@ -1,0 +1,8 @@
+pixel art icon of a round dark metal dwarven buckler shield, top-down fantasy roguelike style, limited palette
+dwarven_buckler1
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/dwarven_buckler1.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 9 cores; dominantes: #000000, #606060, #010101, #303030, #202020, #404040, #c0c0c0, #808080

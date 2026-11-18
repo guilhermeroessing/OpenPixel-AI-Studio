@@ -1,0 +1,8 @@
+pixel art outdoor stone paver floor tiles in pale beige and blue-grey, RPG style, limited palette
+castlefloors_outside
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/HughSpectrum/castlefloors_outside.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 128x160 px; escala original detectada: 1x
+Paleta: 4 cores; dominantes: #6a8d8e, #bdc6a8, #dfdab5, #666d8c

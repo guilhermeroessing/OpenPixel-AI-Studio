@@ -1,0 +1,8 @@
+pixel art sprite of a dark purple-red abomination monster with a pale face, top-down fantasy roguelike style, limited palette
+abomination_large5
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large5.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 9 cores; dominantes: #000000, #6d3d54, #937096, #844051, #342126, #b98075, #46202e, #ebbcb4

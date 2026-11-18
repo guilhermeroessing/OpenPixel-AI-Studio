@@ -1,0 +1,8 @@
+pixel art sprite of a brown abomination monster with a pale head and tentacle-like limbs, top-down fantasy roguelike style, limited palette
+abomination_large3
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large3.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #000000, #55422f, #847135, #bba448, #672e39, #a0347a, #39152c, #dfcb7b

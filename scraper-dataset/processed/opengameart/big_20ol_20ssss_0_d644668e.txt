@@ -1,0 +1,8 @@
+pixel art top-down meadow map with a wooden cabin, tree clusters, fallen logs, dirt fences and a small pond, zelda-like style
+big%20ol%20ssss_0
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-sprites#big%20ol%20ssss_0.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 791x575 px; escala original detectada: 1x
+Paleta: 78 cores; dominantes: #3abe41, #2eca5c, #35a541, #6add4b, #79584f, #299750, #328e41, #563a3f

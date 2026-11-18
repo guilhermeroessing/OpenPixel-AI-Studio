@@ -1,0 +1,8 @@
+pixel art icon of metal centaur barding armor, top-down fantasy roguelike style, limited palette
+centaur_barding_metal
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/centaur_barding_metal.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 16 cores; dominantes: #000000, #202020, #101010, #303030, #b0b0b0, #808080, #606060, #d0d0d0

@@ -1,0 +1,8 @@
+pixel art idle animation sprite sheet of a dark navy humanoid character in four stacked frames with a palette strip
+idle
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Comet/idle.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 128x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #353b53, #272b39, #20222a, #16171b, #050606, #424763, #f2f7f8, #2a3c49

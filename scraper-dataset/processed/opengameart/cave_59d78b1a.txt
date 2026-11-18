@@ -1,0 +1,8 @@
+pixel art cave tileset sheet with brown rock walls, dark cave openings, blue water tiles and rocks on a white background
+cave
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-sprites#gfx/cave.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 640x400 px; escala original detectada: 1x
+Paleta: 26 cores; dominantes: #201729, #79584f, #165c88, #563a3f, #302c34, #3f3730, #94785c, #7dc8f8

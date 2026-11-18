@@ -1,0 +1,8 @@
+pixel art icon of a purple amulet with a gem on a chain, top-down fantasy roguelike style, limited palette
+urand_amulet_invisibility
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/item/amulet/artefact/urand_amulet_invisibility.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #000000, #6717b8, #7451d4, #642cd1, #988be8, #5c5c5c, #767676, #8975d5

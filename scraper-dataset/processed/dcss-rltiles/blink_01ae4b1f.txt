@@ -1,0 +1,8 @@
+pixel art effect sprite of a purple swirling blink spell, top-down fantasy roguelike style, limited palette
+blink
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/blink.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 19 cores; dominantes: #000000, #501370, #7f7f7f, #c4c4c4, #303030, #909090, #404040, #626262

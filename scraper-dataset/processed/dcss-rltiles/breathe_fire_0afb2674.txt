@@ -1,0 +1,8 @@
+pixel art effect sprite of a fire breath blast with orange flames, top-down fantasy roguelike style, limited palette
+breathe_fire
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/breathe_fire.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #000000, #909090, #c4c4c4, #df0201, #ff4004, #500000, #303030, #9f0100

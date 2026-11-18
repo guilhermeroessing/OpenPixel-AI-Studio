@@ -1,0 +1,8 @@
+pixel art kitchen stove and oven with cooking pots on a dark stone counter, RPG furniture sprite
+kitchen
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/building-interior/kitchen.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 64x128 px; escala original detectada: 1x
+Paleta: 19 cores; dominantes: #2e2533, #000000, #4d4a5d, #726b7e, #b19998, #322125, #e5e6c7, #c4b59f

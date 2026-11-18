@@ -1,0 +1,8 @@
+pixel art sword swing animation sprite sheet of a brown humanoid character in four rows, RPG style with skin tone palette
+swing
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Coffee/swing.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 448x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #603429, #442725, #050606, #2e1f1c, #1a1213, #714535, #f2f7f8, #2a3c49

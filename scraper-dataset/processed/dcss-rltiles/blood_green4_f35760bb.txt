@@ -1,0 +1,8 @@
+pixel art sprite of a green blood splatter on the ground, top-down fantasy roguelike style, limited palette
+blood_green4
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/misc/blood/blood_green4.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #286401, #205b00, #004706, #004f0d, #095917, #1e5200, #326d0b, #003f06

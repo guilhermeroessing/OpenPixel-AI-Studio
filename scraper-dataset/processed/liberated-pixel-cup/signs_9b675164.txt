@@ -1,0 +1,8 @@
+pixel art wooden inn and shop signs with gold trim and coin bag icons, RPG UI tiles, limited palette
+signs
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/object/signs.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x64 px; escala original detectada: 1x
+Paleta: 9 cores; dominantes: #b19998, #726b7e, #e5e6c7, #4d4a5d, #c4b59f, #b78c41, #684415, #ccbd7b

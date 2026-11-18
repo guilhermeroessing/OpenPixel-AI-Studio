@@ -1,0 +1,8 @@
+pixel art sprite of a grey hunched abomination monster with a large head, top-down fantasy roguelike style, limited palette
+abomination_large4
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large4.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 14 cores; dominantes: #000000, #60696c, #8b8b8b, #3f4049, #5e4640, #9b7964, #6b3932, #b1526a

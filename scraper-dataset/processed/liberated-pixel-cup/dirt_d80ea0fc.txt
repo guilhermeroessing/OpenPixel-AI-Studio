@@ -1,0 +1,8 @@
+pixel art brown dirt path tiles with pebbles, top-down RPG terrain, limited palette
+dirt
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/dirt.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #b88751, #c39753, #996b4a, #ae764b, #322125, #c2ad57, #a17c50

@@ -1,0 +1,8 @@
+pixel art grey ceramic cup on a small pedestal stand, RPG item sprite, limited palette
+cup
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/object/cup.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x64 px; escala original detectada: 1x
+Paleta: 5 cores; dominantes: #726b7e, #4d4a5d, #c4b59f, #b19998, #e5e6c7

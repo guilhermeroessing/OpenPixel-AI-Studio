@@ -1,0 +1,8 @@
+pixel art dark grey volcanic rock tiles with black cracks, top-down RPG terrain, limited palette
+lavarock
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/lava/lavarock.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 5 cores; dominantes: #22282a, #2a3034, #101414, #1c2222, #322125

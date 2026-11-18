@@ -1,0 +1,8 @@
+pixel art icon of a purple amethyst gem with a white sparkle, top-down fantasy roguelike style, limited palette
+amethyst
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/item/amulet/amethyst.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #5f2fcd, #1e0f94, #803d11, #ab6f11, #9f69f8, #e7c335, #642714

@@ -1,0 +1,8 @@
+pixel art wooden bridge and staircase railings with brown planks, top-down RPG style, limited palette
+bridges
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/bridges.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 192x224 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #9d6639, #62351c, #8f5030, #aa8550, #2b1c1d, #3e2613

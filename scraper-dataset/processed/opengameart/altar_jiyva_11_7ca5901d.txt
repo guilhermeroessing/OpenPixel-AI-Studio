@@ -1,0 +1,8 @@
+pixel art icon of a green slime-themed altar with a dark green blob, 32x32, dungeon crawl style, green palette
+altar_jiyva_11
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#Dungeon Crawl Stone Soup Full/dungeon/altars/altar_jiyva_11.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #005e00, #000000, #00ce00, #00bf00, #006f00, #007f00, #008e00, #009e00

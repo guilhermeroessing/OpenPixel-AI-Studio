@@ -1,0 +1,8 @@
+pixel art dirt terrain tiles with scattered stones, top-down RPG style, limited palette
+dirt2
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/dirt2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #865e40, #926c42, #723e2a, #7d4d35, #322125, #ae764b, #896f42

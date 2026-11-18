@@ -1,0 +1,8 @@
+pixel art icon of a small green-tinted armored barding piece, top-down fantasy roguelike style, limited palette
+barding3
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/player/barding/barding3.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #000000, #01371a, #025b2c, #30ae45, #177939, #46c54a, #e4a105, #60bbe5

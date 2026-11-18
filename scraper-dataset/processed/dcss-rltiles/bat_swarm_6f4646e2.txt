@@ -1,0 +1,8 @@
+pixel art sprite of a purple swarm of bat-like creatures, top-down fantasy roguelike style, limited palette
+bat_swarm
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/bat_swarm.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #000000, #551200, #ff6600, #c4c4c4, #132a5b, #909090, #303030, #0e122d

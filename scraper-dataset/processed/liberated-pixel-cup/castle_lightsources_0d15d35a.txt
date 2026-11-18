@@ -1,0 +1,8 @@
+pixel art wall torches and candle light sources on purple metal stands, RPG castle decor on transparent background
+castle_lightsources
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/HughSpectrum/castle_lightsources.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 160x128 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #513b50, #8f3950, #322125, #f5ad47, #664665, #fbce7b, #f0eaa2, #d59151

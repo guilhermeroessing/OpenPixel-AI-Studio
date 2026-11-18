@@ -1,0 +1,8 @@
+pixel art hurt animation strip of a dark navy humanoid character recoiling across six frames, limited palette
+hurt
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Comet/hurt.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 448x64 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #353b53, #272b39, #050606, #20222a, #16171b, #424763, #293d4b, #50d4ec

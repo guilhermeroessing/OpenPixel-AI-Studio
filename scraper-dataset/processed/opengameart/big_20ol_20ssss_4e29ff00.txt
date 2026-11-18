@@ -1,0 +1,8 @@
+pixel art top-down overworld scene with a blue pond, dirt path, tree stump and grass patches, limited palette
+big%20ol%20ssss
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-sprites#big%20ol%20ssss.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 245x158 px; escala original detectada: 1x
+Paleta: 49 cores; dominantes: #3abe41, #1e7cb8, #94785c, #2eca5c, #6add4b, #299750, #328e41, #79584f

@@ -1,0 +1,8 @@
+pixel art sprite of a red blood puddle on the ground, top-down fantasy roguelike style, limited palette
+blood_puddle_red2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/misc/blood/blood_puddle_red2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #770000, #5b0000, #640000, #6e0000, #6d0304, #800309, #520000, #650000

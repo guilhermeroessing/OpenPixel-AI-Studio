@@ -1,0 +1,8 @@
+pixel art icon of a pair of grey iron boots, top-down fantasy roguelike style, limited palette
+boots_iron2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/boots_iron2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #000000, #505050, #707070, #909090, #404040, #101010, #303030

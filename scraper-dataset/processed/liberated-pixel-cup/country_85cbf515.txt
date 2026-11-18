@@ -1,0 +1,8 @@
+pixel art wooden bed with blue blanket and wooden chairs and tables, top-down RPG furniture set
+country
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/building-interior/country.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 160x128 px; escala original detectada: 1x
+Paleta: 18 cores; dominantes: #ae764b, #8188be, #c39753, #744b30, #62351c, #b88751, #d1b359, #ffffff

@@ -1,0 +1,8 @@
+pixel art walk cycle sprite sheet of an orange-brown humanoid character in four rows, limited palette
+walk
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Copper/walk.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 576x256 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #aa6030, #7f4c31, #120d10, #644133, #442725, #c58050, #271920, #f2f7f8

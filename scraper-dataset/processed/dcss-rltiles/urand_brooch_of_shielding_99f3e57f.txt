@@ -1,0 +1,8 @@
+pixel art icon of a blue and purple brooch with a silver chain, top-down fantasy roguelike style, limited palette
+urand_brooch_of_shielding
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/item/amulet/artefact/urand_brooch_of_shielding.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 14 cores; dominantes: #000000, #d9bbf1, #404b98, #792c18, #8b68a8, #5e7bba, #3f110c, #231311

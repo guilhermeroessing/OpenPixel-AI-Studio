@@ -1,0 +1,8 @@
+pixel art sprite of a black armored knight with a red plume, top-down fantasy roguelike style, limited palette
+black_knight
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/player/barding/black_knight.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #000000, #421aae, #723cc7, #2d0964, #451e4f, #834ed8, #855293, #683e74

@@ -1,0 +1,8 @@
+pixel art stone house facade with grey brick walls, red roof trim and a wooden door, RPG town building tileset
+house
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/building-exterior/house.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 288x224 px; escala original detectada: 1x
+Paleta: 20 cores; dominantes: #4d4a5d, #726b7e, #2e2533, #b14e45, #c4b59f, #62351c, #1d131e, #b19998

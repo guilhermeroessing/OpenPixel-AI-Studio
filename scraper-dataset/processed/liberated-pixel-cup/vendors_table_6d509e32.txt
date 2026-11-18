@@ -1,0 +1,8 @@
+pixel art set of wooden shop counters and cabinets with wood grain texture, RPG furniture
+vendors_table
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/derivative/vendors_table/PNG/vendors_table.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 224x96 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #736344, #57462c, #322418, #1f1a0e, #a18960, #3f3524

@@ -1,0 +1,8 @@
+pixel art icon of a red amulet on a chain, top-down fantasy roguelike style, limited palette
+urand_bloodlust
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/item/amulet/artefact/urand_bloodlust.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #000000, #961c0c, #681106, #d22a14, #490404, #1d010e, #278bba, #33030d

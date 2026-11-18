@@ -1,0 +1,8 @@
+pixel art interior building tileset with pale blue-grey walls, cream trim, doorways and wall panels, RPG style
+inside
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/building-interior/inside.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x320 px; escala original detectada: 1x
+Paleta: 20 cores; dominantes: #8aaaab, #e5e6c7, #748da4, #a9c9ca, #4a1f16, #c4b59f, #726b7e, #ffffff

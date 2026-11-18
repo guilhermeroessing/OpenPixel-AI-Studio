@@ -1,0 +1,8 @@
+pixel art castle floor tiles with ornate purple and blue patterns, red carpet and orange checkered tiles, RPG tileset
+castlefloors
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/HughSpectrum/castlefloors.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x320 px; escala original detectada: 1x
+Paleta: 18 cores; dominantes: #bf4b4b, #666d8c, #664665, #5d5c72, #5487d2, #5b6cd3, #ca742e, #3c9bd8

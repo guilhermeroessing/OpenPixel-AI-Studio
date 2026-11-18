@@ -1,0 +1,8 @@
+pixel art wooden staircase and balcony railings with blue-grey windows, RPG building tileset
+stairs
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/building-interior/stairs.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 256x448 px; escala original detectada: 1x
+Paleta: 16 cores; dominantes: #704325, #8aaaab, #411e05, #75502d, #4b2b13, #4d4a5d, #9a6f37, #748da4

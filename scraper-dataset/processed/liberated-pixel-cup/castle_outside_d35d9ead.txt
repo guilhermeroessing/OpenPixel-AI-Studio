@@ -1,0 +1,8 @@
+pixel art castle exterior with a blue conical tower, arched windows and red doors, pale stone walls, RPG style
+castle_outside
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/HughSpectrum/castle_outside.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 544x352 px; escala original detectada: 1x
+Paleta: 21 cores; dominantes: #bdc6a8, #dfdab5, #6a8d8e, #99b096, #3c9bd8, #5b6cd3, #5d5c72, #666d8c

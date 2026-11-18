@@ -1,0 +1,8 @@
+pixel art wooden storage chests and crates in dark brown wood, RPG tileset, limited palette
+chests
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/object/chests.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 64x96 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #62351c, #2b1c1d, #3e2613, #1d131e, #9d6639, #8f5030, #2e2533, #aa8550

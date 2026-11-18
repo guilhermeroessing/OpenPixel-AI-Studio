@@ -1,0 +1,8 @@
+pixel art sprite of a crimson abomination monster with spiky dark-red flesh, top-down fantasy roguelike style, limited palette
+abomination_large2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #000000, #913c4a, #2d352f, #52634b, #c8597a, #581d2d, #81122e, #82917d

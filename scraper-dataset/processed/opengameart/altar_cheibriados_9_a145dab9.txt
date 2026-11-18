@@ -1,0 +1,8 @@
+pixel art icon of a grey stone altar with a dark hooded statue on top, 32x32, dungeon crawl style, limited palette
+altar_cheibriados_9
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#Dungeon Crawl Stone Soup Full/dungeon/altars/altar_cheibriados_9.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 34 cores; dominantes: #000000, #abab78, #707070, #606060, #808080, #909090, #a0a0a0, #313131

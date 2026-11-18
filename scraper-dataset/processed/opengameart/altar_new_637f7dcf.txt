@@ -1,0 +1,8 @@
+pixel art icon of a plain grey stone altar with a grey emblem, 32x32, dungeon crawl style
+altar_new
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#Dungeon Crawl Stone Soup Full/dungeon/altars/altar_new.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 19 cores; dominantes: #000000, #606060, #c0c0c0, #909090, #707070, #d0d0d0, #808080, #a0a0a0

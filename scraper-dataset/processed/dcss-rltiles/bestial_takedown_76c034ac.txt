@@ -1,0 +1,8 @@
+pixel art effect sprite of a bestial claw takedown in purple and white, top-down fantasy roguelike style, limited palette
+bestial_takedown
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/bestial_takedown.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 18 cores; dominantes: #000000, #2c3c25, #c4c4c4, #655647, #8f7c6d, #73172d, #b4202a, #303030

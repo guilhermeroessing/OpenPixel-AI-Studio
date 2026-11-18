@@ -1,0 +1,8 @@
+pixel art icon of a round brown and gold dwarven buckler shield, top-down fantasy roguelike style, limited palette
+dwarven_buckler2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/dwarven_buckler2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #010101, #303030, #202020, #605020, #606060, #e0ba4a, #c0a040

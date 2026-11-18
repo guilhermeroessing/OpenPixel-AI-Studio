@@ -1,0 +1,8 @@
+pixel art night scene with hanging pastel lanterns and bunting on a dark background, small full scene tile
+nightshift-superstar
+Fonte: lospec
+Licença: cc0
+Origem (atribuição): https://lospec.com/gallery/grahalda/nightshift-superstar
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 64x64 px; escala original detectada: 1x
+Paleta: 16 cores; dominantes: #28282e, #b0a9e4, #ffe6c6, #6c5671, #d9c8bf, #feaae4, #fff7e4, #fff7a0

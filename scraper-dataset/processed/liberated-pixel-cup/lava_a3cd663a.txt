@@ -1,0 +1,8 @@
+pixel art bright orange lava pool tiles with dark rocky edges, top-down RPG terrain
+lava
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/lava/lava.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 9 cores; dominantes: #ff5442, #ff7b3a, #e43c3c, #ae424a, #523745, #ffa749, #101414, #000000

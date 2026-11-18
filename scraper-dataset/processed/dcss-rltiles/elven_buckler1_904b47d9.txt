@@ -1,0 +1,8 @@
+pixel art icon of a round blue elven buckler shield, top-down fantasy roguelike style, limited palette
+elven_buckler1
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/elven_buckler1.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #000000, #401000, #2f0e02, #802000, #ffc000, #806000, #5c4603, #571c08
