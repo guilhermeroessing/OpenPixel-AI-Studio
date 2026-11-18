@@ -6,3 +6,7 @@ __pycache__/
 dist/
 .pytest_cache/
 # NOTE: /scraper-dataset/ (incl. processed/ and dataset_catalog.db) is intentionally tracked.
+
+# Referencias pessoais (licencas desconhecidas/mistas): NUNCA versionar
+references-local/
+training-local/private/

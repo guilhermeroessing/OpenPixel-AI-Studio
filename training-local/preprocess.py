@@ -7,6 +7,7 @@ Image.NEAREST para RESOLUTION x RESOLUTION e copia a legenda junto.
 Uso (a partir da raiz do projeto):
     python training-local/preprocess.py
     python training-local/preprocess.py --src scraper-dataset/processed --out training-local/data/processed_1024
+    python training-local/preprocess.py --include-private   # tambem le training-local/private/images (nao versionado)
 """
 
 from __future__ import annotations
@@ -19,6 +20,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
+PRIVATE_IMAGES = ROOT / "training-local" / "private" / "images"
 IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".bmp", ".gif"}
 
 
@@ -49,25 +51,43 @@ def main() -> int:
     parser.add_argument("--out", type=Path, default=ROOT / "training-local" / "data" / "processed_1024")
     parser.add_argument("--resolution", type=int, default=1024)
     parser.add_argument("--bg", default="000000", help="cor de fundo do padding, hex RRGGBB")
+    parser.add_argument(
+        "--include-private",
+        action="store_true",
+        help="tambem le training-local/private/images (dados privados, nunca versionar a saida)",
+    )
     args = parser.parse_args()
 
     if not args.src.is_dir():
         print(f"[ERRO] Pasta de origem nao encontrada: {args.src}")
         return 1
 
+    # (raiz, prefixo do nome de saida) de cada fonte de imagens
+    sources = [(args.src, "")]
+    if args.include_private:
+        if PRIVATE_IMAGES.is_dir():
+            sources.append((PRIVATE_IMAGES, "private_"))
+        else:
+            print(f"[AVISO] --include-private sem pasta: {PRIVATE_IMAGES}")
+
     bg = hex_to_rgba(args.bg)
     args.out.mkdir(parents=True, exist_ok=True)
 
-    images = sorted(p for p in args.src.rglob("*") if p.suffix.lower() in IMAGE_EXTS)
+    images = [
+        (root, prefix, p)
+        for root, prefix in sources
+        for p in sorted(root.rglob("*"))
+        if p.suffix.lower() in IMAGE_EXTS
+    ]
     done = 0
-    for img_path in images:
+    for root, prefix, img_path in images:
         caption = img_path.with_suffix(".txt")
         if not caption.exists():
             print(f"[SKIP] sem legenda: {img_path}")
             continue
 
         # Achata subpastas em um nome unico para evitar colisoes
-        stem = "_".join(img_path.relative_to(args.src).with_suffix("").parts)
+        stem = prefix + "_".join(img_path.relative_to(root).with_suffix("").parts)
         with Image.open(img_path) as im:
             out_img = process(im, args.resolution, bg)
         out_img.save(args.out / f"{stem}.png")
