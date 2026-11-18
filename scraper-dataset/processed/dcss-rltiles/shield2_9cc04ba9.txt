@@ -1,0 +1,19 @@
+pixel art grey metal shield with dark outline, top-down roguelike style, limited palette
+shield2
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/shield2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #000000, #505050, #404040, #606060, #707070, #b0b0b0, #909090, #d0d0d0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 1/2/5/0 px; bbox x 1-29, y 5-31; preenchimento 76%; base consistente entre frames: n/a
+- Cores: 10 cores opacas; dominantes: #000000, #505050, #404040, #606060, #707070, #b0b0b0, #909090, #d0d0d0
+- Transparência: 47% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 7426387ebd43

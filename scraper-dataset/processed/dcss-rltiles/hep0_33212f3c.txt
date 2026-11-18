@@ -1,0 +1,19 @@
+pixel art dark stone altar shrine with teal glow, top-down roguelike style, limited palette
+hep0
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/dngn/altars/hep0.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 41 cores; dominantes: #000000, #494943, #292925, #73bdac, #578c99, #6a775b, #9de2ab, #34417a
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (42% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-31, y 0-31; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 41 cores opacas; dominantes: #000000, #494943, #292925, #73bdac, #578c99, #6a775b, #9de2ab, #34417a
+- Transparência: 24% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 87bcf35ef145

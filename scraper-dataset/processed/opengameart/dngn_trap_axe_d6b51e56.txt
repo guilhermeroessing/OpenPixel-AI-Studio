@@ -1,0 +1,19 @@
+pixel art dungeon floor trap tile, dark stone pressure plate with a small red warning glyph, 32x32
+dngn_trap_axe
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_trap_axe.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 17 cores; dominantes: #000000, #202020, #303030, #606060, #909090, #808080, #101010, #b0b0b0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 1/1/7/2 px; bbox x 1-30, y 7-29; preenchimento 67%; base consistente entre frames: n/a
+- Cores: 17 cores opacas; dominantes: #000000, #202020, #303030, #606060, #909090, #808080, #101010, #b0b0b0
+- Transparência: 50% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 141512cc6ace

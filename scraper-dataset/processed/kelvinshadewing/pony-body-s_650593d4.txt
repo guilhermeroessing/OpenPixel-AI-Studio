@@ -1,0 +1,20 @@
+grayscale pixel art pony body spritesheet, many animation frames of a horse walking and idling, 4 colors
+pony-body-s
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/pony/pony-body-s.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x240 px; escala original detectada: 1x
+Paleta: 4 cores; dominantes: #d8d8d8, #202020, #606060, #a0a0a0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=0.94, 8px=0.96)
+- Frames: 40 (8 coluna(s) x 5 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (63% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 4/4/17/40 px; bbox x 4-315, y 17-199; preenchimento 74%; base consistente entre frames: sim
+- Cores: 4 cores opacas; dominantes: #d8d8d8, #202020, #606060, #a0a0a0
+- Transparência: 88% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 53f0acd90a15

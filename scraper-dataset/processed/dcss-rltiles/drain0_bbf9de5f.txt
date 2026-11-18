@@ -1,0 +1,19 @@
+pixel art cyan swirling drain magic effect ring, top-down roguelike style, limited palette
+drain0
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/effects/drain0.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 4 cores; dominantes: #00a0a0, #008080, #80ffff, #00c0c0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: effect
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 2 (1 coluna(s) x 2 linha(s)); spritesheet: sim; larguras uniformes: n/a
+- Contorno escuro: não (0% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 2/2/3/1 px; bbox x 2-29, y 3-30; preenchimento 77%; base consistente entre frames: n/a
+- Cores: 4 cores opacas; dominantes: #00a0a0, #008080, #80ffff, #00c0c0
+- Transparência: 86% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): d867f331289c

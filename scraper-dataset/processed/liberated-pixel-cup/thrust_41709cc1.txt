@@ -1,0 +1,19 @@
+pixel art pale green naked humanoid body spritesheet, spear thrust animation, 4 directions, limited palette
+thrust
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Light Green/thrust.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 576x256 px; escala original detectada: 1x
+Paleta: 14 cores; dominantes: #f2f0c4, #d4d887, #101925, #839f6e, #4a7a69, #f8f3eb, #f2f7f8, #f6f0d1
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.81, 16px=1.01, 8px=1.09)
+- Frames: 9 (9 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (89% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-575, y 0-255; preenchimento 97%; base consistente entre frames: não
+- Cores: 14 cores opacas; dominantes: #f2f0c4, #d4d887, #101925, #839f6e, #4a7a69, #f8f3eb, #f2f7f8, #f6f0d1
+- Transparência: 72% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 78ea97f33a48

@@ -1,0 +1,20 @@
+single-color pixel art pony cutie mark overlay sheet, small bright green marks on transparent background
+pony-mark
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/pony/pony-mark.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x240 px; escala original detectada: 1x
+Paleta: 1 cores; dominantes: #00f800
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=0.0, 8px=0.0)
+- Frames: 48 (8 coluna(s) x 6 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: não (0% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 14/19/25/51 px; bbox x 14-300, y 25-188; preenchimento 61%; base consistente entre frames: não
+- Cores: 1 cores opacas; dominantes: #00f800
+- Transparência: 100% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): de35f0706df9

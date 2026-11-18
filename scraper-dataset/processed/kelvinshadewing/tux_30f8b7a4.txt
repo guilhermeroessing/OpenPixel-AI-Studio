@@ -1,0 +1,20 @@
+pixel art Tux penguin spritesheet, black and white penguin walk and idle frames with orange feet, 4 directions
+tux
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/tux.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 256x224 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #384040, #282830, #181830, #101010, #f8f8f8, #b0b0b0, #704010, #707070
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 56 (8 coluna(s) x 7 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (84% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 6/2/8/0 px; bbox x 6-253, y 8-223; preenchimento 93%; base consistente entre frames: não
+- Cores: 15 cores opacas; dominantes: #384040, #282830, #181830, #101010, #f8f8f8, #b0b0b0, #704010, #707070
+- Transparência: 79% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): e3821e9e645c

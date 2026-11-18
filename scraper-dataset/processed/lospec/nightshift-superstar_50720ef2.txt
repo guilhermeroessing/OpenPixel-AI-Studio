@@ -6,3 +6,13 @@ Origem (atribuição): https://lospec.com/gallery/grahalda/nightshift-superstar
 Tipo: full_tile_scene (tile/cena opaca)
 Dimensões 1:1: 64x64 px; escala original detectada: 1x
 Paleta: 16 cores; dominantes: #28282e, #b0a9e4, #ffe6c6, #6c5671, #d9c8bf, #feaae4, #fff7e4, #fff7a0
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 64x64 px (candidatos 8, 16, 32, 64; razão na grade: 64px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-63, y 0-63; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 16 cores opacas; dominantes: #28282e, #b0a9e4, #ffe6c6, #6c5671, #d9c8bf, #feaae4, #fff7e4, #fff7a0
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): a1f450315b70

@@ -6,3 +6,13 @@ Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/mas
 Tipo: isolated_sprite (sprite isolado com fundo transparente)
 Dimensões 1:1: 192x224 px; escala original detectada: 1x
 Paleta: 6 cores; dominantes: #9d6639, #62351c, #8f5030, #aa8550, #2b1c1d, #3e2613
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=1.38)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-191, y 0-223; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 6 cores opacas; dominantes: #9d6639, #62351c, #8f5030, #aa8550, #2b1c1d, #3e2613
+- Transparência: 43% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): c01209e6dac5

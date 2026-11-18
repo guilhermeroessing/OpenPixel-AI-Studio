@@ -1,0 +1,19 @@
+pixel art blue scaled naga barding armour, top-down roguelike style, limited palette
+naga_barding_blue
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/naga_barding_blue.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 16 cores; dominantes: #000000, #000080, #0000a0, #000060, #0000c0, #a07800, #202020, #101010
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (70% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 11/6/10/5 px; bbox x 11-25, y 10-26; preenchimento 25%; base consistente entre frames: n/a
+- Cores: 16 cores opacas; dominantes: #000000, #000080, #0000a0, #000060, #0000c0, #a07800, #202020, #101010
+- Transparência: 81% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): c582593d7512

@@ -1,0 +1,20 @@
+pixel art character spritesheet of a blue-capped figure, walk cycle, 4 directions, limited palette
+guido
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/guido.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 256x64 px; escala original detectada: 1x
+Paleta: 24 cores; dominantes: #181818, #101838, #182858, #204878, #906020, #683020, #683810, #482010
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 64x64 px (candidatos 8, 16, 32, 64; razão na grade: 64px=None)
+- Frames: 16 (8 coluna(s) x 2 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (93% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 9/5/3/0 px; bbox x 9-250, y 3-63; preenchimento 90%; base consistente entre frames: sim
+- Cores: 24 cores opacas; dominantes: #181818, #101838, #182858, #204878, #906020, #683020, #683810, #482010
+- Transparência: 72% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 4b088ebaf931

@@ -1,0 +1,19 @@
+pixel art lavender naked humanoid body spritesheet, magic casting animation, 4 directions, blue-gray palette
+magic
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Gray/magic.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 512x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #aaacd3, #9c9db3, #16171b, #3a3945, #7a798f, #cdd5ec, #f2f7f8, #2a3c49
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: effect
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.71, 16px=0.96, 8px=1.1)
+- Frames: 8 (8 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (91% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-511, y 0-255; preenchimento 96%; base consistente entre frames: não
+- Cores: 10 cores opacas; dominantes: #aaacd3, #9c9db3, #16171b, #3a3945, #7a798f, #cdd5ec, #f2f7f8, #2a3c49
+- Transparência: 70% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 4684913a8211

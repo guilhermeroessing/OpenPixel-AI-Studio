@@ -1,0 +1,19 @@
+pixel art red-tipped arrow projectile, top-down roguelike style, limited palette
+arrow4
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/effect/arrow4.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #401000, #a02800, #c00000, #a00000, #505050, #d0d0d0, #ff0000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: effect
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 13/13/8/8 px; bbox x 13-18, y 8-23; preenchimento 9%; base consistente entre frames: n/a
+- Cores: 12 cores opacas; dominantes: #000000, #401000, #a02800, #c00000, #a00000, #505050, #d0d0d0, #ff0000
+- Transparência: 94% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 3a1bf4eab346

@@ -1,0 +1,19 @@
+pixel art brown rock cave and mountain tileset with dirt slopes, a wooden ladder and dark cave openings
+mountains
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/mountains.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 384x288 px; escala original detectada: 1x
+Paleta: 22 cores; dominantes: #7d4d35, #322125, #6e3f2d, #c39753, #b88751, #5b3026, #8e5b3c, #4d2620
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16, 32, 48; razão na grade: 48px=0.84, 32px=0.87, 16px=0.94, 8px=1.11)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (70% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-383, y 0-287; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 22 cores opacas; dominantes: #7d4d35, #322125, #6e3f2d, #c39753, #b88751, #5b3026, #8e5b3c, #4d2620
+- Transparência: 44% transparente; alpha parcial 0.9%
+- Hash de conteúdo (sha1): bd1fe0a22ddc

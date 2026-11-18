@@ -1,0 +1,19 @@
+pixel art large purple-grey abomination monster, top-down roguelike style, limited palette
+abomination_large8
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large8.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #000000, #473d50, #25233a, #6b6185, #6b3932, #9796af, #b1526a, #d8e9de
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (90% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 1/1/0/0 px; bbox x 1-30, y 0-31; preenchimento 94%; base consistente entre frames: n/a
+- Cores: 8 cores opacas; dominantes: #000000, #473d50, #25233a, #6b6185, #6b3932, #9796af, #b1526a, #d8e9de
+- Transparência: 28% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 3156c032af18

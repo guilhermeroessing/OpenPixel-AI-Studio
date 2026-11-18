@@ -1,0 +1,19 @@
+pixel art dark blue octagonal orb with swirling magic effect, top-down roguelike style, limited palette
+cacophony
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/gui/abilities/cacophony.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 38 cores; dominantes: #000200, #0b1f45, #000000, #c4c4c4, #8d5fc8, #03411f, #2e805e, #323276
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (40% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 1/1/1/1 px; bbox x 1-30, y 1-30; preenchimento 88%; base consistente entre frames: n/a
+- Cores: 38 cores opacas; dominantes: #000200, #0b1f45, #000000, #c4c4c4, #8d5fc8, #03411f, #2e805e, #323276
+- Transparência: 20% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 9c80fb344e40

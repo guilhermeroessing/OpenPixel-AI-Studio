@@ -1,0 +1,19 @@
+pixel art gray cement stone wall tileset with dark cracked rubble at the bottom, muted gray palette
+cement
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/sewer-dungeon/cement.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 5 cores; dominantes: #7e7068, #5e5252, #4b444c, #3a313a, #867e7f
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32, 48; razão na grade: 48px=0.51, 32px=5.34)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (16% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-95, y 0-191; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 5 cores opacas; dominantes: #7e7068, #5e5252, #4b444c, #3a313a, #867e7f
+- Transparência: 22% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): a3c14a4a8f93

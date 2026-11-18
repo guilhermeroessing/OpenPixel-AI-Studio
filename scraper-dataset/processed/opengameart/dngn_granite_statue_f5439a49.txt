@@ -1,0 +1,19 @@
+pixel art grey granite statue bust on a pedestal, three-quarter view, 32x32
+dngn_granite_statue
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_granite_statue.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 13 cores; dominantes: #000000, #909090, #b0b0b0, #505050, #d0d0d0, #a0a0a0, #707070, #808080
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 4/1/1/0 px; bbox x 4-30, y 1-31; preenchimento 82%; base consistente entre frames: n/a
+- Cores: 13 cores opacas; dominantes: #000000, #909090, #b0b0b0, #505050, #d0d0d0, #a0a0a0, #707070, #808080
+- Transparência: 40% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 886c70399e5b

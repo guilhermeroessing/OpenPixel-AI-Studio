@@ -1,0 +1,20 @@
+grayscale pixel art pony wing overlay sheet, small monochrome wing frames on transparent background, 4 colors
+pony-wing
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/pony/pony-wing.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x240 px; escala original detectada: 1x
+Paleta: 4 cores; dominantes: #d8d8d8, #606060, #a0a0a0, #202020
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=0.91, 8px=1.02)
+- Frames: 45 (9 coluna(s) x 5 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: não (34% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 12/15/17/52 px; bbox x 12-304, y 17-187; preenchimento 65%; base consistente entre frames: não
+- Cores: 4 cores opacas; dominantes: #d8d8d8, #606060, #a0a0a0, #202020
+- Transparência: 98% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): d1ae62ef8260

@@ -1,0 +1,19 @@
+pixel art closed wooden dungeon door in a dark stone arch, brown planks, 32x32
+dngn_closed_door
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_closed_door.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 23 cores; dominantes: #4f2a25, #68362f, #381f1b, #2d1a18, #393939, #151515, #0a0a0a, #454545
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-31, y 0-31; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 23 cores opacas; dominantes: #4f2a25, #68362f, #381f1b, #2d1a18, #393939, #151515, #0a0a0a, #454545
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 12a82b81fdfc

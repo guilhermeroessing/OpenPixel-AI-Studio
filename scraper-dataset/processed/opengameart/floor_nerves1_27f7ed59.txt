@@ -1,0 +1,19 @@
+pixel art dark red-brown organic floor tile with vein-like nerve pattern, 32x32 seamless
+floor_nerves1
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/floor/floor_nerves1.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #200000, #100000, #180000, #300c00, #401000, #601800, #300000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-31, y 0-31; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 7 cores opacas; dominantes: #200000, #100000, #180000, #300c00, #401000, #601800, #300000
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 7103af6392e1

@@ -1,0 +1,19 @@
+pixel art large red and dark-pink fleshy abomination monster, top-down roguelike style, limited palette
+abomination_large9
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_large9.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 16 cores; dominantes: #000000, #81122e, #46042b, #a62c1e, #544f62, #697c94, #e18c64, #2f2d42
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (93% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/1/0 px; bbox x 0-31, y 1-31; preenchimento 97%; base consistente entre frames: n/a
+- Cores: 16 cores opacas; dominantes: #000000, #81122e, #46042b, #a62c1e, #544f62, #697c94, #e18c64, #2f2d42
+- Transparência: 30% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 3a8978945dac

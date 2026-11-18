@@ -1,0 +1,19 @@
+pixel art dungeon fountain, dark stone basin filled with red blood, three-quarter view, 32x32
+dngn_blood_fountain2
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_blood_fountain2.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 21 cores; dominantes: #000000, #e00000, #808080, #404040, #a0a0a0, #c00000, #505050, #a00000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 1/0/0/0 px; bbox x 1-31, y 0-31; preenchimento 97%; base consistente entre frames: n/a
+- Cores: 21 cores opacas; dominantes: #000000, #e00000, #808080, #404040, #a0a0a0, #c00000, #505050, #a00000
+- Transparência: 35% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 5e802749fb89

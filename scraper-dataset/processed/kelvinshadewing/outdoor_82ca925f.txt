@@ -1,0 +1,20 @@
+pixel art outdoor terrain tileset, green grass with brown rock walls, stone paths and dirt edges
+outdoor
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/rpg/outdoor.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 256x256 px; escala original detectada: 1x
+Paleta: 24 cores; dominantes: #40b080, #089870, #704848, #503040, #c8a090, #a88078, #a05840, #70c0a0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 64x64 px (candidatos 8, 16, 32, 64; razão na grade: 64px=1.68)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (23% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/0/0/32 px; bbox x 0-255, y 0-223; preenchimento 88%; base consistente entre frames: n/a
+- Cores: 24 cores opacas; dominantes: #40b080, #089870, #704848, #503040, #c8a090, #a88078, #a05840, #70c0a0
+- Transparência: 46% transparente; alpha parcial 0.1%
+- Hash de conteúdo (sha1): 2b201c3e8beb

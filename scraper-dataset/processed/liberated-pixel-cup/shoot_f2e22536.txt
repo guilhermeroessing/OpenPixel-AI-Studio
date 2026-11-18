@@ -1,0 +1,19 @@
+pixel art golden orange naked humanoid body spritesheet, bow shooting animation, 4 directions, warm palette
+shoot
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Gold/shoot.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 896x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #fdd082, #ea9f54, #281716, #d28144, #9e3c27, #fbe7a4, #f2f7f8, #2a3c49
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.89, 16px=1.09, 8px=1.15)
+- Frames: 14 (14 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (93% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-895, y 0-255; preenchimento 98%; base consistente entre frames: não
+- Cores: 10 cores opacas; dominantes: #fdd082, #ea9f54, #281716, #d28144, #9e3c27, #fbe7a4, #f2f7f8, #2a3c49
+- Transparência: 75% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): e525c2a7f8d8

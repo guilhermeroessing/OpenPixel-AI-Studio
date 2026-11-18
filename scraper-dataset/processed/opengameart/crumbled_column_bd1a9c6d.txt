@@ -1,0 +1,19 @@
+pixel art crumbled stone column base, grey broken pillar on transparent background, 32x32
+crumbled_column
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/crumbled_column.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #000000, #b0b0b0, #a0a0a0, #707070, #909090, #d0d0d0, #e0e0e0, #505050
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 4/1/5/0 px; bbox x 4-30, y 5-31; preenchimento 71%; base consistente entre frames: n/a
+- Cores: 10 cores opacas; dominantes: #000000, #b0b0b0, #a0a0a0, #707070, #909090, #d0d0d0, #e0e0e0, #505050
+- Transparência: 67% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 7c16e63e4ca6

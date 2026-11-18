@@ -1,0 +1,20 @@
+pixel art empress character sprite, small purple-haired figure in a dark robe, single standing frame
+empress
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/empress.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 24x40 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #181818, #002850, #f04890, #682888, #283068, #182830, #484848, #683020
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8; razão na grade: 8px=1.04)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (98% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 3/4/2/0 px; bbox x 3-19, y 2-39; preenchimento 67%; base consistente entre frames: n/a
+- Cores: 15 cores opacas; dominantes: #181818, #002850, #f04890, #682888, #283068, #182830, #484848, #683020
+- Transparência: 49% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 408538f7a53a

@@ -1,0 +1,19 @@
+pixel art pale green naked humanoid body spritesheet, magic casting animation, 4 directions, limited palette
+magic
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Light Green/magic.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 512x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #f2f0c4, #d4d887, #101925, #4a7a69, #839f6e, #f8f3eb, #f2f7f8, #2a3c49
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: effect
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.75, 16px=0.95, 8px=1.13)
+- Frames: 8 (8 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (89% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-511, y 0-255; preenchimento 96%; base consistente entre frames: não
+- Cores: 10 cores opacas; dominantes: #f2f0c4, #d4d887, #101925, #4a7a69, #839f6e, #f8f3eb, #f2f7f8, #2a3c49
+- Transparência: 70% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): a34b8d32e281

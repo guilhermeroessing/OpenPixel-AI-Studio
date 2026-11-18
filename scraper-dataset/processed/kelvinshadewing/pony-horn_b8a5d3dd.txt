@@ -1,0 +1,20 @@
+grayscale pixel art pony horn overlay sheet, small monochrome horn frames on transparent background, 4 colors
+pony-horn
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/pony/pony-horn.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x240 px; escala original detectada: 1x
+Paleta: 4 cores; dominantes: #606060, #d8d8d8, #a0a0a0, #202020
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=0.59, 8px=0.67)
+- Frames: 96 (16 coluna(s) x 6 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: não (1% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 24/0/4/54 px; bbox x 24-319, y 4-185; preenchimento 70%; base consistente entre frames: não
+- Cores: 4 cores opacas; dominantes: #606060, #d8d8d8, #a0a0a0, #202020
+- Transparência: 99% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): a789086faeab

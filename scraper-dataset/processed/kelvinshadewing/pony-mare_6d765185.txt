@@ -1,0 +1,20 @@
+pixel art pony mare spritesheet, gray horse animation frames with blue and red accents, 7 colors
+pony-mare
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/pony/pony-mare.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x240 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #d8d8d8, #606060, #202020, #a0a0a0, #f8f8f8, #0000f8, #e84868
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=0.9, 8px=0.96)
+- Frames: 40 (8 coluna(s) x 5 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: não (32% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 18/4/4/50 px; bbox x 18-315, y 4-189; preenchimento 72%; base consistente entre frames: não
+- Cores: 7 cores opacas; dominantes: #d8d8d8, #606060, #202020, #a0a0a0, #f8f8f8, #0000f8, #e84868
+- Transparência: 94% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): ad75f2062a18

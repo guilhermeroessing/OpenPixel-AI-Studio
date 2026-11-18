@@ -6,3 +6,13 @@ Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles
 Tipo: isolated_sprite (sprite isolado com fundo transparente)
 Dimensões 1:1: 32x32 px; escala original detectada: 1x
 Paleta: 14 cores; dominantes: #000000, #d0d0d0, #c0c0c0, #707070, #808080, #909090, #b0b0b0, #606060
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 2/2/0/0 px; bbox x 2-29, y 0-31; preenchimento 88%; base consistente entre frames: n/a
+- Cores: 14 cores opacas; dominantes: #000000, #d0d0d0, #c0c0c0, #707070, #808080, #909090, #b0b0b0, #606060
+- Transparência: 54% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 54775fbb0a91

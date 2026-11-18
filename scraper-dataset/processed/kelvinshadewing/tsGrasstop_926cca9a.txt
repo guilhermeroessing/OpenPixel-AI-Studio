@@ -1,0 +1,20 @@
+pixel art dark grass-top terrain tileset with brown and green cliff edges and round ring-shaped corners
+tsGrasstop
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/tsGrasstop.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 464x176 px; escala original detectada: 1x
+Paleta: 15 cores; dominantes: #282820, #383020, #182020, #504030, #4b5b52, #183830, #182828, #5d8759
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16; razão na grade: 16px=1.07, 8px=0.96)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (61% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/0/0/2 px; bbox x 0-463, y 0-173; preenchimento 99%; base consistente entre frames: n/a
+- Cores: 15 cores opacas; dominantes: #282820, #383020, #182020, #504030, #4b5b52, #183830, #182828, #5d8759
+- Transparência: 45% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 142805791a62

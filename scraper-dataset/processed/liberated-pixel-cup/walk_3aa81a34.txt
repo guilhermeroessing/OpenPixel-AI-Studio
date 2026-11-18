@@ -1,0 +1,19 @@
+pixel art lavender naked humanoid body spritesheet, walk cycle, 4 directions, blue-gray palette
+walk
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Gray/walk.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 576x256 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #aaacd3, #9c9db3, #16171b, #7a798f, #3a3945, #cdd5ec, #271920, #f2f7f8
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.57, 16px=0.71, 8px=1.01)
+- Frames: 9 (9 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (91% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-575, y 0-255; preenchimento 97%; base consistente entre frames: não
+- Cores: 11 cores opacas; dominantes: #aaacd3, #9c9db3, #16171b, #7a798f, #3a3945, #cdd5ec, #271920, #f2f7f8
+- Transparência: 72% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 0eeb8ab62638

@@ -1,0 +1,19 @@
+pixel art dungeon cobblestone floor tile, dark grey stones, 32x32 seamless
+cobble_blood1
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/floor/cobble_blood1.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #404040, #303030, #202020, #101010, #505050, #606060
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-31, y 0-31; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 6 cores opacas; dominantes: #404040, #303030, #202020, #101010, #505050, #606060
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 656b205fb73d

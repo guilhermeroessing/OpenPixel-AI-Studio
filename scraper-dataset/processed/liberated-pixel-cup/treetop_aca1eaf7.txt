@@ -1,0 +1,19 @@
+pixel art two round green bushes and two dark green pine trees on transparent background, forest treetop sprites
+treetop
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/treetop.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 192x224 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #397e00, #81a100, #074337, #0c2d2b, #105b2d, #0b5c2f, #101820, #003023
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16, 32; razão na grade: 32px=1.0, 16px=0.95, 8px=0.99)
+- Frames: 4 (2 coluna(s) x 2 linha(s)); spritesheet: sim; larguras uniformes: sim
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 1/1/0/16 px; bbox x 1-190, y 0-207; preenchimento 92%; base consistente entre frames: não
+- Cores: 8 cores opacas; dominantes: #397e00, #81a100, #074337, #0c2d2b, #105b2d, #0b5c2f, #101820, #003023
+- Transparência: 51% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 748163a6e082

@@ -1,0 +1,19 @@
+pixel art pond tileset with blue water tiles bordered by green grass and brown dirt edges
+watergrass
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/watergrass.png
+Tipo: full_tile_scene (tile/cena opaca)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 14 cores; dominantes: #156c99, #2f8136, #0098b2, #64a42c, #006b46, #499231, #004337, #00cfdf
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32, 48; razão na grade: 48px=1.17, 32px=2.31)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-95, y 0-191; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 14 cores opacas; dominantes: #156c99, #2f8136, #0098b2, #64a42c, #006b46, #499231, #004337, #00cfdf
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): f93610619e8a

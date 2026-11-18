@@ -1,0 +1,20 @@
+pixel art death cap mushroom monster spritesheet, 8 small purple and pink mushroom sprites in a row, limited palette
+deathcap
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/platform/deathcap.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 128x16 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #f04890, #181818, #682888, #002850, #d89810, #f8f8f8, #f8e810, #704010
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 16x16 px (candidatos 8, 16; razão na grade: 16px=None)
+- Frames: 8 (8 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (78% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 1/0/0/0 px; bbox x 1-127, y 0-15; preenchimento 99%; base consistente entre frames: sim
+- Cores: 8 cores opacas; dominantes: #f04890, #181818, #682888, #002850, #d89810, #f8f8f8, #f8e810, #704010
+- Transparência: 43% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 309aa40376ff

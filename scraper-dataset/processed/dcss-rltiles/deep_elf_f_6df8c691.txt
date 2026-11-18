@@ -1,0 +1,19 @@
+pixel art deep elf female humanoid character with pale skin and dark hair, top-down roguelike style, limited palette
+deep_elf_f
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/player/base/deep_elf_f.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #000000, #e5a282, #ffd3af, #ffb691, #ca8f72, #909090, #707070, #a5765e
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (98% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 5/5/2/0 px; bbox x 5-26, y 2-31; preenchimento 64%; base consistente entre frames: n/a
+- Cores: 11 cores opacas; dominantes: #000000, #e5a282, #ffd3af, #ffb691, #ca8f72, #909090, #707070, #a5765e
+- Transparência: 70% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 256aa36ef30e

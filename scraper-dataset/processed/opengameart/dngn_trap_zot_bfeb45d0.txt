@@ -1,0 +1,19 @@
+pixel art glowing blue-white magic circle trap tile on a dark background, 32x32
+dngn_trap_zot
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_trap_zot.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 5 cores; dominantes: #000000, #ffffff, #80ffff, #00ffff, #ff0000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (52% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/0/7/5 px; bbox x 0-31, y 7-26; preenchimento 62%; base consistente entre frames: n/a
+- Cores: 5 cores opacas; dominantes: #000000, #ffffff, #80ffff, #00ffff, #ff0000
+- Transparência: 65% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 4cce8b9050fc

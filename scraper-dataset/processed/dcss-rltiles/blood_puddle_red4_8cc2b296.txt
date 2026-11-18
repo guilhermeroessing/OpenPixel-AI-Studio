@@ -1,0 +1,19 @@
+pixel art dark red blood puddle splatter on the ground, top-down roguelike style, limited palette
+blood_puddle_red4
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/misc/blood/blood_puddle_red4.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #770000, #6e0000, #5b0000, #640000, #6d0304, #650000, #800309, #520000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/1/11/2 px; bbox x 0-30, y 11-29; preenchimento 57%; base consistente entre frames: n/a
+- Cores: 8 cores opacas; dominantes: #770000, #6e0000, #5b0000, #640000, #6d0304, #650000, #800309, #520000
+- Transparência: 66% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): f0af339e9105

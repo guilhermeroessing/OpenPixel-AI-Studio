@@ -1,0 +1,19 @@
+pixel art grey stone elephant statue, side view, dungeon prop, 32x32
+elephant_statue
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/elephant_statue.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 49 cores; dominantes: #000000, #4a4a4a, #2b2b2b, #666666, #393939, #656565, #40424c, #444444
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-31, y 0-31; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 49 cores opacas; dominantes: #000000, #4a4a4a, #2b2b2b, #666666, #393939, #656565, #40424c, #444444
+- Transparência: 18% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): f9658e2f76e0

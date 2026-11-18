@@ -6,3 +6,13 @@ Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-s
 Tipo: isolated_sprite (sprite isolado com fundo transparente)
 Dimensões 1:1: 240x144 px; escala original detectada: 1x
 Paleta: 6 cores; dominantes: #e5e1e1, #443934, #786860, #ffffff, #c8b8b8, #a89080
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16, 48; razão na grade: 48px=0.31, 16px=0.17, 8px=0.15)
+- Frames: 2 (1 coluna(s) x 2 linha(s)); spritesheet: sim; larguras uniformes: n/a
+- Contorno escuro: sim (73% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/0/0/24 px; bbox x 0-239, y 0-119; preenchimento 83%; base consistente entre frames: n/a
+- Cores: 6 cores opacas; dominantes: #e5e1e1, #443934, #786860, #ffffff, #c8b8b8, #a89080
+- Transparência: 47% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): e2ba5a4ebece

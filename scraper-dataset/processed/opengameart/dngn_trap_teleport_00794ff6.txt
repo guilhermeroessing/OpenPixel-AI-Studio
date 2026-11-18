@@ -1,0 +1,19 @@
+pixel art teleport trap tile, green swirling magic ring on a dark floor, 32x32
+dngn_trap_teleport
+Fonte: opengameart
+Licença: CC0
+Origem (atribuição): https://opengameart.org/content/dungeon-crawl-32x32-tiles#crawl-tiles Oct-5-2010/dc-dngn/dngn_trap_teleport.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 8 cores; dominantes: #000000, #00ff00, #80ff80, #003000, #c0ffc0, #008000, #00c000, #ffffff
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 0/0/7/7 px; bbox x 0-31, y 7-24; preenchimento 56%; base consistente entre frames: n/a
+- Cores: 8 cores opacas; dominantes: #000000, #00ff00, #80ff80, #003000, #c0ffc0, #008000, #00c000, #ffffff
+- Transparência: 71% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 9a116c11cf27

@@ -1,0 +1,20 @@
+pixel art town building tileset with wooden doors, shelves and windows, blue-gray and brown palette
+doors
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/rpg/doors.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 176x192 px; escala original detectada: 1x
+Paleta: 81 cores; dominantes: #808088, #484858, #302820, #404040, #000000, #684020, #606070, #606078
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 16x16 px (candidatos 8, 16; razão na grade: 16px=1.98)
+- Frames: 6 (1 coluna(s) x 6 linha(s)); spritesheet: sim; larguras uniformes: n/a
+- Contorno escuro: sim (82% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/12/0 px; bbox x 0-175, y 12-191; preenchimento 94%; base consistente entre frames: n/a
+- Cores: 81 cores opacas; dominantes: #808088, #484858, #302820, #404040, #000000, #684020, #606070, #606078
+- Transparência: 39% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 31bf35d246ab

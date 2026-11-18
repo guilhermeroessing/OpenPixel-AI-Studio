@@ -6,3 +6,13 @@ Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/sour
 Tipo: isolated_sprite (sprite isolado com fundo transparente)
 Dimensões 1:1: 32x32 px; escala original detectada: 1x
 Paleta: 7 cores; dominantes: #770000, #640000, #6e0000, #5b0000, #800309, #650000, #520000
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 2 (2 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 2/1/12/2 px; bbox x 2-30, y 12-29; preenchimento 51%; base consistente entre frames: sim
+- Cores: 7 cores opacas; dominantes: #770000, #640000, #6e0000, #5b0000, #800309, #650000, #520000
+- Transparência: 80% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 1794568ccd7e

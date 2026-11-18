@@ -1,0 +1,19 @@
+pixel art black hole sprite, dark blob-shaped pit with soft edges, near-black monochrome palette, 3 frames
+holek
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/holek.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x192 px; escala original detectada: 1x
+Paleta: 6 cores; dominantes: #000000, #080a0a, #101414, #22282a, #2a3034, #1c2222
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 48x48 px (candidatos 8, 16, 32, 48; razão na grade: 48px=1.51)
+- Frames: 3 (1 coluna(s) x 3 linha(s)); spritesheet: sim; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-95, y 0-191; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 6 cores opacas; dominantes: #000000, #080a0a, #101414, #22282a, #2a3034, #1c2222
+- Transparência: 29% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 8aa8cc7b9499

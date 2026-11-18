@@ -1,0 +1,20 @@
+pixel art town building tileset, shops and houses with red and blue roofs and signs, static props
+statics
+Fonte: kelvinshadewing
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/KelvinShadewing/pixels/blob/master/rpg/statics.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 320x544 px; escala original detectada: 1x
+Paleta: 194 cores; dominantes: #e0e8f0, #f8f8f8, #404040, #302820, #a8a8a8, #684020, #886030, #a87840
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+Atribuição sugerida: kelvinshadewing.net (repositório: https://github.com/KelvinShadewing/pixels)
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16, 32; razão na grade: 32px=1.09, 16px=1.07, 8px=0.94)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (46% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/1 px; bbox x 0-319, y 0-542; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 194 cores opacas; dominantes: #e0e8f0, #f8f8f8, #404040, #302820, #a8a8a8, #684020, #886030, #a87840
+- Transparência: 29% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): a58f036c229f

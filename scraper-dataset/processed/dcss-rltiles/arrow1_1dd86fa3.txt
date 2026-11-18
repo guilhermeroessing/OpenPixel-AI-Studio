@@ -1,0 +1,19 @@
+pixel art red-tipped arrow projectile in flight, top-down roguelike style, limited palette
+arrow1
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/effect/arrow1.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 12 cores; dominantes: #000000, #401000, #c00000, #802000, #c03000, #a02800, #b0b0b0, #a00000
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: effect
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (100% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 6/7/11/9 px; bbox x 6-24, y 11-22; preenchimento 22%; base consistente entre frames: n/a
+- Cores: 12 cores opacas; dominantes: #000000, #401000, #c00000, #802000, #c03000, #a02800, #b0b0b0, #a00000
+- Transparência: 93% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 386b7bf53972

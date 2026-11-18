@@ -1,0 +1,19 @@
+pixel art blue waterfall tile with cyan streaks and a white foam splash at the bottom, limited palette
+waterfall
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/outdoor/PNG/waterfall.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 96x160 px; escala original detectada: 1x
+Paleta: 3 cores; dominantes: #156c99, #0098b2, #00cfdf
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos 8, 16, 32; razão na grade: 32px=0.96, 16px=0.98, 8px=0.96)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: não (0% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 5/7/0/25 px; bbox x 5-88, y 0-134; preenchimento 74%; base consistente entre frames: n/a
+- Cores: 3 cores opacas; dominantes: #156c99, #0098b2, #00cfdf
+- Transparência: 44% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 7bb3ce2d0cdd

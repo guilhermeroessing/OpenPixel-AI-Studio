@@ -1,0 +1,19 @@
+pixel art copper-brown naked humanoid body spritesheet, idle animation frames, limited palette
+idle
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/sprite/character/Body/Base/Human_androgynous/Sienna/idle.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 128x256 px; escala original detectada: 1x
+Paleta: 10 cores; dominantes: #d68c61, #a96b4c, #895b4a, #593636, #2a1722, #deac9b, #f2f7f8, #2a3c49
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: não detectada (candidatos 8, 16, 32, 64; razão na grade: 64px=0.0, 32px=0.97, 16px=0.9, 8px=1.05)
+- Frames: 2 (2 coluna(s) x 1 linha(s)); spritesheet: sim; larguras uniformes: não
+- Contorno escuro: não (56% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro sim; margens E/D/T/B = 18/0/0/0 px; bbox x 18-127, y 0-255; preenchimento 86%; base consistente entre frames: não
+- Cores: 10 cores opacas; dominantes: #d68c61, #a96b4c, #895b4a, #593636, #2a1722, #deac9b, #f2f7f8, #2a3c49
+- Transparência: 40% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 215e4cd32d5b

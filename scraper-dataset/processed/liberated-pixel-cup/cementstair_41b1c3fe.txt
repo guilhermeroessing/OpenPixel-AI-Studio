@@ -1,0 +1,19 @@
+pixel art gray stone staircase tiles with stepped ramps and pillars, muted gray palette
+cementstair
+Fonte: liberated-pixel-cup
+Licença: GPL-3.0
+Origem (atribuição): https://github.com/OpenGameArt/LiberatedPixelCup/blob/master/tileset/original/Sharm/sewer-dungeon/cementstair.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 160x128 px; escala original detectada: 1x
+Paleta: 7 cores; dominantes: #7e7068, #5e5252, #3a313a, #4b444c, #867e7f, #302732, #1d131e
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=2.26)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (92% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-159, y 0-127; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 7 cores opacas; dominantes: #7e7068, #5e5252, #3a313a, #4b444c, #867e7f, #302732, #1d131e
+- Transparência: 28% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): f6012fef44c5

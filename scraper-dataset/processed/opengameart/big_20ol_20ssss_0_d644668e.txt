@@ -6,3 +6,13 @@ Origem (atribuição): https://opengameart.org/content/zelda-like-tilesets-and-s
 Tipo: full_tile_scene (tile/cena opaca)
 Dimensões 1:1: 791x575 px; escala original detectada: 1x
 Paleta: 78 cores; dominantes: #3abe41, #2eca5c, #35a541, #6add4b, #79584f, #299750, #328e41, #563a3f
+
+Análise de pixels:
+- Categoria: environment
+- Grade de tile: não detectada (candidatos nenhum; razão na grade: -)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: n/a (sem silhueta transparente)
+- Alinhamento: centro horizontal sim; base no fundo do quadro sim; margens E/D/T/B = 0/0/0/0 px; bbox x 0-790, y 0-574; preenchimento 100%; base consistente entre frames: n/a
+- Cores: 78 cores opacas; dominantes: #3abe41, #2eca5c, #35a541, #6add4b, #79584f, #299750, #328e41, #563a3f
+- Transparência: 0% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): c2ae1764950e

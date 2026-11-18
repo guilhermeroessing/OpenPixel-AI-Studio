@@ -1,0 +1,19 @@
+pixel art magenta scaled naga barding armour, top-down roguelike style, limited palette
+naga_barding_magenta
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/UNUSED/armour/naga_barding_magenta.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 18 cores; dominantes: #000000, #800040, #a00050, #600030, #a07800, #202020, #101010, #c0c0c0
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: asset
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (65% da borda com luminância < 64)
+- Alinhamento: centro horizontal não; base no fundo do quadro não; margens E/D/T/B = 11/6/10/5 px; bbox x 11-25, y 10-26; preenchimento 25%; base consistente entre frames: n/a
+- Cores: 18 cores opacas; dominantes: #000000, #800040, #a00050, #600030, #a07800, #202020, #101010, #c0c0c0
+- Transparência: 81% transparente; alpha parcial 0.0%
+- Hash de conteúdo (sha1): 3b4e4440b2dc

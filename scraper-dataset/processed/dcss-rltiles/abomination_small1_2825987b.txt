@@ -1,0 +1,19 @@
+pixel art small teal and dark-blue abomination monster, top-down roguelike style, limited palette
+abomination_small1
+Fonte: dcss-rltiles
+Licença: Public domain (RLTiles, conforme rltiles/license.txt do DCSS)
+Origem (atribuição): https://github.com/crawl/crawl/blob/master/crawl-ref/source/rltiles/mon/aberrations/abomination_small1.png
+Tipo: isolated_sprite (sprite isolado com fundo transparente)
+Dimensões 1:1: 32x32 px; escala original detectada: 1x
+Paleta: 11 cores; dominantes: #000000, #294054, #466e79, #172533, #91293f, #611726, #d8e8cb, #330715
+Legenda gerada por template automático (sem modelo multimodal); revisar antes de treinar.
+
+Análise de pixels:
+- Categoria: character
+- Grade de tile: 32x32 px (candidatos 8, 16, 32; razão na grade: 32px=None)
+- Frames: 1 (1 coluna(s) x 1 linha(s)); spritesheet: não; larguras uniformes: n/a
+- Contorno escuro: sim (97% da borda com luminância < 64)
+- Alinhamento: centro horizontal sim; base no fundo do quadro não; margens E/D/T/B = 2/1/2/3 px; bbox x 2-30, y 2-28; preenchimento 76%; base consistente entre frames: n/a
+- Cores: 11 cores opacas; dominantes: #000000, #294054, #466e79, #172533, #91293f, #611726, #d8e8cb, #330715
+- Transparência: 49% transparente; alpha parcial 1.0%
+- Hash de conteúdo (sha1): a595ebabe7d2
