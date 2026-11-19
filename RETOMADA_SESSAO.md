@@ -1,3 +1,5 @@
+> **Documento histórico.** Este guia foi escrito antes dos experimentos de novembro de 2026. O plano de treinar LoRAs próprias foi executado e **descartado** (resultado negativo). O estado atual e o motor de IA recomendado estão no [README](README.md) e em [docs/EXPERIMENTOS.md](docs/EXPERIMENTOS.md).
+
 # Retomada do trabalho: OpenPixel AI Studio
 
 Este arquivo permite continuar, em outra sessão do Claude Code e em outro computador (o da RTX 5050), exatamente de onde o trabalho parou.

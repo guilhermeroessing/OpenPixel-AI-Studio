@@ -13,10 +13,10 @@ import numpy as np
 from PIL import Image
 
 from . import postprocess as pp  # importa o pacote -> sys.path de shared-contracts
-from .mock_provider import SmartMockProvider
+from .providers import get_provider
 from schemas import CompleteMapResponse, GenerateRequest, MapAsset, SpriteResponse  # noqa: E402
 
-_provider = SmartMockProvider()
+_provider = get_provider()
 DIRECTIONS = ["S", "SE", "E", "NE", "N", "NW", "W", "SW"]
 HR_SCALE = 8
 MAP_W = MAP_H = 16

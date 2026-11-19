@@ -1,0 +1,153 @@
+"""ComfyProvider: gera pela API local do ComfyUI (http://127.0.0.1:8188) e pixeliza no backend.
+
+Mesma interface do SmartMockProvider: generate(prompt, size, seed) -> (RGB uint8 HxWx3, seed).
+Usa so a biblioteca padrao (urllib) + PIL/numpy. O ComfyUI mantem o modelo carregado entre
+geracoes e cuida da memoria.
+
+Configuracao (variaveis de ambiente ou .env):
+  COMFY_URL         endereco do ComfyUI              (padrao http://127.0.0.1:8188)
+  COMFY_CHECKPOINT  checkpoint SDXL                  (padrao sd_xl_base_1.0.safetensors)
+  COMFY_LORAS       pilha de LoRAs "arquivo:forca,arquivo:forca" (padrao: pixel-art-xl 0.7 + PixelArtRedmond-Lite64 0.7)
+                    use "none" para gerar so com o checkpoint
+  COMFY_TRIGGER     palavras-gatilho das LoRAs       (padrao "Pixel Art, PixArFK, pixel art")
+  COMFY_AVOID       termos extras para o prompt negativo (ex.: "(weapon:1.6), (shield:1.8)")
+  COMFY_STEPS / COMFY_CFG / COMFY_SIZE   passos, cfg e lado da imagem (25 / 6.5 / 1024)
+  PIXEL_GRID        grade logica de uma pixelizacao opcional dentro do provider (padrao 0 = desligada:
+                    o service.py ja pixeliza com postprocess.pixelize; ligue, ex. 128, para usar
+                    openpixel_core.pixelate, que preserva mais detalhe em algumas imagens)
+  PIXEL_COLORS      cores da paleta adaptativa dessa pixelizacao opcional (padrao 24)
+"""
+from __future__ import annotations
+
+import io
+import json
+import os
+import random
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+import uuid
+
+import numpy as np
+from PIL import Image
+
+from .pixelate import pixelate
+
+NEGATIVE = "blurry, anti-aliasing, smooth gradient, photo, realistic, 3d render, jpeg artifacts, text, watermark"
+DEFAULT_LORAS = "pixel-art-xl-v1.1.safetensors:0.7,PixelArtRedmond-Lite64.safetensors:0.7"
+DEFAULT_TRIGGER = "Pixel Art, PixArFK, pixel art"
+
+
+def parse_loras(spec: str) -> list[tuple[str, float]]:
+    """'a.safetensors:0.7,b.safetensors' -> [('a.safetensors', 0.7), ('b.safetensors', 1.0)]; 'none' -> []."""
+    spec = (spec or "").strip()
+    if not spec or spec.lower() == "none":
+        return []
+    out = []
+    for item in spec.split(","):
+        name, sep, strength = item.strip().rpartition(":")
+        if not sep:  # sem ":forca"
+            name, strength = strength, "1.0"
+        out.append((name.strip(), float(strength)))
+    return out
+
+
+class ComfyProvider:
+    name = "comfyui_sdxl_pixel"
+
+    def __init__(self, url: str | None = None, checkpoint: str | None = None, steps: int | None = None,
+                 cfg: float | None = None, native_size: int | None = None, loras: str | None = None,
+                 trigger: str | None = None, avoid: str | None = None, grid: int | None = None,
+                 colors: int | None = None, timeout: int = 600):
+        env = os.environ.get
+        self.url = (url or env("COMFY_URL") or "http://127.0.0.1:8188").rstrip("/")
+        self.checkpoint = checkpoint or env("COMFY_CHECKPOINT", "sd_xl_base_1.0.safetensors")
+        self.steps = steps or int(env("COMFY_STEPS", "25"))
+        self.cfg = cfg or float(env("COMFY_CFG", "6.5"))
+        self.native_size = native_size or int(env("COMFY_SIZE", "1024"))
+        self.loras = parse_loras(loras if loras is not None else env("COMFY_LORAS", DEFAULT_LORAS))
+        self.trigger = trigger if trigger is not None else env("COMFY_TRIGGER", DEFAULT_TRIGGER)
+        self.avoid = avoid if avoid is not None else env("COMFY_AVOID", "")
+        self.grid = grid if grid is not None else int(env("PIXEL_GRID", "0"))
+        self.colors = colors or int(env("PIXEL_COLORS", "24"))
+        self.timeout = timeout
+
+    # ---- HTTP ---------------------------------------------------------------
+    def _http(self, path: str, data: bytes | None = None, raw: bool = False, timeout: int = 60):
+        headers = {"Content-Type": "application/json"} if data else {}
+        req = urllib.request.Request(self.url + path, data=data, headers=headers)
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                body = r.read()
+        except urllib.error.HTTPError as exc:
+            raise RuntimeError(f"ComfyUI HTTP {exc.code} em {path}: {exc.read().decode(errors='replace')[:800]}") from exc
+        except OSError as exc:
+            raise RuntimeError(f"Nao consegui falar com o ComfyUI em {self.url} ({exc}). Ele esta aberto?") from exc
+        return body if raw else json.loads(body)
+
+    def is_up(self) -> bool:
+        try:
+            self._http("/system_stats", timeout=3)
+            return True
+        except RuntimeError:
+            return False
+
+    # ---- workflow -----------------------------------------------------------
+    def build_prompt(self, prompt: str) -> str:
+        head = f"{self.trigger}, " if self.trigger else ""
+        return f"{head}{prompt.strip()}, hard pixel edges, limited palette"
+
+    def build_workflow(self, prompt: str, seed: int) -> dict:
+        wf: dict = {"1": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": self.checkpoint}}}
+        model, clip = ["1", 0], ["1", 1]
+        for i, (name, strength) in enumerate(self.loras):
+            nid = f"lora{i}"
+            wf[nid] = {"class_type": "LoraLoader", "inputs": {
+                "model": model, "clip": clip, "lora_name": name,
+                "strength_model": strength, "strength_clip": strength}}
+            model, clip = [nid, 0], [nid, 1]
+        negative = f"{NEGATIVE}, {self.avoid}" if self.avoid else NEGATIVE
+        wf.update({
+            "3": {"class_type": "CLIPTextEncode", "inputs": {"clip": clip, "text": self.build_prompt(prompt)}},
+            "4": {"class_type": "CLIPTextEncode", "inputs": {"clip": clip, "text": negative}},
+            "5": {"class_type": "EmptyLatentImage", "inputs": {
+                "width": self.native_size, "height": self.native_size, "batch_size": 1}},
+            "6": {"class_type": "KSampler", "inputs": {
+                "model": model, "seed": seed, "steps": self.steps, "cfg": self.cfg,
+                "sampler_name": "euler", "scheduler": "normal",
+                "positive": ["3", 0], "negative": ["4", 0], "latent_image": ["5", 0], "denoise": 1.0}},
+            "7": {"class_type": "VAEDecode", "inputs": {"samples": ["6", 0], "vae": ["1", 2]}},
+            "8": {"class_type": "SaveImage", "inputs": {"images": ["7", 0], "filename_prefix": "openpixel/gen"}},
+        })
+        return wf
+
+    # ---- interface do provider ---------------------------------------------
+    def generate(self, prompt: str, size: int = 1024, seed: int | None = None):
+        if seed is None:
+            seed = random.randint(0, 2**31 - 1)
+        payload = json.dumps({"prompt": self.build_workflow(prompt, seed), "client_id": uuid.uuid4().hex}).encode()
+        pid = self._http("/prompt", payload)["prompt_id"]
+
+        t0 = time.time()
+        while time.time() - t0 < self.timeout:
+            hist = self._http("/history/" + pid)
+            if pid in hist:
+                st = hist[pid].get("status", {})
+                if st.get("status_str") == "error":
+                    raise RuntimeError(f"ComfyUI falhou: {json.dumps(st)[:800]}")
+                images = [im for o in hist[pid].get("outputs", {}).values() for im in o.get("images", [])]
+                if images:
+                    it = images[0]
+                    q = urllib.parse.urlencode({"filename": it["filename"], "subfolder": it.get("subfolder", ""),
+                                                "type": it.get("type", "output")})
+                    img = Image.open(io.BytesIO(self._http("/view?" + q, raw=True, timeout=120))).convert("RGB")
+                    if self.grid:
+                        arr = pixelate(img, grid=self.grid, colors=self.colors, out_size=size)
+                    else:
+                        if img.size != (size, size):
+                            img = img.resize((size, size), Image.LANCZOS)
+                        arr = np.asarray(img, dtype=np.uint8)
+                    return np.ascontiguousarray(arr), seed
+            time.sleep(0.5)
+        raise RuntimeError("Tempo maximo de espera do ComfyUI excedido")

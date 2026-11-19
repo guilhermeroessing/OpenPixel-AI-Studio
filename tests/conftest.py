@@ -1,8 +1,11 @@
 """Configuração comum dos testes: torna importáveis os pacotes do monorepo."""
 from __future__ import annotations
 
+import os
 import sys
 from pathlib import Path
+
+os.environ["DEVICE_MODE"] = "cpu_mock"  # testes sempre em mock, mesmo com .env em cuda
 
 import numpy as np
 import pytest
