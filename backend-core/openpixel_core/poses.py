@@ -56,3 +56,38 @@ def preset_image(name: str, size: int = 1024) -> np.ndarray:
     if name not in PRESETS:
         raise ValueError(f"pose desconhecida: {name!r}; opcoes: {', '.join(PRESETS)}")
     return render_pose(PRESETS[name], size)
+
+
+def run_cycle(frames: int = 8) -> list[list[tuple[float, float]]]:
+    """Ciclo de corrida de perfil (olhando para a direita): `frames` esqueletos, um passo completo (2 passadas).
+
+    Cinematica simples: coxas e bracos oscilam em oposicao, o joelho dobra na fase de recuperacao e o
+    quadril sobe e desce duas vezes por ciclo.
+    """
+    from math import cos, pi, sin
+
+    def pt(origin, length, ang):  # ang 0 = para baixo, positivo = para a frente (+x)
+        return (origin[0] + length * sin(ang), origin[1] + length * cos(ang))
+
+    out = []
+    for i in range(frames):
+        ph = 2 * pi * i / frames
+        hip = (0.46, 0.53 + 0.02 * cos(2 * ph))
+        lean = 0.22
+        neck = (hip[0] + 0.27 * sin(lean), hip[1] - 0.27 * cos(lean))
+        nose = (neck[0] + 0.06, neck[1] - 0.07)
+        legs, arms = {}, {}
+        for side, p in (("r", ph), ("l", ph + pi)):
+            thigh = 0.8 * sin(p)
+            flex = 0.15 + 1.2 * max(0.0, cos(p))
+            knee = pt(hip, 0.18, thigh)
+            legs[side] = (knee, pt(knee, 0.18, thigh - flex))
+            sho = (neck[0] + (-0.01 if side == "r" else 0.01), neck[1] + 0.015)
+            up = -0.95 * sin(p)
+            elb = pt(sho, 0.12, up)
+            arms[side] = (sho, elb, pt(elb, 0.11, up + 1.5))
+        out.append([nose, neck, arms["r"][0], arms["r"][1], arms["r"][2], arms["l"][0], arms["l"][1], arms["l"][2],
+                    (hip[0] - 0.01, hip[1]), legs["r"][0], legs["r"][1], (hip[0] + 0.01, hip[1]), legs["l"][0], legs["l"][1],
+                    (nose[0] - 0.012, nose[1] - 0.012), (nose[0] + 0.012, nose[1] - 0.012),
+                    (nose[0] - 0.05, nose[1] + 0.005), (nose[0] - 0.035, nose[1] + 0.005)])
+    return out

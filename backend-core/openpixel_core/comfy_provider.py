@@ -15,6 +15,7 @@ Configuracao (variaveis de ambiente ou .env):
   COMFY_POSE        pose padrao (ControlNet OpenPose): nome de preset (idle, hands_on_hips, arms_up, walk) ou
                     caminho de uma imagem de esqueleto; vazio = sem controle de pose
   COMFY_POSE_STRENGTH / COMFY_CONTROLNET   forca (1.0) e arquivo do ControlNet (xinsir_openpose_sdxl.safetensors)
+  COMFY_REF_WEIGHT  peso do IP-Adapter quando generate(..., reference=imagem) e usado (0.8)
   PIXEL_GRID        grade logica de uma pixelizacao opcional dentro do provider (padrao 0 = desligada:
                     o service.py ja pixeliza com openpixel_core.pixelate (PIXELIZER=box, padrao);
                     ligue so se quiser pixelizar antes, ex. 128)
@@ -78,6 +79,7 @@ class ComfyProvider:
         self.colors = colors or int(env("PIXEL_COLORS", "24"))
         self.pose = pose if pose is not None else env("COMFY_POSE", "")
         self.pose_strength = pose_strength if pose_strength is not None else float(env("COMFY_POSE_STRENGTH", "1.0"))
+        self.ref_weight = float(env("COMFY_REF_WEIGHT", "0.8"))
         self.controlnet = controlnet or env("COMFY_CONTROLNET", "xinsir_openpose_sdxl.safetensors")
         self.timeout = timeout
         self._uploaded: dict[str, str] = {}
@@ -134,7 +136,8 @@ class ComfyProvider:
         head = f"{self.trigger}, " if self.trigger else ""
         return f"{head}{prompt.strip()}, hard pixel edges, limited palette"
 
-    def build_workflow(self, prompt: str, seed: int, pose_image: str | None = None) -> dict:
+    def build_workflow(self, prompt: str, seed: int, pose_image: str | None = None,
+                       ref_image: str | None = None, ref_weight: float | None = None) -> dict:
         wf: dict = {"1": {"class_type": "CheckpointLoaderSimple", "inputs": {"ckpt_name": self.checkpoint}}}
         model, clip = ["1", 0], ["1", 1]
         for i, (name, strength) in enumerate(self.loras):
@@ -143,6 +146,15 @@ class ComfyProvider:
                 "model": model, "clip": clip, "lora_name": name,
                 "strength_model": strength, "strength_clip": strength}}
             model, clip = [nid, 0], [nid, 1]
+        if ref_image:  # IP-Adapter: mantem o visual do personagem de uma imagem de referencia
+            wf["ref_in"] = {"class_type": "LoadImage", "inputs": {"image": ref_image}}
+            wf["ipa_load"] = {"class_type": "IPAdapterUnifiedLoader", "inputs": {
+                "model": model, "preset": "PLUS (high strength)"}}
+            wf["ipa"] = {"class_type": "IPAdapterAdvanced", "inputs": {
+                "model": ["ipa_load", 0], "ipadapter": ["ipa_load", 1], "image": ["ref_in", 0],
+                "weight": self.ref_weight if ref_weight is None else ref_weight, "weight_type": "linear",
+                "combine_embeds": "concat", "start_at": 0.0, "end_at": 1.0, "embeds_scaling": "V only"}}
+            model = ["ipa", 0]
         negative = f"{NEGATIVE}, {self.avoid}" if self.avoid else NEGATIVE
         positive, neg = ["3", 0], ["4", 0]
         wf.update({
@@ -168,12 +180,14 @@ class ComfyProvider:
         return wf
 
     # ---- interface do provider ---------------------------------------------
-    def generate(self, prompt: str, size: int = 1024, seed: int | None = None, pose: str | None = None):
+    def generate(self, prompt: str, size: int = 1024, seed: int | None = None, pose: str | None = None,
+                 reference: str | None = None, ref_weight: float | None = None):
         if seed is None:
             seed = random.randint(0, 2**31 - 1)
         pose = self.pose if pose is None else pose
         pose_image = self._upload_pose(pose) if pose else None
-        payload = json.dumps({"prompt": self.build_workflow(prompt, seed, pose_image), "client_id": uuid.uuid4().hex}).encode()
+        ref_image = self._upload_pose(reference) if reference else None  # mesma rotina de upload
+        payload = json.dumps({"prompt": self.build_workflow(prompt, seed, pose_image, ref_image, ref_weight), "client_id": uuid.uuid4().hex}).encode()
         pid = self._http("/prompt", payload)["prompt_id"]
 
         t0 = time.time()

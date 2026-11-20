@@ -29,3 +29,9 @@ def test_workflow_with_pose_routes_conditioning_through_controlnet():
 def test_workflow_without_pose_has_no_controlnet():
     wf = ComfyProvider(loras="none").build_workflow("knight", 1)
     assert "cn" not in wf and wf["6"]["inputs"]["positive"] == ["3", 0]
+
+
+def test_workflow_with_reference_uses_ip_adapter_on_model():
+    wf = ComfyProvider(loras="a.safetensors").build_workflow("knight", 1, ref_image="r.png", ref_weight=0.5)
+    assert wf["ipa_load"]["inputs"]["model"] == ["lora0", 0]
+    assert wf["ipa"]["inputs"]["weight"] == 0.5 and wf["6"]["inputs"]["model"] == ["ipa", 0]
