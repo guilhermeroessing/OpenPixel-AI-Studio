@@ -58,7 +58,8 @@ def preset_image(name: str, size: int = 1024) -> np.ndarray:
     return render_pose(PRESETS[name], size)
 
 
-def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True) -> list[list[tuple[float, float]]]:
+def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True,
+              shoulder_spread: float = 0.05) -> list[list[tuple[float, float]]]:
     """Ciclo de CORRIDA de perfil (olhando para a direita), um passo completo (2 passadas).
 
     Diferencas para uma caminhada: tronco inclinado, joelho da perna de recuperacao sobe alto (calcanhar
@@ -88,7 +89,7 @@ def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True) -
             flex = 0.2 + 1.7 * max(0.0, cos(p))               # recuperacao: joelho dobra ate o calcanhar subir
             knee = pt(hip, 0.18, thigh)
             legs[side] = (knee, pt(knee, 0.18, thigh - flex))
-            spread = 0.03 if three_quarter else 0.01
+            spread = shoulder_spread if three_quarter else 0.01
             sho = (neck[0] + (-spread if side == "r" else spread), neck[1] + 0.015)
             up = -1.0 * sin(p) - 0.1
             flex = 0.9 + 0.9 * max(0.0, -sin(p))             # braco de tras mais aberto, o da frente fechado
