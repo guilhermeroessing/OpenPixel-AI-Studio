@@ -107,3 +107,19 @@ def test_avoid_for_adds_motion_specific_terms():
     assert animation.avoid_for(animation.MOTIONS["run"]) == animation.RUN_AVOID
     punch = animation.avoid_for(animation.MOTIONS["punch"])
     assert punch.startswith(animation.RUN_AVOID) and "boxing gloves" in punch and "smoke" in punch
+
+
+def test_prompt_weight_wraps_character_text_only_when_requested():
+    class Fake:
+        native_size = 64
+        prompts: list = []
+
+        def generate(self, text, size, seed, pose=None, reference=None):
+            self.prompts.append(text)
+            return np.zeros((size, size, 3), np.uint8), seed
+
+    pose = [(0.5, 0.5)] * 18
+    f = Fake()
+    animation.generate_motion_raws(f, "girl", 64, 1, [pose], "punching", False)
+    animation.generate_motion_raws(f, "girl", 64, 1, [pose], "punching", False, prompt_weight=1.3)
+    assert f.prompts == ["girl, punching", "(girl:1.3), punching"]

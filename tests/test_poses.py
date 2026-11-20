@@ -77,3 +77,15 @@ def test_punch_cycle_extends_arm_forward_and_keeps_feet_planted():
     assert all(abs(max(p[10][1], p[13][1]) - 0.89) < 1e-6 for p in poses)
     longer = punch_cycle(6, reach=1.5)
     assert max(p[1][0] for p in longer) > max(p[1][0] for p in poses)  # mais alcance = tronco mais a frente
+
+
+def test_punch_guard_is_narrow_and_rear_fist_stays_at_the_chin():
+    from openpixel_core.poses import punch_cycle
+
+    poses = punch_cycle(6)
+    guard = poses[0]
+    assert abs(guard[10][0] - guard[13][0]) < 0.17            # pes proximos: pernas nao viram um cone
+    for p in poses:
+        nose, rear_wrist = p[0], p[7]
+        assert rear_wrist[1] < p[8][1]                         # punho de tras acima do quadril...
+        assert abs(rear_wrist[0] - nose[0]) < 0.12             # ...e perto do rosto (nao esticado ao lado do golpe)

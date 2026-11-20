@@ -192,12 +192,13 @@ def punch_cycle(frames: int = 6, reach: float = 1.0) -> list[list[tuple[float, f
     recua) -> golpe (corpo avanca, joelho da frente dobra, braco estica) -> impacto -> recuo -> guarda.
     ``reach`` multiplica o quanto o corpo avanca no golpe (1 = padrao). Loop fechado: termina na guarda.
     """
-    guard = {"r_arm": 0.9, "r_elbow": 1.7, "l_arm": 0.5, "l_elbow": 1.9, "lean": 0.12, "hip_x": 0.45,
-             "r_thigh": 0.35, "r_knee": 0.30, "l_thigh": -0.30, "l_knee": 0.35, "head_dx": 0.06}
+    # 2) braco de tras (l) junto ao queixo: ombro quase vertical e cotovelo muito dobrado (punho sobe ate o queixo)
+    guard = {"r_arm": 0.9, "r_elbow": 1.7, "l_arm": 0.12, "l_elbow": 2.5, "lean": 0.12, "hip_x": 0.45,
+             "r_thigh": 0.22, "r_knee": 0.40, "l_thigh": -0.16, "l_knee": 0.45, "head_dx": 0.06}
     wind = {**guard, "r_arm": -0.4, "r_elbow": 1.9, "lean": 0.04, "hip_x": 0.44, "head_dx": 0.05,
             "r_knee": 0.25, "l_knee": 0.40}
     strike = {**guard, "r_arm": 1.45, "r_elbow": 0.15, "lean": 0.12 + 0.18 * reach, "hip_x": 0.45 + 0.04 * reach,
-              "r_thigh": 0.55, "r_knee": 0.55, "l_thigh": -0.45, "l_knee": 0.10, "l_arm": 0.2, "l_elbow": 2.0,
+              "r_thigh": 0.42, "r_knee": 0.55, "l_thigh": -0.34, "l_knee": 0.12, "l_arm": 0.10, "l_elbow": 2.6,
               "head_dx": 0.07}
     hit = {**strike, "r_arm": 1.55, "r_elbow": 0.0, "lean": 0.12 + 0.23 * reach, "hip_x": 0.45 + 0.06 * reach}
     back = {**guard, "r_arm": 1.0, "r_elbow": 1.2, "lean": 0.20, "hip_x": 0.47, "r_knee": 0.40}

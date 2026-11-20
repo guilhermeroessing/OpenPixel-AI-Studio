@@ -31,7 +31,7 @@ MOTIONS = {
     "run": {"label": "Corrida", "fps": 10, "suffix": RUN_SUFFIX, "frames": 8, "anchor": "centroid",
             "poses": lambda frames, p: run_cycle(frames, half=True, shoulder_spread=p.get("shoulder_spread", 0.05),
                                                  lean=p.get("lean", 0.35), flight=p.get("flight_height", 0.025))},
-    "punch": {"label": "Soco", "fps": 10, "suffix": PUNCH_SUFFIX, "frames": 6, "anchor": "fixed",
+    "punch": {"label": "Soco", "fps": 10, "suffix": PUNCH_SUFFIX, "frames": 6, "anchor": "fixed", "prompt_weight": 1.3,
               "avoid": "(boxing gloves:1.5), (gloves:1.4), smoke, dust, aura, energy effect, particles, motion blur, "
                        "speed lines, glow, (ground shadow:1.5), (floor:1.3)",
               "poses": lambda frames, p: punch_cycle(frames)},
@@ -119,9 +119,14 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
 
 
 def generate_motion_raws(provider, prompt: str, native: int, seed: int, poses: list, suffix: str,
-                         use_reference: bool, progress: Callable[[int, int], None] | None = None) -> list[np.ndarray]:
-    """Gera uma imagem bruta por pose (mesma seed; a primeira pose vira a referencia do personagem)."""
-    text = f"{prompt.strip()}, {suffix}"
+                         use_reference: bool, progress: Callable[[int, int], None] | None = None,
+                         prompt_weight: float = 1.0) -> list[np.ndarray]:
+    """Gera uma imagem bruta por pose (mesma seed; a primeira pose vira a referencia do personagem).
+
+    prompt_weight > 1 da mais peso ao texto do personagem do que ao do movimento (evita que "soco" pinte tudo de vermelho).
+    """
+    who = prompt.strip() if prompt_weight == 1.0 else f"({prompt.strip()}:{prompt_weight})"
+    text = f"{who}, {suffix}"
     total = len(poses) + (1 if use_reference else 0)
     raws: list[np.ndarray] = []
     done = 0

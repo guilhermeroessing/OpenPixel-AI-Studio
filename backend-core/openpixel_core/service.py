@@ -355,7 +355,7 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
              for k in ("shoulder_spread", "lean", "flight_height")}
     raws = animation.generate_motion_raws(
         prov, req.prompt, prov.native_size, seed, motion["poses"](n_frames, shape), motion["suffix"],
-        prov.ref_weight > 0, progress)
+        prov.ref_weight > 0, progress, motion.get("prompt_weight", 1.0))
     rgba = animation.process_frames(raws, req.size, req.palette_size,
                                     p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"],
                                     anchor=motion["anchor"])
