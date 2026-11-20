@@ -99,3 +99,89 @@ def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True,
                     (nose[0] - 0.025, nose[1] - 0.012), (nose[0] + 0.005, nose[1] - 0.012),
                     (nose[0] - 0.05, nose[1] + 0.005), (nose[0] - 0.035, nose[1] + 0.005)])
     return out
+
+
+# ---------------------------------------------------------------- movimentos por quadros-chave
+# Um "movimento" e uma lista de quadros-chave com os parametros do esqueleto; skeleton() faz a cinematica e
+# interpolate() gera N poses suaves (com volta ao inicio, para o loop fechar). Novos movimentos = novos
+# quadros-chave, sem codigo novo de desenho.
+
+POSE_DEFAULTS: dict[str, float] = {
+    "hip_x": 0.46, "lean": 0.10, "chest": 0.0, "head_dx": 0.06, "head_dy": -0.06, "spread": 0.05, "hs": 0.02,
+    "ground": 0.89, "hip_dy": 0.0,
+    # bracos: angulo do braco (0 = para baixo, + para a frente) e dobra do cotovelo; r = perto da camera
+    "r_arm": 0.10, "r_elbow": 0.50, "l_arm": -0.08, "l_elbow": 0.60,
+    # pernas: angulo da coxa e dobra do joelho
+    "r_thigh": 0.12, "r_knee": 0.10, "l_thigh": -0.10, "l_knee": 0.10,
+}
+
+
+def skeleton(**kw: float) -> list[tuple[float, float]]:
+    """Esqueleto COCO-18 por cinematica direta. Parametros em POSE_DEFAULTS; o pe mais baixo toca o chao
+    (`ground`), a menos que `hip_dy` desloque o corpo (agachar, pular)."""
+    from math import cos, sin
+
+    p = {**POSE_DEFAULTS, **kw}
+    unknown = set(kw) - set(POSE_DEFAULTS)
+    if unknown:
+        raise ValueError(f"parametros de pose desconhecidos: {sorted(unknown)}")
+
+    def pt(origin, length, ang):
+        return (origin[0] + length * sin(ang), origin[1] + length * cos(ang))
+
+    def drop(side):  # extensao vertical da perna (quadril -> tornozelo)
+        t, f = p[f"{side}_thigh"], p[f"{side}_knee"]
+        return 0.18 * cos(t) + 0.18 * cos(t - f)
+
+    hip = (p["hip_x"], p["ground"] - max(drop("r"), drop("l")) + p["hip_dy"])
+    neck = (hip[0] + 0.27 * sin(p["lean"]), hip[1] - 0.27 * cos(p["lean"]) - p["chest"])
+    nose = (neck[0] + p["head_dx"], neck[1] + p["head_dy"])
+    legs, arms = {}, {}
+    for side in ("r", "l"):
+        knee = pt(hip, 0.18, p[f"{side}_thigh"])
+        legs[side] = (knee, pt(knee, 0.18, p[f"{side}_thigh"] - p[f"{side}_knee"]))
+        sho = (neck[0] + (-p["spread"] if side == "r" else p["spread"]), neck[1] + 0.015)
+        up = p[f"{side}_arm"]
+        elb = pt(sho, 0.11, up)
+        arms[side] = (sho, elb, pt(elb, 0.10, up + p[f"{side}_elbow"]))
+    hs = p["hs"]
+    return [nose, neck, arms["r"][0], arms["r"][1], arms["r"][2], arms["l"][0], arms["l"][1], arms["l"][2],
+            (hip[0] - hs, hip[1]), legs["r"][0], legs["r"][1], (hip[0] + hs, hip[1]), legs["l"][0], legs["l"][1],
+            (nose[0] - 0.025, nose[1] - 0.012), (nose[0] + 0.005, nose[1] - 0.012),
+            (nose[0] - 0.05, nose[1] + 0.005), (nose[0] - 0.035, nose[1] + 0.005)]
+
+
+def interpolate(keys: list[tuple[float, dict[str, float]]], frames: int = 8) -> list[list[tuple[float, float]]]:
+    """Quadros-chave [(t, parametros)], t em [0, 1), ciclicos (depois do ultimo volta ao primeiro) -> `frames` poses.
+
+    Parametros ausentes num quadro-chave herdam o valor padrao; a interpolacao e cosseno (comeca e termina devagar).
+    """
+    from math import cos, pi
+
+    ks = sorted(keys, key=lambda k: k[0])
+    if not ks or any(not 0 <= t < 1 for t, _ in ks):
+        raise ValueError("quadros-chave precisam ter t em [0, 1)")
+    ext = ks + [(ks[0][0] + 1.0, ks[0][1])]  # fecha o ciclo
+    out = []
+    for i in range(frames):
+        t = i / frames
+        if t < ks[0][0]:
+            t += 1.0
+        a = max(j for j in range(len(ext) - 1) if ext[j][0] <= t)
+        (t0, p0), (t1, p1) = ext[a], ext[a + 1]
+        w = 0.5 - 0.5 * cos(pi * (t - t0) / (t1 - t0))
+        names = set(p0) | set(p1)
+        out.append(skeleton(**{n: (1 - w) * p0.get(n, POSE_DEFAULTS[n]) + w * p1.get(n, POSE_DEFAULTS[n]) for n in names}))
+    return out
+
+
+def idle_cycle(frames: int = 8, breath: float = 1.0) -> list[list[tuple[float, float]]]:
+    """Parado respirando: o peito sobe e desce, os joelhos cedem um pouco na expiracao, os bracos balancam
+    quase nada. `breath` multiplica a amplitude (1 = padrao)."""
+    b = breath
+    return interpolate([
+        (0.00, {"chest": 0.000, "r_knee": 0.12, "l_knee": 0.12, "lean": 0.10, "r_arm": 0.10, "l_arm": -0.08}),
+        (0.25, {"chest": 0.012 * b, "r_knee": 0.06, "l_knee": 0.06, "lean": 0.10 + 0.02 * b, "r_arm": 0.10 + 0.05 * b, "l_arm": -0.08 - 0.04 * b}),
+        (0.50, {"chest": 0.018 * b, "r_knee": 0.04, "l_knee": 0.04, "lean": 0.10 + 0.03 * b, "r_arm": 0.10 + 0.08 * b, "l_arm": -0.08 - 0.06 * b, "head_dy": -0.06 - 0.004 * b}),
+        (0.75, {"chest": 0.006 * b, "r_knee": 0.09, "l_knee": 0.09, "lean": 0.10 + 0.01 * b, "r_arm": 0.10 + 0.03 * b, "l_arm": -0.08 - 0.02 * b}),
+    ], frames)

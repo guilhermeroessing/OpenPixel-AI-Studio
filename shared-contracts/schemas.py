@@ -31,8 +31,12 @@ class GenerateRequest(BaseModel):
     params: GenParams | None = None
 
 
+Motion = Literal["run", "idle"]  # movimentos implementados (ver openpixel_core.animation.MOTIONS)
+
+
 class AnimateRequest(GenerateRequest):
     frames: int = Field(default=8, ge=2, le=16)
+    motion: Motion = "run"
 
 
 class SpriteResponse(BaseModel):

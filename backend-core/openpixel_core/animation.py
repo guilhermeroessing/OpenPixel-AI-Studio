@@ -17,10 +17,21 @@ import numpy as np
 from PIL import Image
 
 from .pixelate import pixelate
-from .poses import render_pose, run_cycle
+from .poses import idle_cycle, render_pose, run_cycle
 
 RUN_SUFFIX = ("running, three-quarter side view facing right, arms swinging, both arms visible, "
               "full body, simple flat background")
+IDLE_SUFFIX = ("standing idle, relaxed, breathing, three-quarter side view facing right, arms hanging at the sides, "
+               "both arms visible, full body, simple flat background")
+
+# Movimentos disponiveis: texto acrescentado ao prompt, fps do loop e gerador das poses (quadros x parametros).
+MOTIONS = {
+    "run": {"label": "Corrida", "fps": 10, "suffix": RUN_SUFFIX,
+            "poses": lambda frames, p: run_cycle(frames, half=True, shoulder_spread=p.get("shoulder_spread", 0.05),
+                                                 lean=p.get("lean", 0.35), flight=p.get("flight_height", 0.025))},
+    "idle": {"label": "Parado (idle)", "fps": 6, "suffix": IDLE_SUFFIX,
+             "poses": lambda frames, p: idle_cycle(frames)},
+}
 RUN_AVOID = "(weapon:1.6), (shield:1.8), (sword:1.5), (spear:1.5), (gun:1.5), close-up, bust, cropped, multiple views"
 
 
@@ -29,7 +40,7 @@ def _components(mask: np.ndarray, connectivity: int = 8):
     return n, lab, stats
 
 
-def _remove_bg(a: np.ndarray, tol: int) -> np.ndarray:
+def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True) -> np.ndarray:
     """Mascara do personagem (True) em um frame pixelizado: tira o fundo ligado as bordas e a sombra do chao."""
     g = a.shape[0]
     edge = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
@@ -44,7 +55,7 @@ def _remove_bg(a: np.ndarray, tol: int) -> np.ndarray:
         return np.ones((g, g), bool)
     # sombra fina no chao: faixas horizontais largas nas ultimas linhas, sem corpo logo acima
     ys = np.nonzero(fg.any(axis=1))[0]
-    min_run = max(4, round(g * 12 / 128))
+    min_run = max(4, round(g * 0.2)) if clean_shadow else g + 1  # sombra: >= 20% da largura (tenis: ~11%)
     # de cima para baixo: ao apagar a linha de cima da faixa, a de baixo passa a ficar sem corpo acima (cascata)
     for y in range(max(ys.max() - max(3, round(g * 8 / 128)), 1), ys.max() + 1):
         x = 0
@@ -92,13 +103,11 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
     return out
 
 
-def generate_run_raws(provider, prompt: str, native: int, seed: int, frames: int, shoulder_spread: float,
-                      lean: float, flight: float, use_reference: bool,
-                      progress: Callable[[int, int], None] | None = None) -> list[np.ndarray]:
-    """Gera `frames` imagens brutas do meio ciclo de corrida (o loop fecha sozinho)."""
-    poses = run_cycle(frames, half=True, shoulder_spread=shoulder_spread, lean=lean, flight=flight)
-    text = f"{prompt.strip()}, {RUN_SUFFIX}"
-    total = frames + (1 if use_reference else 0)
+def generate_motion_raws(provider, prompt: str, native: int, seed: int, poses: list, suffix: str,
+                         use_reference: bool, progress: Callable[[int, int], None] | None = None) -> list[np.ndarray]:
+    """Gera uma imagem bruta por pose (mesma seed; a primeira pose vira a referencia do personagem)."""
+    text = f"{prompt.strip()}, {suffix}"
+    total = len(poses) + (1 if use_reference else 0)
     raws: list[np.ndarray] = []
     done = 0
     with tempfile.TemporaryDirectory(prefix="openpixel_run_") as tmp:

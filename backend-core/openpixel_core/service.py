@@ -337,7 +337,7 @@ def export_engine_bundle(map_dir: str, engine: str) -> str:
 # ---------------------------------------------------------------- animacao de corrida
 
 def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
-    """Ciclo de corrida: ComfyUI (pose + referencia) ou, sem ele, um balanco simples do sprite base."""
+    """Animacao por movimento (corrida, idle...): ComfyUI (pose + referencia) ou, sem ele, um balanco simples."""
     p = req.params or GenParams()
     seed = req.seed if req.seed is not None else animation.new_seed()
     prov = _provider_for(req.params)
@@ -349,11 +349,11 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
     if not prov.avoid:
         prov = prov.with_overrides(avoid=animation.RUN_AVOID)
     defaults = default_params()
-    raws = animation.generate_run_raws(
-        prov, req.prompt, prov.native_size, seed, req.frames,
-        p.shoulder_spread if p.shoulder_spread is not None else defaults["shoulder_spread"],
-        p.lean if p.lean is not None else defaults["lean"],
-        p.flight_height if p.flight_height is not None else defaults["flight_height"],
+    motion = animation.MOTIONS[req.motion]
+    shape = {k: (getattr(p, k) if getattr(p, k) is not None else defaults[k])
+             for k in ("shoulder_spread", "lean", "flight_height")}
+    raws = animation.generate_motion_raws(
+        prov, req.prompt, prov.native_size, seed, motion["poses"](req.frames, shape), motion["suffix"],
         prov.ref_weight > 0, progress)
     rgba = animation.process_frames(raws, req.size, req.palette_size,
                                     p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"])
@@ -362,4 +362,4 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
         used = sorted({pp._hex(c) for c in a[a[..., 3] > 0][:, :3]})
         out.append(SpriteResponse(image_b64=_png_b64_rgba(a), width=req.size, height=req.size, palette=used,
                                   seed=seed, provider=_provider.name))
-    return AnimationResponse(frames=out, seed=seed, fps=10, provider=_provider.name)
+    return AnimationResponse(frames=out, seed=seed, fps=motion["fps"], provider=_provider.name)

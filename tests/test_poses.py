@@ -35,3 +35,32 @@ def test_workflow_with_reference_uses_ip_adapter_on_model():
     wf = ComfyProvider(loras="a.safetensors").build_workflow("knight", 1, ref_image="r.png", ref_weight=0.5)
     assert wf["ipa_load"]["inputs"]["model"] == ["lora0", 0]
     assert wf["ipa"]["inputs"]["weight"] == 0.5 and wf["6"]["inputs"]["model"] == ["ipa", 0]
+
+
+def test_skeleton_feet_touch_ground_and_rejects_unknown_params():
+    from openpixel_core.poses import skeleton
+
+    pts = skeleton()
+    assert len(pts) == 18 and max(pts[10][1], pts[13][1]) == pytest.approx(0.89)
+    with pytest.raises(ValueError):
+        skeleton(voar=1.0)
+
+
+def test_interpolate_is_cyclic_and_validates_keys():
+    from openpixel_core.poses import interpolate
+
+    poses = interpolate([(0.0, {"chest": 0.0}), (0.5, {"chest": 0.02})], frames=8)
+    necks = [p[1][1] for p in poses]
+    assert len(poses) == 8 and necks[4] < necks[0]          # no meio o peito esta mais alto (y menor)
+    assert abs(necks[7] - necks[0]) < abs(necks[4] - necks[0])  # volta ao inicio: o ultimo quadro se aproxima do primeiro
+    with pytest.raises(ValueError):
+        interpolate([(1.5, {})], frames=4)
+
+
+def test_idle_cycle_moves_chest_a_little_and_keeps_feet_planted():
+    from openpixel_core.poses import idle_cycle
+
+    poses = idle_cycle(8)
+    chest = [p[1][1] for p in poses]
+    assert 0.01 < max(chest) - min(chest) < 0.04
+    assert all(abs(max(p[10][1], p[13][1]) - 0.89) < 1e-6 for p in poses)

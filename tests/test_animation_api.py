@@ -74,3 +74,18 @@ def test_process_frames_removes_flat_ground_shadow():
     out = animation.process_frames([img], grid=64, colors=8, bg_tol=45)[0]
     ys = np.nonzero(out[..., 3].any(axis=1))[0]
     assert ys.max() - ys.min() < 37  # sem a faixa o personagem ocupa ~ 35 linhas de 64; com ela, 39
+
+
+def test_animate_accepts_idle_and_rejects_unknown_motion():
+    ok = client.post("/animate", json={"prompt": "x", "size": 32, "frames": 4, "motion": "idle"})
+    assert ok.status_code == 200
+    assert client.post("/animate", json={"prompt": "x", "size": 32, "motion": "voar"}).status_code == 422
+
+
+def test_process_frames_keeps_wide_shoes_but_drops_wider_shadow():
+    img = np.full((256, 256, 3), (150, 150, 150), np.uint8)
+    img[40:200, 120:136] = (200, 30, 30)          # corpo/perna estreita
+    img[200:216, 108:148] = (240, 240, 240)       # tenis: 40 px de largura em 256 (~16%, abaixo de 20%)
+    out = animation.process_frames([img], grid=64, colors=8, bg_tol=45)[0]
+    ys = np.nonzero(out[..., 3].any(axis=1))[0]
+    assert ys.max() - ys.min() >= 39              # os 4 ultimos pixels do tenis continuam la
