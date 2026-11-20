@@ -58,34 +58,37 @@ def preset_image(name: str, size: int = 1024) -> np.ndarray:
     return render_pose(PRESETS[name], size)
 
 
-def run_cycle(frames: int = 8) -> list[list[tuple[float, float]]]:
-    """Ciclo de corrida de perfil (olhando para a direita): `frames` esqueletos, um passo completo (2 passadas).
+def run_cycle(frames: int = 8, half: bool = False) -> list[list[tuple[float, float]]]:
+    """Ciclo de CORRIDA de perfil (olhando para a direita), um passo completo (2 passadas).
 
-    Cinematica simples: coxas e bracos oscilam em oposicao, o joelho dobra na fase de recuperacao e o
-    quadril sobe e desce duas vezes por ciclo.
+    Diferencas para uma caminhada: tronco inclinado, joelho da perna de recuperacao sobe alto (calcanhar
+    perto do gluteo), bracos dobrados em ~100 graus e bombeando, fase de voo (os dois pes fora do chao) e
+    quadril que sobe no voo e desce no apoio. Com ``half=True`` devolve so meio ciclo (``frames`` poses de
+    0 a pi): a segunda metade e a primeira com direita/esquerda trocadas, entao o loop fecha sozinho.
     """
     from math import cos, pi, sin
 
     def pt(origin, length, ang):  # ang 0 = para baixo, positivo = para a frente (+x)
         return (origin[0] + length * sin(ang), origin[1] + length * cos(ang))
 
+    steps = frames * 2 if half else frames
     out = []
     for i in range(frames):
-        ph = 2 * pi * i / frames
-        hip = (0.46, 0.53 + 0.02 * cos(2 * ph))
-        lean = 0.22
+        ph = 2 * pi * i / steps
+        hip = (0.46, 0.55 - 0.025 * (1 - cos(2 * ph)))  # sobe ate 5% da altura no voo, desce no apoio
+        lean = 0.35
         neck = (hip[0] + 0.27 * sin(lean), hip[1] - 0.27 * cos(lean))
-        nose = (neck[0] + 0.06, neck[1] - 0.07)
+        nose = (neck[0] + 0.06, neck[1] - 0.06)
         legs, arms = {}, {}
         for side, p in (("r", ph), ("l", ph + pi)):
-            thigh = 0.8 * sin(p)
-            flex = 0.15 + 1.2 * max(0.0, cos(p))
+            thigh = 0.2 + 0.75 * sin(p)                       # coxa vai mais para a frente que para tras
+            flex = 0.2 + 1.7 * max(0.0, cos(p))               # recuperacao: joelho dobra ate o calcanhar subir
             knee = pt(hip, 0.18, thigh)
             legs[side] = (knee, pt(knee, 0.18, thigh - flex))
             sho = (neck[0] + (-0.01 if side == "r" else 0.01), neck[1] + 0.015)
-            up = -0.95 * sin(p)
-            elb = pt(sho, 0.12, up)
-            arms[side] = (sho, elb, pt(elb, 0.11, up + 1.5))
+            up = -1.0 * sin(p) - 0.1
+            elb = pt(sho, 0.11, up)
+            arms[side] = (sho, elb, pt(elb, 0.10, up + 1.75))
         out.append([nose, neck, arms["r"][0], arms["r"][1], arms["r"][2], arms["l"][0], arms["l"][1], arms["l"][2],
                     (hip[0] - 0.01, hip[1]), legs["r"][0], legs["r"][1], (hip[0] + 0.01, hip[1]), legs["l"][0], legs["l"][1],
                     (nose[0] - 0.012, nose[1] - 0.012), (nose[0] + 0.012, nose[1] - 0.012),
