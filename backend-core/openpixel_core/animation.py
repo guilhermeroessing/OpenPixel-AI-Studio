@@ -41,7 +41,7 @@ MOTIONS = {
               "avoid": "(sword:1.6), (katana:1.5), (blade:1.5), (weapon:1.5), (knife:1.4), (stick:1.3), (staff:1.3), (boxing gloves:1.5), (red gloves:1.5), "
                        "smoke, dust, aura, energy effect, slash effect, motion blur, speed lines, glow, "
                        "(ground shadow:1.5), (floor:1.3)",
-              "poses": lambda frames, p: sword_cycle(frames)},
+              "poses": lambda frames, p: sword_cycle(frames, reach=1.5)},
     "idle": {"label": "Parado (idle)", "fps": 4, "suffix": IDLE_SUFFIX, "frames": 4, "anchor": "fixed",
              "poses": lambda frames, p: idle_cycle(frames)},
 }
@@ -53,8 +53,21 @@ def _components(mask: np.ndarray, connectivity: int = 8):
     return n, lab, stats
 
 
-def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True) -> np.ndarray:
-    """Mascara do personagem (True) em um frame pixelizado: tira o fundo ligado as bordas e a sombra do chao."""
+def _torso_protect(pose, g: int, radius: float = 0.045) -> np.ndarray:
+    """Faixa em volta do tronco da pose (pescoco -> meio do quadril): sempre e personagem, mesmo que a roupa tenha
+    a cor do fundo (regata branca em fundo claro)."""
+    m = np.zeros((g, g), np.uint8)
+    neck = pose[1]
+    hip = ((pose[8][0] + pose[11][0]) / 2, (pose[8][1] + pose[11][1]) / 2)
+    cv2.line(m, (round(neck[0] * (g - 1)), round(neck[1] * (g - 1))), (round(hip[0] * (g - 1)), round(hip[1] * (g - 1))),
+             1, max(1, round(2 * radius * g)))
+    return m.astype(bool)
+
+
+def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.ndarray | None = None) -> np.ndarray:
+    """Mascara do personagem (True) em um frame pixelizado: tira o fundo ligado as bordas e a sombra do chao.
+
+    ``protect``: mascara de pixels que nunca sao fundo (o tronco, vindo da pose)."""
     g = a.shape[0]
     edge = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
     vals, counts = np.unique(edge.reshape(-1, 3), axis=0, return_counts=True)
@@ -64,6 +77,8 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True) -> np.ndarray
     border = set(lab[0]) | set(lab[-1]) | set(lab[:, 0]) | set(lab[:, -1])
     border.discard(0)
     fg = ~np.isin(lab, list(border))
+    if protect is not None:
+        fg |= protect
     if not fg.any():
         return np.ones((g, g), bool)
     # sombra fina no chao: faixas horizontais largas nas ultimas linhas, sem corpo logo acima
@@ -91,7 +106,7 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True) -> np.ndarray
 
 
 def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg_tol: int = 45,
-                   anchor: str = "centroid") -> list[np.ndarray]:
+                   anchor: str = "centroid", poses: list | None = None) -> list[np.ndarray]:
     """Frames brutos (RGB alta resolucao) -> RGBA grid x grid: paleta unica, sem fundo, alinhados.
 
     anchor: "centroid" recentraliza cada frame na horizontal (bom para corrida, em que o corpo avanca e recua);
@@ -105,9 +120,9 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
         colors=colors, method=Image.Quantize.MEDIANCUT, kmeans=4, dither=Image.Dither.NONE)
     pal = [tuple(int(v) for v in c) for c in np.array(q.getpalette()[:colors * 3], np.uint8).reshape(-1, 3)]
     items = []
-    for r in raws:
+    for i, r in enumerate(raws):
         a = pixelate(r, grid, palette=pal, out_size=None)
-        mask = _remove_bg(a, bg_tol)
+        mask = _remove_bg(a, bg_tol, protect=_torso_protect(poses[i], grid) if poses else None)
         ys, xs = np.nonzero(mask)
         items.append((a, mask, ys, xs))
     margin = max(1, round(grid * 6 / 128))

@@ -220,7 +220,9 @@ def sword_cycle(frames: int = 6, reach: float = 1.0) -> list[list[tuple[float, f
     cut = {**guard, "r_arm": 1.1, "r_elbow": 0.3, "l_arm": 1.0, "l_elbow": 0.4, "lean": 0.12 + 0.18 * reach,
            "hip_x": 0.45 + 0.04 * reach, "r_thigh": 0.42, "r_knee": 0.55, "l_thigh": -0.34, "l_knee": 0.12,
            "head_dx": 0.07}
-    follow = {**cut, "r_arm": 0.5, "r_elbow": 0.3, "l_arm": 0.4, "l_elbow": 0.4, "lean": 0.12 + 0.22 * reach}
+    cut.update({"r_thigh": 0.55, "r_knee": 0.75, "l_knee": 0.25})   # joelhos cedem: o corpo desce com o golpe, pes fixos
+    follow = {**cut, "r_arm": 0.1, "r_elbow": 0.2, "l_arm": 0.0, "l_elbow": 0.3, "lean": 0.12 + 0.26 * reach,
+              "r_thigh": 0.6, "r_knee": 0.85, "head_dy": -0.045}  # maos terminam baixas, ao lado do joelho
     back = {**guard, "r_arm": 0.6, "r_elbow": 0.9, "l_arm": 0.5, "l_elbow": 1.0, "lean": 0.16, "hip_x": 0.47}
     return interpolate([(0.0, guard), (1 / 6, raise_), (2 / 6, mid), (3 / 6, cut), (4 / 6, follow), (5 / 6, back)],
                        frames)

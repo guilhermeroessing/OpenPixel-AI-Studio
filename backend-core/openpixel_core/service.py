@@ -353,12 +353,13 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
         prov = prov.with_overrides(avoid=animation.avoid_for(motion))
     shape = {k: (getattr(p, k) if getattr(p, k) is not None else defaults[k])
              for k in ("shoulder_spread", "lean", "flight_height")}
+    poses = motion["poses"](n_frames, shape)
     raws = animation.generate_motion_raws(
-        prov, req.prompt, prov.native_size, seed, motion["poses"](n_frames, shape), motion["suffix"],
+        prov, req.prompt, prov.native_size, seed, poses, motion["suffix"],
         prov.ref_weight > 0, progress, motion.get("prompt_weight", 1.0))
     rgba = animation.process_frames(raws, req.size, req.palette_size,
                                     p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"],
-                                    anchor=motion["anchor"])
+                                    anchor=motion["anchor"], poses=poses)
     out = []
     for a in rgba:
         used = sorted({pp._hex(c) for c in a[a[..., 3] > 0][:, :3]})

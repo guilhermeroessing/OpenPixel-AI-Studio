@@ -128,3 +128,19 @@ def test_prompt_weight_wraps_character_text_only_when_requested():
 def test_sword_motion_forbids_weapons_in_the_prompt():
     sword = animation.avoid_for(animation.MOTIONS["sword"])
     assert "(sword:1.6)" in sword and sword.startswith(animation.RUN_AVOID)
+
+
+def test_remove_bg_keeps_white_torso_that_matches_the_background_when_protected():
+    g = 64
+    a = np.full((g, g, 3), 235, np.uint8)                    # fundo claro
+    a[10:20, 28:36] = (200, 30, 30)                          # cabeca/pescoco
+    a[48:60, 24:40] = (30, 30, 160)                          # shorts e pernas
+    a[20:48, 28:36] = 236                                    # regata branca ~ cor do fundo, ligada a borda
+    a[20:48, 20:28] = 235
+    pose = [(0.5, 0.2)] * 18
+    pose[1] = (0.5, 0.3)
+    pose[8], pose[11] = (0.5, 0.7), (0.5, 0.7)
+    sem = animation._remove_bg(a, 45)
+    com = animation._remove_bg(a, 45, protect=animation._torso_protect(pose, g))
+    assert not sem[34, 32] and com[34, 32]
+    assert not com[34, 5]                                    # o fundo longe do tronco continua sendo fundo
