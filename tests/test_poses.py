@@ -64,3 +64,16 @@ def test_idle_cycle_moves_chest_a_little_and_keeps_feet_planted():
     chest = [p[1][1] for p in poses]
     assert 0.01 < max(chest) - min(chest) < 0.04
     assert all(abs(max(p[10][1], p[13][1]) - 0.89) < 1e-6 for p in poses)
+
+
+def test_punch_cycle_extends_arm_forward_and_keeps_feet_planted():
+    from openpixel_core.poses import punch_cycle
+
+    poses = punch_cycle(6)
+    wrist_x = [p[4][0] for p in poses]                  # pulso do braco da frente
+    assert len(poses) == 6
+    assert max(wrist_x) - min(wrist_x) > 0.25           # o golpe estica o braco bem a frente da guarda
+    assert wrist_x.index(max(wrist_x)) in (2, 3)        # pico no golpe/impacto
+    assert all(abs(max(p[10][1], p[13][1]) - 0.89) < 1e-6 for p in poses)
+    longer = punch_cycle(6, reach=1.5)
+    assert max(p[1][0] for p in longer) > max(p[1][0] for p in poses)  # mais alcance = tronco mais a frente

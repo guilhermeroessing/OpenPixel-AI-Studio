@@ -17,10 +17,12 @@ import numpy as np
 from PIL import Image
 
 from .pixelate import pixelate
-from .poses import idle_cycle, render_pose, run_cycle
+from .poses import idle_cycle, punch_cycle, render_pose, run_cycle
 
 RUN_SUFFIX = ("running, three-quarter side view facing right, arms swinging, both arms visible, "
               "full body, simple flat background")
+PUNCH_SUFFIX = ("throwing a punch, fist extended forward, fighting stance, bare hands, three-quarter side view "
+               "facing right, both arms visible, full body, simple flat background")
 IDLE_SUFFIX = ("standing idle, relaxed, breathing, three-quarter side view facing right, arms hanging at the sides, "
                "both arms visible, full body, simple flat background")
 
@@ -29,6 +31,10 @@ MOTIONS = {
     "run": {"label": "Corrida", "fps": 10, "suffix": RUN_SUFFIX, "frames": 8, "anchor": "centroid",
             "poses": lambda frames, p: run_cycle(frames, half=True, shoulder_spread=p.get("shoulder_spread", 0.05),
                                                  lean=p.get("lean", 0.35), flight=p.get("flight_height", 0.025))},
+    "punch": {"label": "Soco", "fps": 10, "suffix": PUNCH_SUFFIX, "frames": 6, "anchor": "fixed",
+              "avoid": "(boxing gloves:1.5), (gloves:1.4), smoke, dust, aura, energy effect, particles, motion blur, "
+                       "speed lines, glow, (ground shadow:1.5), (floor:1.3)",
+              "poses": lambda frames, p: punch_cycle(frames)},
     "idle": {"label": "Parado (idle)", "fps": 4, "suffix": IDLE_SUFFIX, "frames": 4, "anchor": "fixed",
              "poses": lambda frames, p: idle_cycle(frames)},
 }
@@ -140,6 +146,12 @@ def generate_motion_raws(provider, prompt: str, native: int, seed: int, poses: l
             if progress:
                 progress(done, total)
     return raws
+
+
+def avoid_for(motion: dict) -> str:
+    """Prompt negativo do movimento: o geral (armas, vistas multiplas) mais os termos proprios dele."""
+    extra = motion.get("avoid")
+    return f"{RUN_AVOID}, {extra}" if extra else RUN_AVOID
 
 
 def new_seed() -> int:

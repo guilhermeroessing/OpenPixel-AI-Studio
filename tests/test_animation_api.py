@@ -101,3 +101,9 @@ def test_anchor_fixed_keeps_relative_position_while_centroid_recenters():
     import pytest
     with pytest.raises(ValueError):
         animation.process_frames([a], anchor="solto")
+
+
+def test_avoid_for_adds_motion_specific_terms():
+    assert animation.avoid_for(animation.MOTIONS["run"]) == animation.RUN_AVOID
+    punch = animation.avoid_for(animation.MOTIONS["punch"])
+    assert punch.startswith(animation.RUN_AVOID) and "boxing gloves" in punch and "smoke" in punch

@@ -347,10 +347,10 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
         frames = animate_asset(req.model_copy(update={"seed": seed}), n_frames)
         if progress:
             progress(len(frames), len(frames))
-        return AnimationResponse(frames=frames, seed=seed, fps=10, provider=_provider.name)
-    if not prov.avoid:
-        prov = prov.with_overrides(avoid=animation.RUN_AVOID)
+        return AnimationResponse(frames=frames, seed=seed, fps=motion["fps"], provider=_provider.name)
     defaults = default_params()
+    if not prov.avoid:
+        prov = prov.with_overrides(avoid=animation.avoid_for(motion))
     shape = {k: (getattr(p, k) if getattr(p, k) is not None else defaults[k])
              for k in ("shoulder_spread", "lean", "flight_height")}
     raws = animation.generate_motion_raws(

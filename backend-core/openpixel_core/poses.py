@@ -185,3 +185,21 @@ def idle_cycle(frames: int = 8, breath: float = 1.0) -> list[list[tuple[float, f
         (0.50, {"chest": 0.018 * b, "r_knee": 0.04, "l_knee": 0.04, "lean": 0.10 + 0.03 * b, "r_arm": 0.10 + 0.08 * b, "l_arm": -0.08 - 0.06 * b, "head_dy": -0.06 - 0.004 * b}),
         (0.75, {"chest": 0.006 * b, "r_knee": 0.09, "l_knee": 0.09, "lean": 0.10 + 0.01 * b, "r_arm": 0.10 + 0.03 * b, "l_arm": -0.08 - 0.02 * b}),
     ], frames)
+
+
+def punch_cycle(frames: int = 6, reach: float = 1.0) -> list[list[tuple[float, float]]]:
+    """Soco (direto com o braco da frente, olhando para a direita): guarda -> armacao (cotovelo para tras, tronco
+    recua) -> golpe (corpo avanca, joelho da frente dobra, braco estica) -> impacto -> recuo -> guarda.
+    ``reach`` multiplica o quanto o corpo avanca no golpe (1 = padrao). Loop fechado: termina na guarda.
+    """
+    guard = {"r_arm": 0.9, "r_elbow": 1.7, "l_arm": 0.5, "l_elbow": 1.9, "lean": 0.12, "hip_x": 0.45,
+             "r_thigh": 0.35, "r_knee": 0.30, "l_thigh": -0.30, "l_knee": 0.35, "head_dx": 0.06}
+    wind = {**guard, "r_arm": -0.4, "r_elbow": 1.9, "lean": 0.04, "hip_x": 0.44, "head_dx": 0.05,
+            "r_knee": 0.25, "l_knee": 0.40}
+    strike = {**guard, "r_arm": 1.45, "r_elbow": 0.15, "lean": 0.12 + 0.18 * reach, "hip_x": 0.45 + 0.04 * reach,
+              "r_thigh": 0.55, "r_knee": 0.55, "l_thigh": -0.45, "l_knee": 0.10, "l_arm": 0.2, "l_elbow": 2.0,
+              "head_dx": 0.07}
+    hit = {**strike, "r_arm": 1.55, "r_elbow": 0.0, "lean": 0.12 + 0.23 * reach, "hip_x": 0.45 + 0.06 * reach}
+    back = {**guard, "r_arm": 1.0, "r_elbow": 1.2, "lean": 0.20, "hip_x": 0.47, "r_knee": 0.40}
+    return interpolate([(0.0, guard), (1 / 6, wind), (2 / 6, strike), (3 / 6, hit), (4 / 6, back), (5 / 6, {
+        **guard, "lean": 0.14})], frames)
