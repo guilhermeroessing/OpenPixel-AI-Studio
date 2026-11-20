@@ -11,6 +11,22 @@ export interface GenerateRequest {
   symmetric: boolean;
   dither: boolean;
   seed?: number | null;
+  params?: GenOverrides;
+}
+
+/** Forças editadas pelo usuário (só as que diferem do padrão). Chaves = ParamSpec.key. */
+export type GenOverrides = Record<string, number>;
+
+export interface ParamSpec {
+  key: string; label: string; group: string; min: number; max: number; step: number; help: string;
+}
+export interface ParamsInfo { specs: ParamSpec[]; defaults: Record<string, number>; provider: string }
+
+export interface AnimateRequest extends GenerateRequest { frames: number }
+export interface AnimationResponse { frames: SpriteResponse[]; seed: number; fps: number; provider: string }
+export interface JobInfo<T> {
+  id: string; status: "running" | "done" | "error"; progress: number; total: number;
+  result: T | null; error: string | null; elapsed: number;
 }
 
 export interface SpriteResponse {
@@ -78,6 +94,9 @@ function post<T>(path: string, body: unknown): Promise<T> {
 export const generate = (b: GenerateRequest) => post<SpriteResponse>("/generate", b);
 export const generate8 = (b: GenerateRequest) => post<unknown>("/generate8", b);
 export const generateMap = (prompt: string) => post<CompleteMapResponse>("/map", { prompt });
+export const getParams = () => request<ParamsInfo>("/params");
+export const startAnimation = (b: AnimateRequest) => post<{ job_id: string }>("/animate", b);
+export const getJob = <T>(id: string) => request<JobInfo<T>>(`/jobs/${id}`);
 export const getVram = () => request<VramInfo>("/vram");
 export const getDataset = () => request<DatasetItem[]>("/dataset");
 

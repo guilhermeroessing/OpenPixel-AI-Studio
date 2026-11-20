@@ -32,6 +32,9 @@ Plataforma **open source** para criar **personagens, assets isolados, tilesets e
 
 - **Geração de sprites** em 16–128 px, com paleta limitada e pixels alinhados à grade.
 - **8 direções** de um personagem e **animação** de assets.
+- **Animação de corrida com IA** (ComfyUI): poses por ControlNet OpenPose, personagem consistente por IP-Adapter, paleta única, fundo transparente e alinhamento pelos pés. Veja [Animação de corrida e editor de frames](#animação-de-corrida-e-editor-de-frames).
+- **Editor de frames** na interface: frame a frame, com lápis, borracha, linha, formas, balde, conta-gotas, mover, *onion skin*, desfazer/refazer, reprodução e exportação (GIF, folha de sprites, PNG).
+- **Fatores de geração editáveis** (⚙ Configurações → Geração): força de cada LoRA, CFG, passos, pose, referência, forma da corrida e tolerância do removedor de fundo.
 - **Mapas completos:** decompõe o prompt em paleta mestra, lista de assets e camadas de tilemap, e gera o `MAP_ASSEMBLY_MANUAL.md` para montar no Godot/Unity.
 - **Pós-processamento pixel art:** redução com PixelOE, K-Means em CIELAB, remoção de ilhas, tiles sem emenda (*seamless*), simetria, dither e travamento de paleta.
 - **Três modos de motor de IA:** simulado (sem GPU), `diffusers` local (CUDA) e **ComfyUI** (API HTTP), com pilha de LoRAs configurável.
@@ -100,6 +103,18 @@ cd frontend-studio && npm run dev
 ```
 
 Verifique em `http://127.0.0.1:8000/health`. Ao iniciar, o backend informa qual motor de IA está ativo.
+
+## Animação de corrida e editor de frames
+
+Requer `DEVICE_MODE=comfy` com o ComfyUI aberto (modelo `xinsir_openpose_sdxl` de ControlNet e `ip-adapter-plus_sdxl_vit-h`). Sem ele, a interface usa um balanço simples do sprite base.
+
+1. Escreva o personagem no prompt, escolha o tamanho (128 dá o melhor resultado) e, na aba **Animate**, clique em **Gerar corrida (8 frames)**. A tarefa roda em segundo plano (≈ 40 s por imagem, 9 imagens) e mostra o progresso.
+2. Os frames são um **meio ciclo** de corrida: a segunda metade é a primeira com direita e esquerda trocadas, então o loop fecha sozinho.
+3. **Correção manual** abre o editor frame a frame. Atalhos: `B` lápis, `E` borracha, `L` linha, `R` retângulo, `O` elipse, `G` balde, `I` conta-gotas, `M` mover, `←/→` troca de frame, `Espaço` reproduz, `[` `]` tamanho do pincel, `H` grade, `N` *onion skin* (anterior em vermelho, próximo em azul), `Ctrl+Z` / `Ctrl+Shift+Z` desfazer/refazer. Botão direito apaga.
+4. **Exportar** gera o GIF animado (com fundo transparente ou uma cor), a folha de sprites ou o frame atual em PNG, em escala 1x a 8x. **Aplicar e voltar** mantém as edições na prévia.
+5. As forças de cada fator ficam em **⚙ → Geração**; só os valores que você alterar são enviados e eles ficam salvos no navegador.
+
+API: `POST /animate` inicia a tarefa (devolve `job_id`), `GET /jobs/{id}` informa progresso e resultado, `GET /params` lista os fatores editáveis com faixa e padrão.
 
 ## Usando a IA que você quiser
 
@@ -203,7 +218,8 @@ Resumo (detalhes e metodologia em [docs/EXPERIMENTOS.md](docs/EXPERIMENTOS.md)):
 
 ## Roadmap
 
-- [ ] Controle de pose (ControlNet/OpenPose) e remoção de objetos por inpainting.
+- [x] Controle de pose (ControlNet/OpenPose), animação de corrida e editor de frames.
+- [ ] Remoção de objetos por inpainting e mais ciclos de animação (andar, parado, ataque).
 - [ ] Animação de sprites a partir de imagem (modelos de vídeo I2V) — exige modelos grandes; ainda não testado.
 - [ ] Paletas fixas selecionáveis (Endesga 32, DawnBringer 32…) na interface.
 - [ ] Dataset de treino mais limpo para um novo ajuste fino.

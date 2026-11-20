@@ -59,7 +59,7 @@ def preset_image(name: str, size: int = 1024) -> np.ndarray:
 
 
 def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True,
-              shoulder_spread: float = 0.05) -> list[list[tuple[float, float]]]:
+              shoulder_spread: float = 0.05, lean: float = 0.35, flight: float = 0.025) -> list[list[tuple[float, float]]]:
     """Ciclo de CORRIDA de perfil (olhando para a direita), um passo completo (2 passadas).
 
     Diferencas para uma caminhada: tronco inclinado, joelho da perna de recuperacao sobe alto (calcanhar
@@ -78,8 +78,7 @@ def run_cycle(frames: int = 8, half: bool = False, three_quarter: bool = True,
     out = []
     for i in range(frames):
         ph = 2 * pi * i / steps
-        hip = (0.46, 0.55 - 0.025 * (1 - cos(2 * ph)))  # sobe ate 5% da altura no voo, desce no apoio
-        lean = 0.35
+        hip = (0.46, 0.55 - flight * (1 - cos(2 * ph)))  # sobe ate 5% da altura no voo, desce no apoio
         neck = (hip[0] + 0.27 * sin(lean), hip[1] - 0.27 * cos(lean))
         nose = (neck[0] + 0.06, neck[1] - 0.06)
         legs, arms = {}, {}

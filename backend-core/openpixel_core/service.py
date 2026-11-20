@@ -13,10 +13,12 @@ import cv2
 import numpy as np
 from PIL import Image
 
+from . import animation
 from . import postprocess as pp  # importa o pacote -> sys.path de shared-contracts
 from .pixelate import pixelate
 from .providers import get_provider
-from schemas import CompleteMapResponse, GenerateRequest, MapAsset, SpriteResponse  # noqa: E402
+from schemas import (AnimateRequest, AnimationResponse, CompleteMapResponse, GenerateRequest, GenParams,  # noqa: E402
+                     MapAsset, SpriteResponse)
 
 _provider = get_provider()
 DIRECTIONS = ["S", "SE", "E", "NE", "N", "NW", "W", "SW"]
@@ -39,13 +41,68 @@ def _hex_to_rgb(palette: list[str]) -> np.ndarray:
     return np.array([[int(h[i:i + 2], 16) for i in (1, 3, 5)] for h in palette], np.uint8)
 
 
+def _png_b64_rgba(rgba: np.ndarray) -> str:
+    buf = io.BytesIO()
+    Image.fromarray(np.ascontiguousarray(rgba, np.uint8), "RGBA").save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode()
+
+
 def _sprite(rgb: np.ndarray, palette: list[str], seed: int) -> SpriteResponse:
     return SpriteResponse(image_b64=_png_b64(rgb), width=rgb.shape[1], height=rgb.shape[0],
                           palette=palette, seed=seed, provider=_provider.name)
 
 
+# Fatores editaveis na interface: chave, rotulo, grupo, faixa, passo, ajuda. O padrao vem de default_params().
+PARAM_SPECS = [
+    {"key": "lora_pixel_art_xl", "label": "LoRA pixel-art-xl", "group": "Modelo", "min": 0, "max": 2, "step": 0.05,
+     "help": "Força do estilo pixel art. Mais alto = pixels mais duros, proporções mais chibi."},
+    {"key": "lora_redmond", "label": "LoRA PixelArtRedmond", "group": "Modelo", "min": 0, "max": 2, "step": 0.05,
+     "help": "Força do estilo Redmond: proporções heroicas e mais detalhe. Muito alto fica ruidoso."},
+    {"key": "cfg", "label": "CFG (obediência ao prompt)", "group": "Modelo", "min": 1, "max": 20, "step": 0.5,
+     "help": "Mais alto segue o prompt mais à risca, mas satura as cores."},
+    {"key": "steps", "label": "Passos de amostragem", "group": "Modelo", "min": 5, "max": 60, "step": 1,
+     "help": "Mais passos = mais detalhe e mais tempo."},
+    {"key": "pose_strength", "label": "Força da pose (ControlNet)", "group": "Animação", "min": 0, "max": 2,
+     "step": 0.05, "help": "Quanto o personagem obedece ao esqueleto. Abaixo de ~0,8 os braços não seguem a pose."},
+    {"key": "ref_weight", "label": "Referência do personagem (IP-Adapter)", "group": "Animação", "min": 0, "max": 2,
+     "step": 0.05, "help": "Mantém o mesmo visual entre os frames. Alto demais deixa tudo chapado; 0 desliga."},
+    {"key": "shoulder_spread", "label": "Separação dos ombros", "group": "Pose da corrida", "min": 0, "max": 0.1,
+     "step": 0.005, "help": "Afasta o braço de trás do tronco (fração da altura)."},
+    {"key": "flight_height", "label": "Altura do voo", "group": "Pose da corrida", "min": 0, "max": 0.1,
+     "step": 0.005, "help": "Quanto o personagem sobe na fase de voo (fração da altura)."},
+    {"key": "lean", "label": "Inclinação do tronco", "group": "Pose da corrida", "min": 0, "max": 0.7,
+     "step": 0.025, "help": "Inclinação para a frente, em radianos. Maior = corrida mais agressiva."},
+    {"key": "bg_tolerance", "label": "Tolerância do removedor de fundo", "group": "Pós-processo", "min": 10,
+     "max": 150, "step": 5, "help": "Alto remove mais fundo (e sombra), mas pode comer partes do personagem."},
+]
+
+
+def default_params() -> dict[str, float]:
+    d = {"lora_pixel_art_xl": 0.7, "lora_redmond": 0.7, "cfg": 6.5, "steps": 25, "pose_strength": 1.0,
+         "ref_weight": 0.5, "shoulder_spread": 0.05, "flight_height": 0.025, "lean": 0.35, "bg_tolerance": 45}
+    p = _provider
+    if hasattr(p, "with_overrides"):  # ComfyProvider: o padrao real vem da instancia
+        d.update(cfg=p.cfg, steps=p.steps, pose_strength=p.pose_strength, ref_weight=p.ref_weight)
+        for name, strength in p.loras:
+            low = name.lower()
+            key = "lora_pixel_art_xl" if "pixel-art-xl" in low else "lora_redmond" if "redmond" in low else None
+            if key:
+                d[key] = strength
+    return d
+
+
+def _provider_for(params: GenParams | None):
+    """Provider com as forcas da requisicao aplicadas (so o ComfyProvider suporta; o mock ignora)."""
+    if params is None or not hasattr(_provider, "with_overrides"):
+        return _provider
+    lora = {k: v for k, v in (("pixel-art-xl", params.lora_pixel_art_xl), ("redmond", params.lora_redmond))
+            if v is not None}
+    return _provider.with_overrides(cfg=params.cfg, steps=params.steps, pose_strength=params.pose_strength,
+                                    ref_weight=params.ref_weight, lora_strengths=lora or None)
+
+
 def _base(req: GenerateRequest):
-    hr, seed = _provider.generate(req.prompt, _hr(req.size), req.seed)
+    hr, seed = _provider_for(req.params).generate(req.prompt, _hr(req.size), req.seed)
     # Padrao: media por bloco + paleta K-Means (openpixel_core.pixelate). PIXELIZER=pixeloe volta ao
     # pipeline antigo; seamless/symmetric/dither sempre usam o pipeline antigo (so ele os implementa).
     if os.environ.get("PIXELIZER", "box") == "box" and not (req.seamless or req.symmetric or req.dither):
@@ -275,3 +332,34 @@ def export_engine_bundle(map_dir: str, engine: str) -> str:
             if (d / extra).exists():
                 z.write(d / extra, extra)
     return str(zpath)
+
+
+# ---------------------------------------------------------------- animacao de corrida
+
+def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
+    """Ciclo de corrida: ComfyUI (pose + referencia) ou, sem ele, um balanco simples do sprite base."""
+    p = req.params or GenParams()
+    seed = req.seed if req.seed is not None else animation.new_seed()
+    prov = _provider_for(req.params)
+    if not hasattr(prov, "with_overrides"):
+        frames = animate_asset(req.model_copy(update={"seed": seed}), req.frames)
+        if progress:
+            progress(len(frames), len(frames))
+        return AnimationResponse(frames=frames, seed=seed, fps=10, provider=_provider.name)
+    if not prov.avoid:
+        prov = prov.with_overrides(avoid=animation.RUN_AVOID)
+    defaults = default_params()
+    raws = animation.generate_run_raws(
+        prov, req.prompt, prov.native_size, seed, req.frames,
+        p.shoulder_spread if p.shoulder_spread is not None else defaults["shoulder_spread"],
+        p.lean if p.lean is not None else defaults["lean"],
+        p.flight_height if p.flight_height is not None else defaults["flight_height"],
+        prov.ref_weight > 0, progress)
+    rgba = animation.process_frames(raws, req.size, req.palette_size,
+                                    p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"])
+    out = []
+    for a in rgba:
+        used = sorted({pp._hex(c) for c in a[a[..., 3] > 0][:, :3]})
+        out.append(SpriteResponse(image_b64=_png_b64_rgba(a), width=req.size, height=req.size, palette=used,
+                                  seed=seed, provider=_provider.name))
+    return AnimationResponse(frames=out, seed=seed, fps=10, provider=_provider.name)

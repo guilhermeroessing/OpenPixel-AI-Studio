@@ -13,8 +13,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from . import service
-from schemas import GenerateRequest  # noqa: E402
+from fastapi import HTTPException
+
+from . import jobs, service
+from schemas import AnimateRequest, GenerateRequest  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 DB_PATH = Path(os.environ.get("DATASET_DB", ROOT / "scraper-dataset" / "dataset_catalog.db"))
@@ -42,6 +44,26 @@ def generate(req: GenerateRequest):
 @app.post("/generate8")
 def generate8(req: GenerateRequest):
     return service.generate_8_directions(req)
+
+
+@app.get("/params")
+def params():
+    """Fatores de geracao editaveis (faixa, passo, ajuda) e o valor padrao atual de cada um."""
+    return {"specs": service.PARAM_SPECS, "defaults": service.default_params(), "provider": service._provider.name}
+
+
+@app.post("/animate")
+def animate(req: AnimateRequest):
+    """Inicia a animacao de corrida em segundo plano; consulte o andamento em GET /jobs/{id}."""
+    return {"job_id": jobs.submit(lambda progress: service.animate_run(req, progress).model_dump())}
+
+
+@app.get("/jobs/{job_id}")
+def job(job_id: str):
+    j = jobs.get(job_id)
+    if j is None:
+        raise HTTPException(status_code=404, detail="tarefa nao encontrada")
+    return j
 
 
 @app.post("/map")

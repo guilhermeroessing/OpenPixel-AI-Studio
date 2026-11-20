@@ -5,6 +5,20 @@ from pydantic import BaseModel, Field
 AssetKind = Literal["character", "asset", "tileset", "map"]
 
 
+class GenParams(BaseModel):
+    """Forca de cada fator da geracao. None = usa o padrao do provider (ver GET /params)."""
+    lora_pixel_art_xl: float | None = Field(default=None, ge=0, le=2)
+    lora_redmond: float | None = Field(default=None, ge=0, le=2)
+    cfg: float | None = Field(default=None, ge=1, le=20)
+    steps: int | None = Field(default=None, ge=5, le=60)
+    pose_strength: float | None = Field(default=None, ge=0, le=2)
+    ref_weight: float | None = Field(default=None, ge=0, le=2)
+    shoulder_spread: float | None = Field(default=None, ge=0, le=0.1)
+    flight_height: float | None = Field(default=None, ge=0, le=0.1)
+    lean: float | None = Field(default=None, ge=0, le=0.7)
+    bg_tolerance: int | None = Field(default=None, ge=10, le=150)
+
+
 class GenerateRequest(BaseModel):
     prompt: str = Field(min_length=1)
     size: int = Field(default=32, ge=16, le=128)
@@ -14,6 +28,11 @@ class GenerateRequest(BaseModel):
     symmetric: bool = False
     dither: bool = False
     seed: int | None = None
+    params: GenParams | None = None
+
+
+class AnimateRequest(GenerateRequest):
+    frames: int = Field(default=8, ge=2, le=16)
 
 
 class SpriteResponse(BaseModel):
@@ -30,6 +49,13 @@ class MapAsset(BaseModel):
     kind: Literal["tile", "prop"]
     prompt: str
     size: int = 32
+
+
+class AnimationResponse(BaseModel):
+    frames: list[SpriteResponse]
+    seed: int
+    fps: int = 10
+    provider: str = "smart_mock"
 
 
 class CompleteMapResponse(BaseModel):

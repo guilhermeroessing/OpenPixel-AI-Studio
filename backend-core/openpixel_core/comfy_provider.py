@@ -23,6 +23,7 @@ Configuracao (variaveis de ambiente ou .env):
 """
 from __future__ import annotations
 
+import copy
 import io
 import json
 import os
@@ -96,6 +97,33 @@ class ComfyProvider:
         except OSError as exc:
             raise RuntimeError(f"Nao consegui falar com o ComfyUI em {self.url} ({exc}). Ele esta aberto?") from exc
         return body if raw else json.loads(body)
+
+    def with_overrides(self, cfg: float | None = None, steps: int | None = None, pose_strength: float | None = None,
+                       ref_weight: float | None = None, lora_strengths: dict[str, float] | None = None,
+                       avoid: str | None = None) -> "ComfyProvider":
+        """Copia do provider com forcas trocadas (por requisicao, sem mexer na instancia global).
+
+        lora_strengths: {trecho do nome da LoRA (sem diferenciar maiusculas): forca}.
+        """
+        c = copy.copy(self)
+        if cfg is not None:
+            c.cfg = cfg
+        if steps is not None:
+            c.steps = steps
+        if pose_strength is not None:
+            c.pose_strength = pose_strength
+        if ref_weight is not None:
+            c.ref_weight = ref_weight
+        if avoid is not None:
+            c.avoid = avoid
+        if lora_strengths:
+            def pick(name: str, old: float) -> float:
+                for key, val in lora_strengths.items():
+                    if key.lower() in name.lower():
+                        return val
+                return old
+            c.loras = [(n, pick(n, s)) for n, s in self.loras]
+        return c
 
     def is_up(self) -> bool:
         try:
