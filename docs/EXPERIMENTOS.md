@@ -54,6 +54,14 @@ Passar a imagem já pixelada de volta pelo SDXL com as duas LoRAs (denoise 0,3 e
 | *LuisaP MOSS Pixel Art Refiner* | Não há versão SDXL (as versões são MOSS Image, Z-Image, Qwen e SD 1.5). A versão SD 1.5 tem 1 MB e exigiria um checkpoint SD 1.5 (≈ 2–4 GB). |
 | *PixelArtRedmond* nas bases Qwen, Z-Image e Flux | Exigem os respectivos modelos base; usamos a versão **SDXL (Lite 64)**. |
 
+**Decisão (19/11/2026):** após comparar 5 variantes lado a lado (PixelOE, média + K-Means, moda, média + Endesga 32 e 64 px/16 cores) sobre o prompt simples, o padrão do `service` passou a ser **média por bloco + paleta K-Means** (`pixelate.py`, `PIXELIZER=box`). `PIXELIZER=pixeloe` volta ao pipeline antigo.
+
+![Prompt simples vs detalhado](images/05-prompt-simples-vs-detalhado.png)
+
+![Pixelizações sobre o prompt simples](images/06-pixelizacoes-prompt-simples.png)
+
+*Prompt simples (`spartan warrior, teal and grey armor, blue cloak, full body, standing, front view`) deu resultados mais limpos e consistentes que o prompt longo.*
+
 ## 6. Recomendação atual
 
 SDXL base + `pixel-art-xl-v1.1` (0,7) + `PixelArtRedmond-Lite64` (0,7), via ComfyUI, seguido do pós-processamento do `service` (ou de `pixelate.py`, com paleta K-Means ou fixa). Próximos passos: controle de pose, inpainting para remover objetos e, depois, animação.

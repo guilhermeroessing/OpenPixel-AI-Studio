@@ -5,6 +5,7 @@ import base64
 import io
 import json
 import math
+import os
 import zipfile
 from pathlib import Path
 
@@ -13,6 +14,7 @@ import numpy as np
 from PIL import Image
 
 from . import postprocess as pp  # importa o pacote -> sys.path de shared-contracts
+from .pixelate import pixelate
 from .providers import get_provider
 from schemas import CompleteMapResponse, GenerateRequest, MapAsset, SpriteResponse  # noqa: E402
 
@@ -44,7 +46,13 @@ def _sprite(rgb: np.ndarray, palette: list[str], seed: int) -> SpriteResponse:
 
 def _base(req: GenerateRequest):
     hr, seed = _provider.generate(req.prompt, _hr(req.size), req.seed)
-    rgb, pal = pp.pixelize(hr, req.size, req.palette_size, req.dither, req.seamless, req.symmetric)
+    # Padrao: media por bloco + paleta K-Means (openpixel_core.pixelate). PIXELIZER=pixeloe volta ao
+    # pipeline antigo; seamless/symmetric/dither sempre usam o pipeline antigo (so ele os implementa).
+    if os.environ.get("PIXELIZER", "box") == "box" and not (req.seamless or req.symmetric or req.dither):
+        rgb = pixelate(hr, grid=req.size, colors=req.palette_size, out_size=req.size)
+        pal = [pp._hex(c) for c in np.unique(rgb.reshape(-1, 3), axis=0)]
+    else:
+        rgb, pal = pp.pixelize(hr, req.size, req.palette_size, req.dither, req.seamless, req.symmetric)
     return rgb, pal, seed
 
 

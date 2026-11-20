@@ -49,7 +49,7 @@ ai-gateway-mcp  (FastMCP)    ─┼─▶ backend-core (FastAPI)
                               │      │    ├─ sdxl_provider.py    SDXL + LoRA via diffusers (CUDA)
                               │      │    └─ comfy_provider.py   ComfyUI via API HTTP
                               │      ├─ postprocess.py   pixelização, paleta, ilhas, seamless, simetria
-                              │      └─ pixelate.py      pixelizador opcional (preserva mais detalhe)
+                              │      └─ pixelate.py      pixelizador padrão (média + paleta K-Means)
 shared-contracts (schemas)   ─┘
 scraper-dataset              dataset de referência (coleta + análise + legendas)
 ```
@@ -160,7 +160,8 @@ Variáveis lidas do ambiente ou do `.env` (o ambiente tem prioridade):
 | `COMFY_TRIGGER` | `Pixel Art, PixArFK, pixel art` | Gatilhos das LoRAs |
 | `COMFY_AVOID` | vazio | Termos extras no prompt negativo |
 | `COMFY_STEPS` / `COMFY_CFG` / `COMFY_SIZE` | `25` / `6.5` / `1024` | Passos, CFG, lado da imagem |
-| `PIXEL_GRID` / `PIXEL_COLORS` | `0` / `24` | Pixelização opcional no provider (0 = desligada) |
+| `PIXELIZER` | `box` | Pixelizador do `service`: `box` (média por bloco + paleta K-Means, `pixelate.py`) ou `pixeloe` (pipeline antigo). Seamless, simetria e dither sempre usam o antigo |
+| `PIXEL_GRID` / `PIXEL_COLORS` | `0` / `24` | Pixelização opcional *dentro do provider* (0 = desligada; o `service` já pixeliza) |
 | `SDXL_BASE_MODEL` / `SDXL_LORA_PATH` | SDXL base / — | Modo `cuda` |
 | `SDXL_STEPS` / `SDXL_GUIDANCE` / `SDXL_SIZE` | `28` / `6.5` / `1024` | Modo `cuda` |
 | `OPENPIXEL_ALLOW_BASE_SDXL` | — | `1` permite SDXL sem LoRA no modo `cuda` |

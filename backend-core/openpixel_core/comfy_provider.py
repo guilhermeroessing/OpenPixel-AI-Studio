@@ -13,8 +13,8 @@ Configuracao (variaveis de ambiente ou .env):
   COMFY_AVOID       termos extras para o prompt negativo (ex.: "(weapon:1.6), (shield:1.8)")
   COMFY_STEPS / COMFY_CFG / COMFY_SIZE   passos, cfg e lado da imagem (25 / 6.5 / 1024)
   PIXEL_GRID        grade logica de uma pixelizacao opcional dentro do provider (padrao 0 = desligada:
-                    o service.py ja pixeliza com postprocess.pixelize; ligue, ex. 128, para usar
-                    openpixel_core.pixelate, que preserva mais detalhe em algumas imagens)
+                    o service.py ja pixeliza com openpixel_core.pixelate (PIXELIZER=box, padrao);
+                    ligue so se quiser pixelizar antes, ex. 128)
   PIXEL_COLORS      cores da paleta adaptativa dessa pixelizacao opcional (padrao 24)
 """
 from __future__ import annotations
