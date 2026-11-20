@@ -339,24 +339,26 @@ def export_engine_bundle(map_dir: str, engine: str) -> str:
 def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
     """Animacao por movimento (corrida, idle...): ComfyUI (pose + referencia) ou, sem ele, um balanco simples."""
     p = req.params or GenParams()
+    motion = animation.MOTIONS[req.motion]
+    n_frames = req.frames or motion["frames"]
     seed = req.seed if req.seed is not None else animation.new_seed()
     prov = _provider_for(req.params)
     if not hasattr(prov, "with_overrides"):
-        frames = animate_asset(req.model_copy(update={"seed": seed}), req.frames)
+        frames = animate_asset(req.model_copy(update={"seed": seed}), n_frames)
         if progress:
             progress(len(frames), len(frames))
         return AnimationResponse(frames=frames, seed=seed, fps=10, provider=_provider.name)
     if not prov.avoid:
         prov = prov.with_overrides(avoid=animation.RUN_AVOID)
     defaults = default_params()
-    motion = animation.MOTIONS[req.motion]
     shape = {k: (getattr(p, k) if getattr(p, k) is not None else defaults[k])
              for k in ("shoulder_spread", "lean", "flight_height")}
     raws = animation.generate_motion_raws(
-        prov, req.prompt, prov.native_size, seed, motion["poses"](req.frames, shape), motion["suffix"],
+        prov, req.prompt, prov.native_size, seed, motion["poses"](n_frames, shape), motion["suffix"],
         prov.ref_weight > 0, progress)
     rgba = animation.process_frames(raws, req.size, req.palette_size,
-                                    p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"])
+                                    p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"],
+                                    anchor=motion["anchor"])
     out = []
     for a in rgba:
         used = sorted({pp._hex(c) for c in a[a[..., 3] > 0][:, :3]})

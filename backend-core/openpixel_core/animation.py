@@ -26,10 +26,10 @@ IDLE_SUFFIX = ("standing idle, relaxed, breathing, three-quarter side view facin
 
 # Movimentos disponiveis: texto acrescentado ao prompt, fps do loop e gerador das poses (quadros x parametros).
 MOTIONS = {
-    "run": {"label": "Corrida", "fps": 10, "suffix": RUN_SUFFIX,
+    "run": {"label": "Corrida", "fps": 10, "suffix": RUN_SUFFIX, "frames": 8, "anchor": "centroid",
             "poses": lambda frames, p: run_cycle(frames, half=True, shoulder_spread=p.get("shoulder_spread", 0.05),
                                                  lean=p.get("lean", 0.35), flight=p.get("flight_height", 0.025))},
-    "idle": {"label": "Parado (idle)", "fps": 6, "suffix": IDLE_SUFFIX,
+    "idle": {"label": "Parado (idle)", "fps": 4, "suffix": IDLE_SUFFIX, "frames": 4, "anchor": "fixed",
              "poses": lambda frames, p: idle_cycle(frames)},
 }
 RUN_AVOID = "(weapon:1.6), (shield:1.8), (sword:1.5), (spear:1.5), (gun:1.5), close-up, bust, cropped, multiple views"
@@ -77,8 +77,16 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True) -> np.ndarray
     return np.isin(lab, keep)
 
 
-def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg_tol: int = 45) -> list[np.ndarray]:
-    """Frames brutos (RGB alta resolucao) -> RGBA grid x grid: paleta unica, sem fundo, alinhados."""
+def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg_tol: int = 45,
+                   anchor: str = "centroid") -> list[np.ndarray]:
+    """Frames brutos (RGB alta resolucao) -> RGBA grid x grid: paleta unica, sem fundo, alinhados.
+
+    anchor: "centroid" recentraliza cada frame na horizontal (bom para corrida, em que o corpo avanca e recua);
+    "fixed" aplica o MESMO deslocamento a todos os frames (local fixo: o que se move e so o movimento da pose,
+    ideal para idle e ataques parados).
+    """
+    if anchor not in ("centroid", "fixed"):
+        raise ValueError("anchor deve ser 'centroid' ou 'fixed'")
     small = [np.asarray(Image.fromarray(r).convert("RGB").resize((grid, grid), Image.BOX)) for r in raws]
     q = Image.fromarray(np.concatenate(small, axis=1)).quantize(
         colors=colors, method=Image.Quantize.MEDIANCUT, kmeans=4, dither=Image.Dither.NONE)
@@ -91,9 +99,10 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
         items.append((a, mask, ys, xs))
     margin = max(1, round(grid * 6 / 128))
     dy = (grid - margin) - max(it[2].max() for it in items)  # um unico dy: preserva a subida do voo
+    fixed_dx = grid // 2 - int(round(float(np.mean([it[3].mean() for it in items]))))
     out = []
     for a, mask, ys, xs in items:
-        dx = grid // 2 - int(round(xs.mean()))
+        dx = fixed_dx if anchor == "fixed" else grid // 2 - int(round(xs.mean()))
         canvas = np.zeros((grid, grid, 4), np.uint8)
         sy, sx = ys + dy, xs + dx
         ok = (sy >= 0) & (sy < grid) & (sx >= 0) & (sx < grid)

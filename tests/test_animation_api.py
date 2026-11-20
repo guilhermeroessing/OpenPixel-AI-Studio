@@ -89,3 +89,15 @@ def test_process_frames_keeps_wide_shoes_but_drops_wider_shadow():
     out = animation.process_frames([img], grid=64, colors=8, bg_tol=45)[0]
     ys = np.nonzero(out[..., 3].any(axis=1))[0]
     assert ys.max() - ys.min() >= 39              # os 4 ultimos pixels do tenis continuam la
+
+
+def test_anchor_fixed_keeps_relative_position_while_centroid_recenters():
+    a, b = _scene(0), np.roll(_scene(0), 40, axis=1)  # mesmo personagem 40 px (10 na grade) mais a direita
+    left = lambda f: int(np.nonzero(f[..., 3].any(axis=0))[0].min())
+    c = animation.process_frames([a, b], grid=64, colors=8, anchor="centroid")
+    f = animation.process_frames([a, b], grid=64, colors=8, anchor="fixed")
+    assert left(c[0]) == left(c[1])               # recentralizado: iguais
+    assert left(f[1]) - left(f[0]) == 10          # local fixo: o deslocamento da pose e preservado
+    import pytest
+    with pytest.raises(ValueError):
+        animation.process_frames([a], anchor="solto")

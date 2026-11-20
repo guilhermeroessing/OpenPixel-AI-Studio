@@ -35,7 +35,7 @@ Motion = Literal["run", "idle"]  # movimentos implementados (ver openpixel_core.
 
 
 class AnimateRequest(GenerateRequest):
-    frames: int = Field(default=8, ge=2, le=16)
+    frames: int | None = Field(default=None, ge=2, le=16)  # None = o padrao do movimento (corrida 8, idle 4)
     motion: Motion = "run"
 
 
