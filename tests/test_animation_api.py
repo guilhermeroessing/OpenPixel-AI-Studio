@@ -70,7 +70,7 @@ def test_process_frames_transparent_bg_shared_size_and_vertical_motion_kept():
 
 def test_process_frames_removes_flat_ground_shadow():
     img = _scene(0)
-    img[200:204, 60:190] = (128, 128, 128)  # faixa larga e fina abaixo dos pes (sombra)
+    img[200:216, 60:190] = (128, 128, 128)  # faixa larga e GROSSA (4 linhas na grade) abaixo dos pes (sombra)
     out = animation.process_frames([img], grid=64, colors=8, bg_tol=45)[0]
     ys = np.nonzero(out[..., 3].any(axis=1))[0]
-    assert ys.max() - ys.min() < 52  # sem a faixa o personagem ocupa ~ 35 linhas de 64
+    assert ys.max() - ys.min() < 37  # sem a faixa o personagem ocupa ~ 35 linhas de 64; com ela, 39

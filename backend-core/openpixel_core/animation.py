@@ -45,14 +45,15 @@ def _remove_bg(a: np.ndarray, tol: int) -> np.ndarray:
     # sombra fina no chao: faixas horizontais largas nas ultimas linhas, sem corpo logo acima
     ys = np.nonzero(fg.any(axis=1))[0]
     min_run = max(4, round(g * 12 / 128))
-    for y in range(ys.max(), max(ys.max() - max(3, round(g * 8 / 128)), 1), -1):
+    # de cima para baixo: ao apagar a linha de cima da faixa, a de baixo passa a ficar sem corpo acima (cascata)
+    for y in range(max(ys.max() - max(3, round(g * 8 / 128)), 1), ys.max() + 1):
         x = 0
         while x < g:
             if fg[y, x]:
                 x2 = x
                 while x2 < g and fg[y, x2]:
                     x2 += 1
-                if x2 - x >= min_run and fg[y - 1, x:x2].mean() < 0.3:
+                if x2 - x >= min_run and fg[y - 1, x:x2].mean() < 0.6:
                     fg[y, x:x2] = False
                 x = x2
             else:
