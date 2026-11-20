@@ -46,6 +46,19 @@ Passar a imagem já pixelada de volta pelo SDXL com as duas LoRAs (denoise 0,3 e
 
 ![Refino](images/04-refino-img2img.png)
 
+## 4b. Controle de pose (ControlNet OpenPose)
+
+O `ComfyProvider` aceita uma pose (`COMFY_POSE` ou `generate(..., pose="arms_up")`) e aplica o ControlNet `xinsir_openpose_sdxl` (já instalado no Comfy). O módulo `poses.py` desenha esqueletos prontos (`idle`, `hands_on_hips`, `arms_up`, `walk`); também dá para passar o caminho de qualquer imagem de esqueleto OpenPose.
+
+- Força 0,5: quase ignora a pose. Força 0,8: segue pernas e tronco, mas os braços erguidos não. **Força 1,0 (padrão): segue a pose por inteiro**, com personagem centrado e proporção estável. Força 1,4: igual, com cores mais chapadas.
+- Efeito colateral: o ControlNet deixa as cores mais saturadas (ciano) e o fundo mais colorido que sem pose. O prompt precisa dizer a pose também (ex.: "arms raised above head").
+- Custo: ≈ 28 s por imagem, contra ≈ 18 s sem pose.
+- Amostra pequena (2 seeds por configuração), avaliação visual.
+
+![Poses](images/09-controle-de-pose.png)
+
+![Força do ControlNet](images/10-pose-forca.png)
+
 ## 5. Não testados (e por quê)
 
 | Recurso | Situação |

@@ -160,6 +160,7 @@ Variáveis lidas do ambiente ou do `.env` (o ambiente tem prioridade):
 | `COMFY_TRIGGER` | `Pixel Art, PixArFK, pixel art` | Gatilhos das LoRAs |
 | `COMFY_AVOID` | vazio | Termos extras no prompt negativo |
 | `COMFY_STEPS` / `COMFY_CFG` / `COMFY_SIZE` | `25` / `6.5` / `1024` | Passos, CFG, lado da imagem |
+| `COMFY_POSE` / `COMFY_POSE_STRENGTH` | vazio / `1.0` | Controle de pose (ControlNet OpenPose): `idle`, `hands_on_hips`, `arms_up`, `walk` ou caminho de uma imagem de esqueleto |
 | `PIXELIZER` | `box` | Pixelizador do `service`: `box` (média por bloco + paleta K-Means, `pixelate.py`) ou `pixeloe` (pipeline antigo). Seamless, simetria e dither sempre usam o antigo |
 | `PIXEL_GRID` / `PIXEL_COLORS` | `0` / `24` | Pixelização opcional *dentro do provider* (0 = desligada; o `service` já pixeliza) |
 | `SDXL_BASE_MODEL` / `SDXL_LORA_PATH` | SDXL base / — | Modo `cuda` |
