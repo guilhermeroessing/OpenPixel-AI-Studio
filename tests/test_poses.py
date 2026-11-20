@@ -89,3 +89,17 @@ def test_punch_guard_is_narrow_and_rear_fist_stays_at_the_chin():
         nose, rear_wrist = p[0], p[7]
         assert rear_wrist[1] < p[8][1]                         # punho de tras acima do quadril...
         assert abs(rear_wrist[0] - nose[0]) < 0.12             # ...e perto do rosto (nao esticado ao lado do golpe)
+
+
+def test_sword_cycle_raises_hands_overhead_then_cuts_down_forward_with_feet_planted():
+    from openpixel_core.poses import sword_cycle
+
+    poses = sword_cycle(6)
+    assert len(poses) == 6
+    wrist_y = [p[4][1] for p in poses]
+    assert wrist_y.index(min(wrist_y)) == 1                         # maos no ponto mais alto na armacao
+    assert min(wrist_y) < poses[1][0][1]                            # acima da cabeca (nariz)
+    wrist_x = [p[4][0] for p in poses]
+    assert wrist_x.index(max(wrist_x)) in (3, 4)                    # corte e acompanhamento: maos a frente
+    assert all(abs(p[4][0] - p[7][0]) < 0.14 for p in poses)        # as duas maos ficam juntas (cabo)
+    assert all(abs(max(p[10][1], p[13][1]) - 0.89) < 1e-6 for p in poses)

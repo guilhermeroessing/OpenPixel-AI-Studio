@@ -31,7 +31,7 @@ class GenerateRequest(BaseModel):
     params: GenParams | None = None
 
 
-Motion = Literal["run", "idle", "punch"]  # movimentos implementados (ver openpixel_core.animation.MOTIONS)
+Motion = Literal["run", "idle", "punch", "sword"]  # movimentos implementados (ver openpixel_core.animation.MOTIONS)
 
 
 class AnimateRequest(GenerateRequest):

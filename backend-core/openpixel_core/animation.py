@@ -17,12 +17,14 @@ import numpy as np
 from PIL import Image
 
 from .pixelate import pixelate
-from .poses import idle_cycle, punch_cycle, render_pose, run_cycle
+from .poses import idle_cycle, punch_cycle, render_pose, run_cycle, sword_cycle
 
 RUN_SUFFIX = ("running, three-quarter side view facing right, arms swinging, both arms visible, "
               "full body, simple flat background")
 PUNCH_SUFFIX = ("throwing a punch, fist extended forward, fighting stance, bare hands, three-quarter side view "
                "facing right, both arms visible, full body, simple flat background")
+SWORD_SUFFIX = ("two-handed overhead downward chop, both bare hands clasped together raised then swung down in front, empty hands, "
+                "three-quarter side view facing right, both arms visible, full body, simple flat background")
 IDLE_SUFFIX = ("standing idle, relaxed, breathing, three-quarter side view facing right, arms hanging at the sides, "
                "both arms visible, full body, simple flat background")
 
@@ -35,6 +37,11 @@ MOTIONS = {
               "avoid": "(boxing gloves:1.5), (gloves:1.4), smoke, dust, aura, energy effect, particles, motion blur, "
                        "speed lines, glow, (ground shadow:1.5), (floor:1.3)",
               "poses": lambda frames, p: punch_cycle(frames)},
+    "sword": {"label": "Golpe de espada", "fps": 10, "suffix": SWORD_SUFFIX, "frames": 6, "anchor": "fixed",
+              "avoid": "(sword:1.6), (katana:1.5), (blade:1.5), (weapon:1.5), (knife:1.4), (stick:1.3), (staff:1.3), (boxing gloves:1.5), (red gloves:1.5), "
+                       "smoke, dust, aura, energy effect, slash effect, motion blur, speed lines, glow, "
+                       "(ground shadow:1.5), (floor:1.3)",
+              "poses": lambda frames, p: sword_cycle(frames)},
     "idle": {"label": "Parado (idle)", "fps": 4, "suffix": IDLE_SUFFIX, "frames": 4, "anchor": "fixed",
              "poses": lambda frames, p: idle_cycle(frames)},
 }

@@ -123,3 +123,8 @@ def test_prompt_weight_wraps_character_text_only_when_requested():
     animation.generate_motion_raws(f, "girl", 64, 1, [pose], "punching", False)
     animation.generate_motion_raws(f, "girl", 64, 1, [pose], "punching", False, prompt_weight=1.3)
     assert f.prompts == ["girl, punching", "(girl:1.3), punching"]
+
+
+def test_sword_motion_forbids_weapons_in_the_prompt():
+    sword = animation.avoid_for(animation.MOTIONS["sword"])
+    assert "(sword:1.6)" in sword and sword.startswith(animation.RUN_AVOID)

@@ -204,3 +204,23 @@ def punch_cycle(frames: int = 6, reach: float = 1.0) -> list[list[tuple[float, f
     back = {**guard, "r_arm": 1.0, "r_elbow": 1.2, "lean": 0.20, "hip_x": 0.47, "r_knee": 0.40}
     return interpolate([(0.0, guard), (1 / 6, wind), (2 / 6, strike), (3 / 6, hit), (4 / 6, back), (5 / 6, {
         **guard, "lean": 0.14})], frames)
+
+
+def sword_cycle(frames: int = 6, reach: float = 1.0) -> list[list[tuple[float, float]]]:
+    """Golpe de espada de cima para baixo (sem espada: so as maos juntas, como se segurassem o cabo), olhando para a
+    direita: guarda -> maos sobem acima da cabeca com o tronco recuando -> corte (os bracos descem para a frente, corpo
+    avanca, joelho da frente dobra) -> acompanhamento (maos baixas a frente) -> volta a guarda. Loop fechado.
+    ``reach`` multiplica o quanto o corpo avanca no corte.
+    """
+    guard = {"r_arm": 0.6, "r_elbow": 1.2, "l_arm": 0.5, "l_elbow": 1.3, "lean": 0.10, "hip_x": 0.45,
+             "r_thigh": 0.22, "r_knee": 0.35, "l_thigh": -0.16, "l_knee": 0.40, "head_dx": 0.06}
+    raise_ = {**guard, "r_arm": 2.4, "r_elbow": 0.9, "l_arm": 2.3, "l_elbow": 1.0, "lean": 0.02, "hip_x": 0.44,
+              "head_dx": 0.05, "r_knee": 0.25, "l_knee": 0.35}
+    mid = {**guard, "r_arm": 1.9, "r_elbow": 0.5, "l_arm": 1.8, "l_elbow": 0.6, "lean": 0.12, "hip_x": 0.46}
+    cut = {**guard, "r_arm": 1.1, "r_elbow": 0.3, "l_arm": 1.0, "l_elbow": 0.4, "lean": 0.12 + 0.18 * reach,
+           "hip_x": 0.45 + 0.04 * reach, "r_thigh": 0.42, "r_knee": 0.55, "l_thigh": -0.34, "l_knee": 0.12,
+           "head_dx": 0.07}
+    follow = {**cut, "r_arm": 0.5, "r_elbow": 0.3, "l_arm": 0.4, "l_elbow": 0.4, "lean": 0.12 + 0.22 * reach}
+    back = {**guard, "r_arm": 0.6, "r_elbow": 0.9, "l_arm": 0.5, "l_elbow": 1.0, "lean": 0.16, "hip_x": 0.47}
+    return interpolate([(0.0, guard), (1 / 6, raise_), (2 / 6, mid), (3 / 6, cut), (4 / 6, follow), (5 / 6, back)],
+                       frames)
