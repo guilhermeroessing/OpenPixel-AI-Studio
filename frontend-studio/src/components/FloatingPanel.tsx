@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Film, Footprints, Loader2, Map as MapIcon, Pencil, PencilRuler } from "lucide-react";
+import { Film, Footprints, Loader2, Map as MapIcon, Pencil, PencilRuler, PersonStanding } from "lucide-react";
 import {
   generate8, generateMap, getJob, startAnimation, toDataUrl,
   type AnimationResponse, type CompleteMapResponse, type GenOverrides, type SpriteResponse,
 } from "../api";
 import { imageDataToCanvas, pngToImageData } from "../animation";
+import type { CustomMotionSpec } from "./PoseEditor";
 
 export interface AnimState { frames: ImageData[]; fps: number }
 
@@ -47,9 +48,10 @@ function normalize8(data: unknown): [string, SpriteResponse][] {
   return [];
 }
 
-export default function FloatingPanel({ prompt, size, sprite, overrides, anim, setAnim, openEditor }: {
+export default function FloatingPanel({ prompt, size, sprite, overrides, anim, setAnim, openEditor, openPoseEditor, custom, onCustomStarted }: {
   prompt: string; size: number; sprite: SpriteResponse | null; overrides: GenOverrides;
   anim: AnimState | null; setAnim: (a: AnimState) => void; openEditor: () => void;
+  openPoseEditor: () => void; custom: CustomMotionSpec | null; onCustomStarted: () => void;
 }) {
   const [tab, setTab] = useState<Tab>("animate");
   const [busy, setBusy] = useState(false);
@@ -65,12 +67,13 @@ export default function FloatingPanel({ prompt, size, sprite, overrides, anim, s
   }
   const need = () => { if (!prompt.trim()) throw new Error("Escreva um prompt na barra lateral primeiro."); };
 
-  async function runAnimation() {
+  async function runAnimation(spec?: CustomMotionSpec) {
     need();
-    const { job_id } = await startAnimation({
-      prompt, size, kind: "character", palette_size: 24, seamless: false, symmetric: false, dither: false,
-      seed: null, frames: 8, params: overrides,
-    });
+    const base = { prompt, size, kind: "character" as const, palette_size: 24, seamless: false, symmetric: false, dither: false, seed: null, params: overrides };
+    const { job_id } = await startAnimation(spec ? {
+      ...base, motion: "custom", poses: spec.poses, motion_text: spec.text || undefined, fps: spec.fps, anchor: spec.anchor,
+      allow_objects: spec.allowObjects, extra_avoid: spec.extraAvoid || undefined,
+    } : { ...base, frames: 8 });
     setJob({ progress: 0, total: 1, elapsed: 0 });
     try {
       for (;;) {
@@ -85,6 +88,15 @@ export default function FloatingPanel({ prompt, size, sprite, overrides, anim, s
       }
     } finally { setJob(null); }
   }
+
+  // o editor de poses entrega o movimento aqui: a geração roda no painel (barra de progresso e resultado)
+  useEffect(() => {
+    if (!custom) return;
+    onCustomStarted();
+    setTab("animate");
+    void run(() => runAnimation(custom));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [custom]);
 
   const tabCls = (t: Tab) =>
     `flex items-center gap-1 px-3 py-1.5 text-sm rounded-md ${tab === t ? "bg-zinc-800 text-zinc-100" : "text-zinc-500 hover:text-zinc-300"}`;
@@ -111,8 +123,11 @@ export default function FloatingPanel({ prompt, size, sprite, overrides, anim, s
               {busy ? <Loader2 size={14} className="animate-spin" /> : <Film size={14} />} Gerar 8 direções
             </button>
             <div className="flex flex-wrap items-center gap-2 border-t border-zinc-800 pt-2">
-              <button className={btn} disabled={busy} onClick={() => run(runAnimation)}>
+              <button className={btn} disabled={busy} onClick={() => run(() => runAnimation())}>
                 {busy && job ? <Loader2 size={14} className="animate-spin" /> : <Footprints size={14} />} Gerar corrida (8 frames)
+              </button>
+              <button className={btn} disabled={busy} onClick={openPoseEditor}>
+                <PersonStanding size={14} /> Animação personalizada (poses)
               </button>
               {anim && (
                 <button className="flex items-center gap-2 rounded-lg border border-emerald-700 px-3 py-1.5 text-sm text-emerald-300 hover:bg-emerald-950"

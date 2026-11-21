@@ -22,7 +22,13 @@ export interface ParamSpec {
 }
 export interface ParamsInfo { specs: ParamSpec[]; defaults: Record<string, number>; provider: string }
 
-export interface AnimateRequest extends GenerateRequest { frames: number }
+export interface AnimateRequest extends GenerateRequest {
+  frames?: number; motion?: string;
+  /** Movimento personalizado: uma pose (18 pontos) por frame, vinda do editor de poses. */
+  poses?: [number, number][][]; motion_text?: string; allow_objects?: boolean; extra_avoid?: string;
+  fps?: number; anchor?: "fixed" | "centroid";
+}
+export interface MotionPreset { label: string; fps: number; frames: number; anchor: string; poses: [number, number][][] }
 export interface AnimationResponse { frames: SpriteResponse[]; seed: number; fps: number; provider: string }
 export interface JobInfo<T> {
   id: string; status: "running" | "done" | "error"; progress: number; total: number;
@@ -96,6 +102,7 @@ export const generate8 = (b: GenerateRequest) => post<unknown>("/generate8", b);
 export const generateMap = (prompt: string) => post<CompleteMapResponse>("/map", { prompt });
 export const getParams = () => request<ParamsInfo>("/params");
 export const startAnimation = (b: AnimateRequest) => post<{ job_id: string }>("/animate", b);
+export const getMotions = () => request<Record<string, MotionPreset>>("/motions");
 export const getJob = <T>(id: string) => request<JobInfo<T>>(`/jobs/${id}`);
 export const getVram = () => request<VramInfo>("/vram");
 export const getDataset = () => request<DatasetItem[]>("/dataset");

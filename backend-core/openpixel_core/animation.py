@@ -45,7 +45,8 @@ MOTIONS = {
     "idle": {"label": "Parado (idle)", "fps": 4, "suffix": IDLE_SUFFIX, "frames": 4, "anchor": "fixed",
              "poses": lambda frames, p: idle_cycle(frames)},
 }
-RUN_AVOID = "(weapon:1.6), (shield:1.8), (sword:1.5), (spear:1.5), (gun:1.5), close-up, bust, cropped, multiple views"
+SCENE_AVOID = "close-up, bust, cropped, multiple views"
+RUN_AVOID = "(weapon:1.6), (shield:1.8), (sword:1.5), (spear:1.5), (gun:1.5), " + SCENE_AVOID
 
 
 def _components(mask: np.ndarray, connectivity: int = 8):
@@ -187,8 +188,26 @@ def generate_motion_raws(provider, prompt: str, native: int, seed: int, poses: l
 
 def avoid_for(motion: dict) -> str:
     """Prompt negativo do movimento: o geral (armas, vistas multiplas) mais os termos proprios dele."""
+    base = motion.get("base_avoid", RUN_AVOID)
     extra = motion.get("avoid")
-    return f"{RUN_AVOID}, {extra}" if extra else RUN_AVOID
+    return f"{base}, {extra}" if extra else base
+
+
+def custom_motion(poses: list, text: str | None = None, fps: int | None = None, anchor: str | None = None,
+                  allow_objects: bool = False, extra_avoid: str | None = None) -> dict:
+    """Movimento montado pelo usuario (editor de poses): as poses vem prontas e o texto descreve o gesto.
+
+    Por padrao proibe armas (o gesto e do corpo); ``allow_objects`` tira essa proibicao, por conta de quem usa.
+    """
+    text = (text or "").strip().rstrip(",")
+    suffix = f"{text}, full body, simple flat background" if text else "full body, simple flat background"
+    motion = {"label": "Personalizado", "fps": fps or 8, "suffix": suffix, "frames": len(poses),
+              "anchor": anchor or "fixed", "poses": lambda frames, p: poses}
+    if allow_objects:
+        motion["base_avoid"] = SCENE_AVOID
+    if extra_avoid and extra_avoid.strip():
+        motion["avoid"] = extra_avoid.strip()
+    return motion
 
 
 def new_seed() -> int:

@@ -336,11 +336,25 @@ def export_engine_bundle(map_dir: str, engine: str) -> str:
 
 # ---------------------------------------------------------------- animacao de corrida
 
+def motion_presets() -> dict:
+    """Movimentos prontos com as poses padrao (pontos de partida do editor de poses)."""
+    d = default_params()
+    shape = {k: d[k] for k in ("shoulder_spread", "lean", "flight_height")}
+    return {name: {"label": m["label"], "fps": m["fps"], "frames": m["frames"], "anchor": m["anchor"],
+                   "poses": [[list(pt) for pt in pose] for pose in m["poses"](m["frames"], shape)]}
+            for name, m in animation.MOTIONS.items()}
+
+
 def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
     """Animacao por movimento (corrida, idle...): ComfyUI (pose + referencia) ou, sem ele, um balanco simples."""
     p = req.params or GenParams()
-    motion = animation.MOTIONS[req.motion]
-    n_frames = req.frames or motion["frames"]
+    if req.poses is not None:
+        motion = animation.custom_motion(req.poses, req.motion_text, req.fps, req.anchor, req.allow_objects,
+                                         req.extra_avoid)
+        n_frames = len(req.poses)
+    else:
+        motion = animation.MOTIONS[req.motion]
+        n_frames = req.frames or motion["frames"]
     seed = req.seed if req.seed is not None else animation.new_seed()
     prov = _provider_for(req.params)
     if not hasattr(prov, "with_overrides"):

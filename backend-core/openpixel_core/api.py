@@ -52,6 +52,12 @@ def params():
     return {"specs": service.PARAM_SPECS, "defaults": service.default_params(), "provider": service._provider.name}
 
 
+@app.get("/motions")
+def motions():
+    """Movimentos prontos com as poses padrao: ponto de partida do editor de poses."""
+    return service.motion_presets()
+
+
 @app.post("/animate")
 def animate(req: AnimateRequest):
     """Inicia a animacao de corrida em segundo plano; consulte o andamento em GET /jobs/{id}."""

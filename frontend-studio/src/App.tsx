@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Canvas from "./components/Canvas";
 import FloatingPanel, { type AnimState } from "./components/FloatingPanel";
 import FrameEditor from "./components/FrameEditor";
+import PoseEditor, { type CustomMotionSpec } from "./components/PoseEditor";
 import SettingsPopover, { type ViewSettings } from "./components/SettingsPopover";
 import { generate, getParams, type GenOverrides, type ParamsInfo, type SpriteResponse } from "./api";
 
@@ -28,6 +29,8 @@ export default function App() {
   const [infoError, setInfoError] = useState<string | null>(null);
   const [anim, setAnim] = useState<AnimState | null>(null);
   const [editing, setEditing] = useState(false);
+  const [posing, setPosing] = useState(false);
+  const [custom, setCustom] = useState<CustomMotionSpec | null>(null);
   const [view, setView] = useState<ViewSettings>({ crt: false, checkerboard: true, pixelPerfect: true });
 
   useEffect(() => {
@@ -64,8 +67,12 @@ export default function App() {
         </div>
         <Canvas sprite={sprite} busy={busy} error={error} view={view} />
         <FloatingPanel prompt={prompt} size={size} sprite={sprite} overrides={overrides}
-          anim={anim} setAnim={setAnim} openEditor={() => setEditing(true)} />
+          anim={anim} setAnim={setAnim} openEditor={() => setEditing(true)}
+          openPoseEditor={() => setPosing(true)} custom={custom} onCustomStarted={() => setCustom(null)} />
       </main>
+      {posing && (
+        <PoseEditor prompt={prompt} onClose={() => setPosing(false)} onGenerate={(spec) => { setPosing(false); setCustom(spec); }} />
+      )}
       {editing && anim && (
         <FrameEditor frames={anim.frames} fps={anim.fps} onClose={() => setEditing(false)}
           onApply={(frames, fps) => { setAnim({ frames, fps }); setEditing(false); }} />

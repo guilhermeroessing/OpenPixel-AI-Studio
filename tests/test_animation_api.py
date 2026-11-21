@@ -156,3 +156,69 @@ def test_remove_bg_leak_guard_blocks_one_pixel_gaps_into_white_clothing():
     com = animation._remove_bg(a, 45, leak_guard=True)
     assert not sem[22, 24] and com[22, 24]
     assert not com[2, 2]                                     # o fundo aberto continua sendo fundo
+
+
+def _pose(dx: float = 0.0):
+    return [[0.5 + dx, 0.1 + 0.05 * (i % 7)] for i in range(18)]
+
+
+def test_motions_endpoint_lists_presets_with_18_point_poses():
+    r = client.get("/motions").json()
+    assert {"run", "idle", "punch", "sword"} <= set(r)
+    for m in r.values():
+        assert len(m["poses"]) == m["frames"] and all(len(p) == 18 for p in m["poses"])
+
+
+def test_animate_request_validates_custom_poses():
+    import pytest
+    from pydantic import ValidationError
+    from schemas import AnimateRequest
+
+    ok = AnimateRequest(prompt="girl", motion="custom", poses=[_pose(), _pose(0.1)])
+    assert len(ok.poses) == 2
+    with pytest.raises(ValidationError):
+        AnimateRequest(prompt="girl", motion="custom")                          # custom exige poses
+    with pytest.raises(ValidationError):
+        AnimateRequest(prompt="girl", motion="custom", poses=[_pose()[:17]])    # 17 pontos
+    with pytest.raises(ValidationError):
+        AnimateRequest(prompt="girl", motion="custom", poses=[[[5.0, 5.0]] * 18])  # fora da imagem
+    many = AnimateRequest(prompt="girl", motion="custom", poses=[_pose()] * 100)  # sem teto baixo de frames
+    assert len(many.poses) == 100
+
+
+def test_custom_motion_forbids_weapons_unless_the_user_allows_objects():
+    poses = [_pose(), _pose(0.1)]
+    safe = animation.custom_motion(poses, "waving hello", extra_avoid="hat")
+    assert animation.avoid_for(safe).startswith(animation.RUN_AVOID) and animation.avoid_for(safe).endswith("hat")
+    assert safe["suffix"].startswith("waving hello") and safe["frames"] == 2 and safe["anchor"] == "fixed"
+    free = animation.custom_motion(poses, "", allow_objects=True)
+    assert "(sword:" not in animation.avoid_for(free) and "cropped" in animation.avoid_for(free)
+    assert free["poses"](2, {}) is poses
+
+
+def test_animate_custom_poses_reach_the_generator_with_one_pose_per_frame(monkeypatch):
+    from openpixel_core import service
+
+    seen = {}
+
+    class Fake:
+        native_size = 64
+        ref_weight = 0.5
+        avoid = ""
+
+        def with_overrides(self, **kw):
+            seen["avoid"] = kw.get("avoid")
+            return self
+
+    def fake_raws(prov, prompt, native, seed, poses, suffix, use_ref, progress=None, prompt_weight=1.0):
+        seen.update(n=len(poses), suffix=suffix)
+        return [np.full((64, 64, 3), 150, np.uint8) for _ in poses]
+
+    monkeypatch.setattr(service, "_provider_for", lambda params: Fake())
+    monkeypatch.setattr(animation, "generate_motion_raws", fake_raws)
+    from schemas import AnimateRequest
+
+    req = AnimateRequest(prompt="girl", size=32, motion="custom", poses=[_pose(), _pose(0.05), _pose(0.1)],
+                         motion_text="waving", fps=5, seed=3)
+    res = service.animate_run(req)
+    assert seen["n"] == 3 and seen["suffix"].startswith("waving") and res.fps == 5 and len(res.frames) == 3
