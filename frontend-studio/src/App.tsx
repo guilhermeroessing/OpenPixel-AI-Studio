@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Settings } from "lucide-react";
-import Sidebar from "./components/Sidebar";
+import Sidebar, { type Mode } from "./components/Sidebar";
 import Canvas from "./components/Canvas";
-import FloatingPanel, { type AnimState } from "./components/FloatingPanel";
+import FloatingPanel from "./components/FloatingPanel";
+import AnimResult from "./components/AnimResult";
 import FrameEditor from "./components/FrameEditor";
-import PoseEditor, { type CustomMotionSpec } from "./components/PoseEditor";
+import PoseEditor from "./components/PoseEditor";
+import { useAnimation } from "./useAnimation";
 import SettingsPopover, { type ViewSettings } from "./components/SettingsPopover";
 import { generate, getParams, type GenOverrides, type ParamsInfo, type SpriteResponse } from "./api";
 
@@ -27,10 +29,9 @@ export default function App() {
   const [overrides, setOverrides] = useState<GenOverrides>(loadOverrides);
   const [info, setInfo] = useState<ParamsInfo | null>(null);
   const [infoError, setInfoError] = useState<string | null>(null);
-  const [anim, setAnim] = useState<AnimState | null>(null);
+  const [mode, setMode] = useState<Mode>("create");
   const [editing, setEditing] = useState(false);
-  const [posing, setPosing] = useState(false);
-  const [custom, setCustom] = useState<CustomMotionSpec | null>(null);
+  const { anim, setAnim, busy: animBusy, job, error: animError, run: runAnimation } = useAnimation(prompt, size, overrides);
   const [view, setView] = useState<ViewSettings>({ crt: false, checkerboard: true, pixelPerfect: true });
 
   useEffect(() => {
@@ -55,7 +56,7 @@ export default function App() {
 
   return (
     <div className="flex h-full bg-zinc-950">
-      <Sidebar prompt={prompt} setPrompt={setPrompt} size={size} setSize={setSize} busy={busy} onGenerate={onGenerate} />
+      <Sidebar mode={mode} setMode={setMode} prompt={prompt} setPrompt={setPrompt} size={size} setSize={setSize} busy={busy} onGenerate={onGenerate} />
       <main className="relative flex-1 min-w-0">
         <div className="absolute top-3 right-3 z-20">
           <button aria-label="Settings" onClick={() => setShowSettings((v) => !v)}
@@ -65,14 +66,18 @@ export default function App() {
           {showSettings && <SettingsPopover value={view} onChange={setView} info={info} infoError={infoError}
             overrides={overrides} setOverrides={setOverrides} />}
         </div>
-        <Canvas sprite={sprite} busy={busy} error={error} view={view} />
-        <FloatingPanel prompt={prompt} size={size} sprite={sprite} overrides={overrides}
-          anim={anim} setAnim={setAnim} openEditor={() => setEditing(true)}
-          openPoseEditor={() => setPosing(true)} custom={custom} onCustomStarted={() => setCustom(null)} />
+        {mode !== "animate" && (
+          <>
+            <Canvas sprite={sprite} busy={busy} error={error} view={view} />
+            <FloatingPanel prompt={prompt} size={size} sprite={sprite} overrides={overrides} />
+          </>
+        )}
+        {/* sempre montado: trocar de aba não perde o histórico de desfazer do editor de poses */}
+        <div className={mode === "animate" ? "h-full" : "hidden"}>
+          <PoseEditor prompt={prompt} active={mode === "animate"} busy={animBusy} onGenerate={runAnimation}
+            result={<AnimResult anim={anim} job={job} error={animError} openEditor={() => setEditing(true)} />} />
+        </div>
       </main>
-      {posing && (
-        <PoseEditor prompt={prompt} onClose={() => setPosing(false)} onGenerate={(spec) => { setPosing(false); setCustom(spec); }} />
-      )}
       {editing && anim && (
         <FrameEditor frames={anim.frames} fps={anim.fps} onClose={() => setEditing(false)}
           onApply={(frames, fps) => { setAnim({ frames, fps }); setEditing(false); }} />

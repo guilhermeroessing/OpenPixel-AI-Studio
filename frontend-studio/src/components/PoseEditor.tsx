@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
-  ChevronLeft, ChevronRight, Copy, FlipHorizontal, Pause, Play, Redo2, Sparkles, Trash2, Undo2, X,
+  ChevronLeft, ChevronRight, Copy, FlipHorizontal, Loader2, Pause, Play, Redo2, Sparkles, Trash2, Undo2,
 } from "lucide-react";
 import { getMotions, type MotionPreset } from "../api";
 import {
@@ -67,8 +67,9 @@ function PoseThumb({ pose, active, onClick, label }: { pose: Pose; active: boole
   );
 }
 
-export default function PoseEditor({ prompt, onClose, onGenerate }: {
-  prompt: string; onClose: () => void; onGenerate: (spec: CustomMotionSpec) => void;
+/** Editor de poses embutido na aba Animar. `active` = aba visível (os atalhos de teclado só valem nela). */
+export default function PoseEditor({ prompt, active, busy, result, onGenerate }: {
+  prompt: string; active: boolean; busy: boolean; result: ReactNode; onGenerate: (spec: CustomMotionSpec) => void;
 }) {
   const draft = useMemo(loadDraft, []);
   const [poses, setPoses] = useState<Pose[]>(draft.poses);
@@ -211,6 +212,8 @@ export default function PoseEditor({ prompt, onClose, onGenerate }: {
     commit(p.poses.map((pose) => clonePose(pose as Pose)), 0);
     setFps(p.fps);
     setAnchor(p.anchor === "centroid" ? "centroid" : "fixed");
+    setText(p.text);
+    setExtraAvoid(p.avoid);
     setPending(null);
   };
   // substituir poses já editadas pede confirmação na própria tela (sem diálogo do navegador)
@@ -223,13 +226,12 @@ export default function PoseEditor({ prompt, onClose, onGenerate }: {
   const keys = useRef<(e: KeyboardEvent) => void>(() => {});
   keys.current = (e) => {
     const tag = (e.target as HTMLElement).tagName;
-    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if (!active || tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
     const k = e.key.toLowerCase();
     if ((e.ctrlKey || e.metaKey) && k === "z") { e.preventDefault(); if (e.shiftKey) redo(); else undo(); }
     else if (k === "arrowleft") setIdx((i) => Math.max(0, i - 1));
     else if (k === "arrowright") setIdx((i) => Math.min(n - 1, i + 1));
     else if (k === " ") { e.preventDefault(); setPlaying((p) => !p); }
-    else if (k === "escape") onClose();
   };
   useEffect(() => {
     const fn = (e: KeyboardEvent) => keys.current(e);
@@ -241,14 +243,13 @@ export default function PoseEditor({ prompt, onClose, onGenerate }: {
   const field = "w-full rounded-md border border-zinc-800 bg-zinc-900 px-2 py-1 text-xs text-zinc-200";
 
   return (
-    <div role="dialog" aria-label="Editor de poses" className="fixed inset-0 z-50 flex flex-col bg-zinc-950 text-zinc-200">
+    <div aria-label="Editor de poses" className="flex h-full min-h-0 flex-col bg-zinc-950 text-zinc-200">
       <header className="flex items-center gap-3 border-b border-zinc-800 px-4 py-2">
-        <h2 className="text-sm font-semibold">Editor de poses · animação personalizada</h2>
+        <h2 className="text-sm font-semibold">Animar · editor de poses</h2>
         <span className="text-xs text-zinc-500">Pose {idx + 1} de {n}</span>
-        <div className="ml-auto flex items-center gap-2">
+        <div className="ml-auto mr-12 flex items-center gap-2">
           <button className={btn} onClick={undo} aria-label="Desfazer" title="Desfazer (Ctrl+Z)"><Undo2 size={14} /></button>
           <button className={btn} onClick={redo} aria-label="Refazer" title="Refazer (Ctrl+Shift+Z)"><Redo2 size={14} /></button>
-          <button className={btn} onClick={onClose} aria-label="Fechar"><X size={14} /> Fechar</button>
         </div>
       </header>
 
@@ -338,11 +339,12 @@ export default function PoseEditor({ prompt, onClose, onGenerate }: {
           </section>
           <section className="space-y-2">
             <p className="text-zinc-500">Personagem (barra lateral): <strong className="text-zinc-300">{prompt.trim() || "— escreva um prompt na barra lateral —"}</strong></p>
-            <button disabled={!prompt.trim()} onClick={generate}
+            <button disabled={!prompt.trim() || busy} onClick={generate}
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-600 px-3 py-2 text-sm font-medium text-white hover:bg-emerald-500 disabled:opacity-50">
-              <Sparkles size={14} /> Gerar {n} {n === 1 ? "frame" : "frames"} com a IA
+              {busy ? <Loader2 size={14} className="animate-spin" /> : <Sparkles size={14} />} Gerar {n} {n === 1 ? "frame" : "frames"} com a IA
             </button>
             <p className="text-zinc-600">São {n} imagens mais 1 de referência do personagem. O tempo depende do seu computador.</p>
+            {result}
           </section>
         </aside>
       </div>

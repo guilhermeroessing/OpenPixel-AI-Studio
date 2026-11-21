@@ -340,7 +340,9 @@ def motion_presets() -> dict:
     """Movimentos prontos com as poses padrao (pontos de partida do editor de poses)."""
     d = default_params()
     shape = {k: d[k] for k in ("shoulder_spread", "lean", "flight_height")}
+    tail = ", full body, simple flat background"
     return {name: {"label": m["label"], "fps": m["fps"], "frames": m["frames"], "anchor": m["anchor"],
+                   "text": m["suffix"].replace(tail, "").strip(" ,"), "avoid": m.get("avoid", ""),
                    "poses": [[list(pt) for pt in pose] for pose in m["poses"](m["frames"], shape)]}
             for name, m in animation.MOTIONS.items()}
 

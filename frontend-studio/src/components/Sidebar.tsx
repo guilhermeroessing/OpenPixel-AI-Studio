@@ -1,10 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
-import { Database, Loader2, Sparkles, Wand2, Cpu } from "lucide-react";
+import { Database, Film, Loader2, Sparkles, Wand2, Cpu } from "lucide-react";
 import { getDataset, getVram, type DatasetItem, type VramInfo } from "../api";
 
 const SIZES = [16, 32, 64, 128];
 
+export type Mode = "create" | "animate" | "dataset";
+
 interface Props {
+  mode: Mode; setMode: (m: Mode) => void;
   prompt: string; setPrompt: (s: string) => void;
   size: number; setSize: (n: number) => void;
   busy: boolean; onGenerate: () => void;
@@ -71,8 +74,7 @@ function DatasetTab() {
   );
 }
 
-export default function Sidebar({ prompt, setPrompt, size, setSize, busy, onGenerate }: Props) {
-  const [tab, setTab] = useState<"create" | "dataset">("create");
+export default function Sidebar({ mode: tab, setMode: setTab, prompt, setPrompt, size, setSize, busy, onGenerate }: Props) {
   const tabCls = (t: string) =>
     `flex-1 flex items-center justify-center gap-1 py-2 text-sm border-b-2 ${tab === t ? "border-emerald-500 text-zinc-100" : "border-transparent text-zinc-500 hover:text-zinc-300"}`;
   return (
@@ -80,14 +82,15 @@ export default function Sidebar({ prompt, setPrompt, size, setSize, busy, onGene
       <div className="px-4 py-3 font-semibold flex items-center gap-2"><Sparkles size={18} className="text-emerald-400" /> OpenPixel Studio</div>
       <div className="flex border-b border-zinc-800">
         <button className={tabCls("create")} onClick={() => setTab("create")}><Wand2 size={14} /> Criar</button>
+        <button className={tabCls("animate")} onClick={() => setTab("animate")}><Film size={14} /> Animar</button>
         <button className={tabCls("dataset")} onClick={() => setTab("dataset")}><Database size={14} /> Dataset</button>
       </div>
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {tab === "create" ? (
+        {tab !== "dataset" ? (
           <>
             <label className="block text-xs text-zinc-400">Prompt
               <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} rows={5}
-                placeholder="ex.: espada de fogo, estilo 16-bit"
+                placeholder={tab === "animate" ? "ex.: mulher esguia, cabelo ciano curto, regata branca" : "ex.: espada de fogo, estilo 16-bit"}
                 className="mt-1 w-full resize-none rounded-lg bg-zinc-900 border border-zinc-800 p-2 text-sm text-zinc-100 focus:outline-none focus:border-emerald-500" />
             </label>
             <div>
@@ -101,10 +104,14 @@ export default function Sidebar({ prompt, setPrompt, size, setSize, busy, onGene
                 ))}
               </div>
             </div>
-            <button onClick={onGenerate} disabled={busy}
-              className="w-full flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 py-2 text-sm font-medium text-white">
-              {busy ? <Loader2 size={16} className="animate-spin" /> : <Wand2 size={16} />} Gerar
-            </button>
+            {tab === "create" ? (
+              <button onClick={onGenerate} disabled={busy}
+                className="w-full flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 py-2 text-sm font-medium text-white">
+                {busy ? <Loader2 size={16} className="animate-spin" /> : <Wand2 size={16} />} Gerar
+              </button>
+            ) : (
+              <p className="text-xs text-zinc-500">Aqui você descreve só o personagem. O movimento é montado ao lado, pose a pose; o tamanho 128 dá o melhor resultado.</p>
+            )}
           </>
         ) : <DatasetTab />}
       </div>

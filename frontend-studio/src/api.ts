@@ -28,7 +28,9 @@ export interface AnimateRequest extends GenerateRequest {
   poses?: [number, number][][]; motion_text?: string; allow_objects?: boolean; extra_avoid?: string;
   fps?: number; anchor?: "fixed" | "centroid";
 }
-export interface MotionPreset { label: string; fps: number; frames: number; anchor: string; poses: [number, number][][] }
+export interface MotionPreset {
+  label: string; fps: number; frames: number; anchor: string; text: string; avoid: string; poses: [number, number][][];
+}
 export interface AnimationResponse { frames: SpriteResponse[]; seed: number; fps: number; provider: string }
 export interface JobInfo<T> {
   id: string; status: "running" | "done" | "error"; progress: number; total: number;

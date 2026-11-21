@@ -222,3 +222,9 @@ def test_animate_custom_poses_reach_the_generator_with_one_pose_per_frame(monkey
                          motion_text="waving", fps=5, seed=3)
     res = service.animate_run(req)
     assert seen["n"] == 3 and seen["suffix"].startswith("waving") and res.fps == 5 and len(res.frames) == 3
+
+
+def test_motions_presets_carry_the_description_and_avoid_terms_for_the_pose_editor():
+    r = client.get("/motions").json()
+    assert "fist extended" in r["punch"]["text"] and "full body" not in r["punch"]["text"]
+    assert "gloves" in r["punch"]["avoid"] and r["idle"]["avoid"] == ""
