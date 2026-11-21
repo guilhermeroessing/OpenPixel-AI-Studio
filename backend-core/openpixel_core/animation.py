@@ -64,7 +64,8 @@ def _torso_protect(pose, g: int, radius: float = 0.045) -> np.ndarray:
     return m.astype(bool)
 
 
-def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.ndarray | None = None) -> np.ndarray:
+def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.ndarray | None = None,
+               leak_guard: bool = False) -> np.ndarray:
     """Mascara do personagem (True) em um frame pixelizado: tira o fundo ligado as bordas e a sombra do chao.
 
     ``protect``: mascara de pixels que nunca sao fundo (o tronco, vindo da pose)."""
@@ -76,7 +77,16 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.n
     n, lab, _ = _components(near, 4)
     border = set(lab[0]) | set(lab[-1]) | set(lab[:, 0]) | set(lab[:, -1])
     border.discard(0)
-    fg = ~np.isin(lab, list(border))
+    bgmask = np.isin(lab, list(border))
+    if leak_guard:
+        # abertura: fresta de 1-2 px entre o corpo e a roupa branca nao deixa o fundo "entrar" e apagar a roupa
+        core = cv2.erode(near.astype(np.uint8), np.ones((3, 3), np.uint8))
+        _, lab2, _ = _components(core, 4)
+        edge2 = set(lab2[0]) | set(lab2[-1]) | set(lab2[:, 0]) | set(lab2[:, -1])
+        edge2.discard(0)
+        grown = cv2.dilate(np.isin(lab2, list(edge2)).astype(np.uint8), np.ones((3, 3), np.uint8)).astype(bool)
+        bgmask = bgmask & grown
+    fg = ~bgmask
     if protect is not None:
         fg |= protect
     if not fg.any():
@@ -106,7 +116,7 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.n
 
 
 def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg_tol: int = 45,
-                   anchor: str = "centroid", poses: list | None = None) -> list[np.ndarray]:
+                   anchor: str = "centroid", poses: list | None = None, leak_guard: bool = True) -> list[np.ndarray]:
     """Frames brutos (RGB alta resolucao) -> RGBA grid x grid: paleta unica, sem fundo, alinhados.
 
     anchor: "centroid" recentraliza cada frame na horizontal (bom para corrida, em que o corpo avanca e recua);
@@ -122,7 +132,7 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
     items = []
     for i, r in enumerate(raws):
         a = pixelate(r, grid, palette=pal, out_size=None)
-        mask = _remove_bg(a, bg_tol, protect=_torso_protect(poses[i], grid) if poses else None)
+        mask = _remove_bg(a, bg_tol, protect=_torso_protect(poses[i], grid) if poses else None, leak_guard=leak_guard)
         ys, xs = np.nonzero(mask)
         items.append((a, mask, ys, xs))
     margin = max(1, round(grid * 6 / 128))

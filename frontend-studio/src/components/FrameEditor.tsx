@@ -1,15 +1,15 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   Check, ChevronLeft, ChevronRight, Circle, Copy, Download, Eraser, FlipHorizontal, Grid3x3, Layers, Minus,
-  Move, PaintBucket, Pause, Pencil, Pipette, Play, Plus, Redo2, Square, Trash2, Undo2, X, ZoomIn, ZoomOut,
+  Move, PaintBucket, Pause, Pencil, Pipette, Play, Plus, Redo2, Square, Trash2, Undo2, Wand2, X, ZoomIn, ZoomOut,
 } from "lucide-react";
 import {
-  type RGBA, cloneData, collectPalette, copyInto, drawEllipse, drawLine, drawRect, flipHorizontal, floodFill,
+  type RGBA, cloneData, collectPalette, copyInto, drawEllipse, drawLine, drawRect, eraseSimilar, flipHorizontal, floodFill,
   getPixel, hexToRgba, rgbaToHex, stamp, translate,
 } from "../drawing";
 import { canvasToBlob, download, encodeGif, imageDataToCanvas, spriteSheet } from "../animation";
 
-type Tool = "pencil" | "eraser" | "line" | "rect" | "ellipse" | "fill" | "picker" | "move";
+type Tool = "pencil" | "eraser" | "line" | "rect" | "ellipse" | "fill" | "picker" | "move" | "wand";
 
 const TOOLS: { id: Tool; label: string; key: string; Icon: typeof Pencil }[] = [
   { id: "pencil", label: "Lápis", key: "B", Icon: Pencil },
@@ -20,6 +20,7 @@ const TOOLS: { id: Tool; label: string; key: string; Icon: typeof Pencil }[] = [
   { id: "fill", label: "Balde", key: "G", Icon: PaintBucket },
   { id: "picker", label: "Conta-gotas", key: "I", Icon: Pipette },
   { id: "move", label: "Mover frame", key: "M", Icon: Move },
+  { id: "wand", label: "Varinha (remover fundo)", key: "W", Icon: Wand2 },
 ];
 const CLEAR: RGBA = [0, 0, 0, 0];
 const MAX_UNDO = 60;
@@ -53,6 +54,9 @@ export default function FrameEditor({ frames: initial, fps: initialFps, onApply,
   const [color, setColor] = useState("#e43b44");
   const [brush, setBrush] = useState(1);
   const [filled, setFilled] = useState(false);
+  const [wandTol, setWandTol] = useState(40);
+  const [wandAll, setWandAll] = useState(false);
+  const [wandContig, setWandContig] = useState(true);
   const [grid, setGrid] = useState(true);
   const [onion, setOnion] = useState(true);
   const [zoom, setZoom] = useState(() => Math.max(1, Math.min(24, Math.floor(Math.min((window.innerWidth - 600) / w, (window.innerHeight - 330) / h)))));
@@ -164,6 +168,16 @@ export default function FrameEditor({ frames: initial, fps: initialFps, onApply,
       pushUndo(idx);
       if (floodFill(f, x, y, erase ? CLEAR : col()) === 0) undoRef.current[idx].pop();
       remember(color); bump();
+    } else if (t === "wand") {
+      // apaga a regiao parecida com o pixel clicado; com "todos os frames" repete no mesmo ponto de cada frame
+      const targets = wandAll ? framesRef.current.map((_, i) => i) : [idx];
+      let total = 0;
+      for (const i of targets) {
+        pushUndo(i);
+        const c = eraseSimilar(framesRef.current[i], x, y, wandTol, wandContig);
+        if (c === 0) undoRef.current[i].pop(); else total += c;
+      }
+      if (total > 0) bump();
     } else if (t === "picker") {
       const p = getPixel(f, x, y);
       if (p && p[3] > 0) setColor(rgbaToHex(p));
@@ -352,6 +366,21 @@ export default function FrameEditor({ frames: initial, fps: initialFps, onApply,
             </label>
             <p className="text-zinc-600">Botão direito apaga. Espaço reproduz, ← → trocam de frame, [ ] mudam o pincel.</p>
           </section>
+          {tool === "wand" && (
+            <section className="space-y-2" aria-label="Varinha">
+              <h3 className="font-semibold text-zinc-400">Varinha (remover fundo)</h3>
+              <label className="flex items-center justify-between">Tolerância {wandTol}
+                <input type="range" min={0} max={200} value={wandTol} onChange={(e) => setWandTol(Number(e.target.value))} className="w-28 accent-emerald-500" />
+              </label>
+              <label className="flex items-center justify-between">Só região ligada
+                <input type="checkbox" checked={wandContig} onChange={(e) => setWandContig(e.target.checked)} className="accent-emerald-500" />
+              </label>
+              <label className="flex items-center justify-between">Em todos os frames
+                <input type="checkbox" checked={wandAll} onChange={(e) => setWandAll(e.target.checked)} className="accent-emerald-500" />
+              </label>
+              <p className="text-zinc-600">Clique numa cor do fundo para apagar as áreas parecidas. Desfazer (Ctrl+Z) vale por frame.</p>
+            </section>
+          )}
           <section className="space-y-2">
             <h3 className="font-semibold text-zinc-400">Este frame</h3>
             <div className="grid grid-cols-2 gap-1">

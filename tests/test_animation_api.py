@@ -144,3 +144,15 @@ def test_remove_bg_keeps_white_torso_that_matches_the_background_when_protected(
     com = animation._remove_bg(a, 45, protect=animation._torso_protect(pose, g))
     assert not sem[34, 32] and com[34, 32]
     assert not com[34, 5]                                    # o fundo longe do tronco continua sendo fundo
+
+
+def test_remove_bg_leak_guard_blocks_one_pixel_gaps_into_white_clothing():
+    g = 48
+    a = np.full((g, g, 3), 235, np.uint8)
+    a[8:40, 14:34] = (40, 40, 40)                            # corpo
+    a[16:30, 18:30] = 236                                    # roupa branca (cor do fundo) dentro do corpo
+    a[22, 14:19] = 236                                       # fresta de 1 px ligando a roupa ao fundo
+    sem = animation._remove_bg(a, 45)
+    com = animation._remove_bg(a, 45, leak_guard=True)
+    assert not sem[22, 24] and com[22, 24]
+    assert not com[2, 2]                                     # o fundo aberto continua sendo fundo

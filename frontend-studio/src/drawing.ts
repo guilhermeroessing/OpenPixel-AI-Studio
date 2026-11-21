@@ -161,3 +161,36 @@ export function collectPalette(frames: ImageData[], limit = 64): string[] {
   return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, limit)
     .map(([k]) => "#" + k.toString(16).padStart(6, "0"));
 }
+
+/**
+ * Varinha de remover fundo: apaga (alfa 0) os pixels parecidos com o pixel clicado. `tol` e a soma das diferencas
+ * RGB (0 = so a cor exata). Contiguo: so a regiao ligada ao clique (4 vizinhos); senao, todos os pixels parecidos do
+ * frame. Devolve quantos pixels apagou.
+ */
+export function eraseSimilar(d: ImageData, x: number, y: number, tol: number, contiguous = true): number {
+  const start = getPixel(d, x, y);
+  if (!start || start[3] === 0) return 0;
+  const { width: w, height: h, data } = d;
+  const like = (i: number) =>
+    data[i + 3] > 0 && Math.abs(data[i] - start[0]) + Math.abs(data[i + 1] - start[1]) + Math.abs(data[i + 2] - start[2]) <= tol;
+  let count = 0;
+  if (!contiguous) {
+    for (let i = 0; i < w * h * 4; i += 4) if (like(i)) { data[i + 3] = 0; count++; }
+    return count;
+  }
+  const seen = new Uint8Array(w * h);
+  const stack = [y * w + x];
+  seen[y * w + x] = 1;
+  while (stack.length) {
+    const p = stack.pop() as number;
+    if (!like(p * 4)) continue;
+    data[p * 4 + 3] = 0;
+    count++;
+    const px = p % w, py = (p - px) / w;
+    if (px > 0 && !seen[p - 1]) { seen[p - 1] = 1; stack.push(p - 1); }
+    if (px < w - 1 && !seen[p + 1]) { seen[p + 1] = 1; stack.push(p + 1); }
+    if (py > 0 && !seen[p - w]) { seen[p - w] = 1; stack.push(p - w); }
+    if (py < h - 1 && !seen[p + w]) { seen[p + w] = 1; stack.push(p + w); }
+  }
+  return count;
+}
