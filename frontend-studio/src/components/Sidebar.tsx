@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Database, Film, Loader2, Sparkles, Wand2, Cpu } from "lucide-react";
 import { getDataset, getVram, type DatasetItem, type VramInfo } from "../api";
+import PaletteChooser from "./PaletteChooser";
 
 const SIZES = [16, 32, 64, 128];
 
@@ -10,6 +11,7 @@ interface Props {
   mode: Mode; setMode: (m: Mode) => void;
   prompt: string; setPrompt: (s: string) => void;
   size: number; setSize: (n: number) => void;
+  palette: string[] | null; setPalette: (p: string[] | null) => void;
   busy: boolean; onGenerate: () => void;
 }
 
@@ -74,7 +76,7 @@ function DatasetTab() {
   );
 }
 
-export default function Sidebar({ mode: tab, setMode: setTab, prompt, setPrompt, size, setSize, busy, onGenerate }: Props) {
+export default function Sidebar({ mode: tab, setMode: setTab, prompt, setPrompt, size, setSize, palette, setPalette, busy, onGenerate }: Props) {
   const tabCls = (t: string) =>
     `flex-1 flex items-center justify-center gap-1 py-2 text-sm border-b-2 ${tab === t ? "border-emerald-500 text-zinc-100" : "border-transparent text-zinc-500 hover:text-zinc-300"}`;
   return (
@@ -104,6 +106,7 @@ export default function Sidebar({ mode: tab, setMode: setTab, prompt, setPrompt,
                 ))}
               </div>
             </div>
+            <PaletteChooser palette={palette} setPalette={setPalette} />
             {tab === "create" ? (
               <button onClick={onGenerate} disabled={busy}
                 className="w-full flex items-center justify-center gap-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 py-2 text-sm font-medium text-white">

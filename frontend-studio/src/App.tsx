@@ -7,6 +7,7 @@ import AnimResult from "./components/AnimResult";
 import FrameEditor from "./components/FrameEditor";
 import PoseEditor from "./components/PoseEditor";
 import { useAnimation } from "./useAnimation";
+import { loadPalette } from "./components/PaletteChooser";
 import SettingsPopover, { type ViewSettings } from "./components/SettingsPopover";
 import { generate, getParams, type GenOverrides, type ParamsInfo, type SpriteResponse } from "./api";
 
@@ -30,8 +31,9 @@ export default function App() {
   const [info, setInfo] = useState<ParamsInfo | null>(null);
   const [infoError, setInfoError] = useState<string | null>(null);
   const [mode, setMode] = useState<Mode>("create");
+  const [palette, setPalette] = useState<string[] | null>(loadPalette);
   const [editing, setEditing] = useState(false);
-  const { anim, setAnim, busy: animBusy, job, error: animError, run: runAnimation } = useAnimation(prompt, size, overrides);
+  const { anim, setAnim, busy: animBusy, job, error: animError, run: runAnimation } = useAnimation(prompt, size, overrides, palette);
   const [view, setView] = useState<ViewSettings>({ crt: false, checkerboard: true, pixelPerfect: true });
 
   useEffect(() => {
@@ -48,6 +50,7 @@ export default function App() {
       setSprite(await generate({
         prompt, size, kind: "asset", palette_size: 16,
         seamless: false, symmetric: false, dither: false, seed: null, params: overrides,
+        custom_palette: palette ?? undefined,
       }));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Erro desconhecido.");
@@ -56,7 +59,7 @@ export default function App() {
 
   return (
     <div className="flex h-full bg-zinc-950">
-      <Sidebar mode={mode} setMode={setMode} prompt={prompt} setPrompt={setPrompt} size={size} setSize={setSize} busy={busy} onGenerate={onGenerate} />
+      <Sidebar mode={mode} setMode={setMode} palette={palette} setPalette={setPalette} prompt={prompt} setPrompt={setPrompt} size={size} setSize={setSize} busy={busy} onGenerate={onGenerate} />
       <main className="relative flex-1 min-w-0">
         <div className="absolute top-3 right-3 z-20">
           <button aria-label="Settings" onClick={() => setShowSettings((v) => !v)}

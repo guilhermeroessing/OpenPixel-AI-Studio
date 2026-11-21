@@ -118,13 +118,47 @@ def _remove_bg(a: np.ndarray, tol: int, clean_shadow: bool = True, protect: np.n
     return np.isin(lab, keep)
 
 
+def _lab(rgb: np.ndarray) -> np.ndarray:
+    return cv2.cvtColor(np.ascontiguousarray(rgb, np.uint8), cv2.COLOR_RGB2LAB).astype(np.float32)
+
+
+def palette_is_tonal(palette: list[tuple[int, int, int]], max_chroma: float = 35.0) -> bool:
+    """Paleta de tons (quase sem cor, ex.: azul-marinho + creme): so a luminosidade distingue as cores."""
+    lab = _lab(np.asarray(palette, np.uint8).reshape(1, -1, 3)).reshape(-1, 3)
+    return bool(np.hypot(lab[:, 1] - 128, lab[:, 2] - 128).max() < max_chroma)
+
+
+def snap_to_palette(arr: np.ndarray, palette: list[tuple[int, int, int]],
+                    src_range: tuple[float, float] | None = None) -> np.ndarray:
+    """Cada pixel vira a cor da paleta mais proxima em Lab (distancia perceptual).
+
+    Paletas de tons (``palette_is_tonal``) usam so a luminosidade, esticada de ``src_range`` (faixa de L do
+    personagem) para a faixa da paleta: sem isso, uma paleta de 2 cores joga quase tudo na mais clara.
+    """
+    pal = np.asarray(palette, np.uint8).reshape(1, -1, 3)
+    lab_pal = _lab(pal).reshape(-1, 3)
+    lab = _lab(arr).reshape(-1, 1, 3)
+    if src_range is not None and palette_is_tonal(palette):
+        lo, hi = src_range
+        lmin, lmax = float(lab_pal[:, 0].min()), float(lab_pal[:, 0].max())
+        stretched = np.clip((lab[:, 0, 0] - lo) / max(hi - lo, 1e-3), 0, 1) * (lmax - lmin) + lmin
+        idx = np.abs(stretched[:, None] - lab_pal[None, :, 0]).argmin(axis=1)
+    else:
+        idx = ((lab - lab_pal[None]) ** 2).sum(axis=2).argmin(axis=1)
+    return pal.reshape(-1, 3)[idx].reshape(arr.shape).astype(np.uint8)
+
+
 def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg_tol: int = 45,
-                   anchor: str = "centroid", poses: list | None = None, leak_guard: bool = True) -> list[np.ndarray]:
+                   anchor: str = "centroid", poses: list | None = None, leak_guard: bool = True,
+                   custom_palette: list[tuple[int, int, int]] | None = None) -> list[np.ndarray]:
     """Frames brutos (RGB alta resolucao) -> RGBA grid x grid: paleta unica, sem fundo, alinhados.
 
     anchor: "centroid" recentraliza cada frame na horizontal (bom para corrida, em que o corpo avanca e recua);
     "fixed" aplica o MESMO deslocamento a todos os frames (local fixo: o que se move e so o movimento da pose,
     ideal para idle e ataques parados).
+
+    custom_palette: cores escolhidas pelo usuario (2 a 8). O fundo e achado com a paleta automatica (para nao
+    se misturar com a roupa) e so depois o personagem e repintado, pixel a pixel, com as cores escolhidas.
     """
     if anchor not in ("centroid", "fixed"):
         raise ValueError("anchor deve ser 'centroid' ou 'fixed'")
@@ -138,6 +172,11 @@ def process_frames(raws: list[np.ndarray], grid: int = 128, colors: int = 24, bg
         mask = _remove_bg(a, bg_tol, protect=_torso_protect(poses[i], grid) if poses else None, leak_guard=leak_guard)
         ys, xs = np.nonzero(mask)
         items.append((a, mask, ys, xs))
+    if custom_palette:
+        # luminosidade do personagem em TODOS os frames (mesma faixa para todos: sem piscar de um frame para outro)
+        lum = np.concatenate([_lab(small[i])[it[1], 0] for i, it in enumerate(items)])
+        src = (float(np.percentile(lum, 5)), float(np.percentile(lum, 95)))
+        items = [(snap_to_palette(small[i], custom_palette, src), m, ys, xs) for i, (_, m, ys, xs) in enumerate(items)]
     margin = max(1, round(grid * 6 / 128))
     dy = (grid - margin) - max(it[2].max() for it in items)  # um unico dy: preserva a subida do voo
     fixed_dx = grid // 2 - int(round(float(np.mean([it[3].mean() for it in items]))))

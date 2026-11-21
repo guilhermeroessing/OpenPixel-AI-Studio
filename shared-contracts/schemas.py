@@ -1,6 +1,7 @@
 """Contratos compartilhados (Pydantic) entre backend, gateway MCP e frontend."""
+import re
 from typing import Literal
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 AssetKind = Literal["character", "asset", "tileset", "map"]
 
@@ -29,6 +30,20 @@ class GenerateRequest(BaseModel):
     dither: bool = False
     seed: int | None = None
     params: GenParams | None = None
+    # paleta escolhida pelo usuario (2 a 8 cores "#rrggbb"): o desenho e composto so com essas cores
+    custom_palette: list[str] | None = Field(default=None, min_length=2, max_length=8)
+
+    @field_validator("custom_palette")
+    @classmethod
+    def _check_palette(cls, v):
+        if v is None:
+            return v
+        if any(not re.fullmatch(r"#[0-9a-fA-F]{6}", c) for c in v):
+            raise ValueError("cada cor da paleta deve ser '#rrggbb'")
+        out = list(dict.fromkeys(c.lower() for c in v))      # sem repetidas
+        if len(out) < 2:
+            raise ValueError("a paleta precisa de pelo menos 2 cores diferentes")
+        return out
 
 
 Motion = Literal["run", "idle", "punch", "sword", "custom"]  # prontos (openpixel_core.animation.MOTIONS) ou "custom"

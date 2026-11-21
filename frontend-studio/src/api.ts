@@ -12,6 +12,8 @@ export interface GenerateRequest {
   dither: boolean;
   seed?: number | null;
   params?: GenOverrides;
+  /** Paleta escolhida (2 a 8 cores #rrggbb): o desenho usa só estas cores. */
+  custom_palette?: string[];
 }
 
 /** Forças editadas pelo usuário (só as que diferem do padrão). Chaves = ParamSpec.key. */

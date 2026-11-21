@@ -105,8 +105,9 @@ def _base(req: GenerateRequest):
     hr, seed = _provider_for(req.params).generate(req.prompt, _hr(req.size), req.seed)
     # Padrao: media por bloco + paleta K-Means (openpixel_core.pixelate). PIXELIZER=pixeloe volta ao
     # pipeline antigo; seamless/symmetric/dither sempre usam o pipeline antigo (so ele os implementa).
+    chosen = [tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) for c in req.custom_palette] if req.custom_palette else None
     if os.environ.get("PIXELIZER", "box") == "box" and not (req.seamless or req.symmetric or req.dither):
-        rgb = pixelate(hr, grid=req.size, colors=req.palette_size, out_size=req.size)
+        rgb = pixelate(hr, grid=req.size, colors=req.palette_size, out_size=req.size, palette=chosen)
         pal = [pp._hex(c) for c in np.unique(rgb.reshape(-1, 3), axis=0)]
     else:
         rgb, pal = pp.pixelize(hr, req.size, req.palette_size, req.dither, req.seamless, req.symmetric)
@@ -375,7 +376,9 @@ def animate_run(req: AnimateRequest, progress=None) -> AnimationResponse:
         prov.ref_weight > 0, progress, motion.get("prompt_weight", 1.0))
     rgba = animation.process_frames(raws, req.size, req.palette_size,
                                     p.bg_tolerance if p.bg_tolerance is not None else defaults["bg_tolerance"],
-                                    anchor=motion["anchor"], poses=poses)
+                                    anchor=motion["anchor"], poses=poses,
+                                    custom_palette=[tuple(int(c[i:i + 2], 16) for i in (1, 3, 5)) for c in req.custom_palette]
+                                    if req.custom_palette else None)
     out = []
     for a in rgba:
         used = sorted({pp._hex(c) for c in a[a[..., 3] > 0][:, :3]})

@@ -246,3 +246,37 @@ def test_character_reference_is_neutral_and_independent_of_the_motion_text():
     animation.generate_motion_raws(f, "girl", 64, 1, [pose, pose], "throwing a punch", True)
     assert f.calls[0] == (f"girl, {animation.REF_SUFFIX}", None)                 # referencia: sem "soco"
     assert all("throwing a punch" in t and r is not None for t, r in f.calls[1:])  # frames: movimento + referencia
+
+
+def test_custom_palette_is_validated_deduplicated_and_limited_to_2_8_colors():
+    import pytest
+    from pydantic import ValidationError
+    from schemas import GenerateRequest
+
+    ok = GenerateRequest(prompt="x", custom_palette=["#AABBCC", "#aabbcc", "#112233"])
+    assert ok.custom_palette == ["#aabbcc", "#112233"]
+    for bad in (["#111111"], ["#111111", "#111111"], ["#111111", "red"], [f"#{i:02x}0000" for i in range(9)]):
+        with pytest.raises(ValidationError):
+            GenerateRequest(prompt="x", custom_palette=bad)
+
+
+def test_snap_to_palette_uses_only_the_chosen_colors_and_splits_two_tone_palettes_by_luminance():
+    dark, light = (31, 42, 68), (244, 227, 193)
+    # personagem so de tons medios-claros (cinzas 150..200): sem esticar, tudo cairia na cor clara
+    grad = np.stack([np.linspace(150, 200, 16, dtype=np.uint8)] * 3, axis=1).reshape(1, 16, 3)
+    assert animation.palette_is_tonal([dark, light]) and not animation.palette_is_tonal([(255, 0, 0), (0, 0, 255)])
+    plain = {tuple(c) for c in animation.snap_to_palette(grad, [dark, light]).reshape(-1, 3)}
+    assert plain == {light}
+    L = animation._lab(grad)[0, :, 0]
+    stretched = {tuple(c) for c in animation.snap_to_palette(grad, [dark, light], (float(L.min()), float(L.max()))).reshape(-1, 3)}
+    assert stretched == {dark, light}                                   # esticando a faixa, as duas cores aparecem
+
+
+def test_process_frames_repaints_the_character_with_the_custom_palette_but_still_finds_the_background():
+    raws = [_scene(), _scene(4)]
+    pal = [(10, 20, 30), (240, 230, 220), (200, 40, 40)]
+    out = animation.process_frames(raws, 64, 8, 45, anchor="fixed", custom_palette=pal)
+    for a in out:
+        fg = a[a[..., 3] > 0][:, :3]
+        assert len(fg) > 0 and {tuple(c) for c in fg} <= set(pal)       # so as cores escolhidas
+        assert (a[..., 3] == 0).any()                                    # o fundo continua transparente

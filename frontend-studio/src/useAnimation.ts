@@ -9,7 +9,7 @@ export interface JobProgress { progress: number; total: number; elapsed: number 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /** Gera uma animação personalizada em segundo plano (POST /animate + GET /jobs) e guarda o resultado. */
-export function useAnimation(prompt: string, size: number, overrides: GenOverrides) {
+export function useAnimation(prompt: string, size: number, overrides: GenOverrides, palette: string[] | null) {
   const [anim, setAnim] = useState<AnimState | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,7 +21,7 @@ export function useAnimation(prompt: string, size: number, overrides: GenOverrid
     try {
       const { job_id } = await startAnimation({
         prompt, size, kind: "character", palette_size: 24, seamless: false, symmetric: false, dither: false,
-        seed: null, params: overrides, motion: "custom", poses: spec.poses, motion_text: spec.text || undefined,
+        seed: null, params: overrides, custom_palette: palette ?? undefined, motion: "custom", poses: spec.poses, motion_text: spec.text || undefined,
         fps: spec.fps, anchor: spec.anchor, allow_objects: spec.allowObjects, extra_avoid: spec.extraAvoid || undefined,
       });
       setJob({ progress: 0, total: 1, elapsed: 0 });
