@@ -228,3 +228,21 @@ def test_motions_presets_carry_the_description_and_avoid_terms_for_the_pose_edit
     r = client.get("/motions").json()
     assert "fist extended" in r["punch"]["text"] and "full body" not in r["punch"]["text"]
     assert "gloves" in r["punch"]["avoid"] and r["idle"]["avoid"] == ""
+
+
+def test_character_reference_is_neutral_and_independent_of_the_motion_text():
+    class Fake:
+        native_size = 64
+
+        def __init__(self):
+            self.calls = []
+
+        def generate(self, text, size, seed, pose=None, reference=None):
+            self.calls.append((text, reference))
+            return np.zeros((size, size, 3), np.uint8), seed
+
+    pose = [(0.5, 0.5)] * 18
+    f = Fake()
+    animation.generate_motion_raws(f, "girl", 64, 1, [pose, pose], "throwing a punch", True)
+    assert f.calls[0] == (f"girl, {animation.REF_SUFFIX}", None)                 # referencia: sem "soco"
+    assert all("throwing a punch" in t and r is not None for t, r in f.calls[1:])  # frames: movimento + referencia

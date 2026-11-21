@@ -17,7 +17,7 @@ import numpy as np
 from PIL import Image
 
 from .pixelate import pixelate
-from .poses import idle_cycle, punch_cycle, render_pose, run_cycle, sword_cycle
+from .poses import idle_cycle, punch_cycle, render_pose, run_cycle, skeleton, sword_cycle
 
 RUN_SUFFIX = ("running, three-quarter side view facing right, arms swinging, both arms visible, "
               "full body, simple flat background")
@@ -25,6 +25,8 @@ PUNCH_SUFFIX = ("throwing a punch, fist extended forward, fighting stance, bare 
                "facing right, both arms visible, full body, simple flat background")
 SWORD_SUFFIX = ("two-handed overhead downward chop, both bare hands clasped together raised then swung down in front, empty hands, "
                 "three-quarter side view facing right, both arms visible, full body, simple flat background")
+REF_SUFFIX = ("standing relaxed, three-quarter side view facing right, arms hanging at the sides, both arms visible, "
+              "full body, simple flat background")
 IDLE_SUFFIX = ("standing idle, relaxed, breathing, three-quarter side view facing right, arms hanging at the sides, "
                "both arms visible, full body, simple flat background")
 
@@ -171,7 +173,11 @@ def generate_motion_raws(provider, prompt: str, native: int, seed: int, poses: l
             paths.append(str(pth))
         ref = None
         if use_reference:
-            ref0, _ = provider.generate(text, native, seed, pose=paths[0])
+            # a referencia do personagem e neutra (em pe, sem o texto do movimento): "soco" nao pinta a roupa de vermelho
+            # e as cores certas passam, via IP-Adapter, para todos os frames
+            neutral = Path(tmp) / "pose_ref.png"
+            Image.fromarray(render_pose(skeleton(), native, 1.5)).save(neutral)
+            ref0, _ = provider.generate(f"{who}, {REF_SUFFIX}", native, seed, pose=str(neutral))
             ref = str(Path(tmp) / "ref.png")
             Image.fromarray(ref0).save(ref)
             done += 1
